@@ -1,0 +1,1405 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keyword" content="DIAC">
+	<meta name="description" content="Delhi International Arbitration Center">
+	<title>DIAC</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	<link rel="icon" type="image/png" sizes="96x96" href="https://diac.ind.in/public/custom/photos/logo.png">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrapValidator.css" />
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrap-select.css" />
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrap-multiselect.css" />
+
+	<!--Sweet Alert-->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/sweetalert/sweetalert.css">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/font-awesome/css/font-awesome.min.css">
+
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/Ionicons/css/ionicons.min.css">
+
+	<!-- DataTables -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css"> -->
+
+	<!-- Select2 -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/plugins/select2/select2.min.css">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/dist/css/AdminLTE.min.css">
+
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/iCheck/all.css" />
+
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+	    folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/dist/css/skins/_all-skins.min.css">
+
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+	<!-- Bootstrap TimePicker -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/timepicker/bootstrap-timepicker.min.css">
+
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+	<!-- bootstrap wysihtml5 - text editor -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+	<!--Tooltips-->
+	<link rel="stylesheet" type="text/css" href="https://diac.ind.in/public/bower_components/tooltip/tooltipster.css" />
+	<link rel="stylesheet" type="text/css" href="https://diac.ind.in/public/bower_components/tooltip/tooltipster-punk.css" />
+	<link rel="stylesheet" type="text/css" href="https://diac.ind.in/public/bower_components/toastr/toastr.min.css" />
+
+	<!-- Summernote -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+	<!-- Full Calender -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/fullcalendar/dist/fullcalendar.min.css" />
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print" />
+
+
+	<!-- <link rel="stylesheet" href="https://diac.ind.in/public/plugins/summernote/summernote.min.css"> -->
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<!-- custom Css -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/custom/css/admin.css?v=1727344696">
+
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	<!-- jQuery -->
+	<script src="https://diac.ind.in/public/bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="https://diac.ind.in/public/bower_components/jquery-ui/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script>
+	<!-- Sweet Alert Plugin -->
+	<script src="https://diac.ind.in/public/bower_components/sweetalert/sweetalert.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="https://diac.ind.in/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://diac.ind.in/public/plugins/select2/select2.full.min.js"></script>
+
+	<!-- Summernote -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<script type="text/javascript" src="https://diac.ind.in/public/bower_components/bootstrap/dist/js/bootstrapValidator.js"></script>
+
+	<script src="https://diac.ind.in/public/bower_components/bootstrap/dist/js/bootstrap-multiselect.js"></script>
+
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/bower_components/bootstrap-filestyle/bootstrap-filestyle.js"></script>
+
+	<!-- DataTables -->
+	<script src="https://diac.ind.in/public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+	<script src="https://diac.ind.in/public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script> -->
+
+	<!-- daterangepicker -->
+	<script src="https://diac.ind.in/public/bower_components/moment/min/moment.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<!-- datepicker -->
+	<script src="https://diac.ind.in/public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+	<!-- Bootstrap WYSIHTML5 -->
+	<script src="https://diac.ind.in/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+	<!-- Slimscroll -->
+	<script src="https://diac.ind.in/public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- FastClick -->
+	<script src="https://diac.ind.in/public/bower_components/fastclick/lib/fastclick.js"></script>
+
+	<!-- AdminLTE App -->
+	<script src="https://diac.ind.in/public/dist/js/adminlte.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/timepicker/bootstrap-timepicker.min.js"></script>
+
+	<!-- Flot -->
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.resize.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.pie.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.categories.js"></script>
+
+	<!-- AdminLTE for demo purposes -->
+	<script src="https://diac.ind.in/public/dist/js/demo.js"></script>
+
+	<!-- Tooltips Plugin -->
+	<script type="text/javascript" src="https://diac.ind.in/public/bower_components/tooltip/jquery.tooltipster.min.js"></script>
+	<script type="text/javascript" src="https://diac.ind.in/public/bower_components/toastr/toastr.min.js"></script>
+
+	<!-- the fileinput plugin styling CSS file -->
+	<link href="https://diac.ind.in/public/plugins/bootstrap_fileinput/fileinput.min.css" rel="stylesheet" type="text/css" />
+
+	<!-- the main fileinput plugin script JS file -->
+	<script src="https://diac.ind.in/public/plugins/bootstrap_fileinput/fileinput.min.js"></script>
+	<script src="https://diac.ind.in/public/plugins/bootstrap_fileinput/theme.min.js"></script>
+
+	<!-- Generate PDF using javascript -->
+	<script src="https://diac.ind.in/public/plugins/jsPDF/html2canvas.min.js"></script>
+	<script src="https://diac.ind.in/public/plugins/jsPDF/jspdf.umd.min.js"></script>
+
+	<!-- Ckeditor -->
+	<script src="https://diac.ind.in/public/plugins/ckeditor/build/ckeditor.js"></script>
+
+	<!-- FullCalender -->
+	<script src="https://diac.ind.in/public/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+
+	<!--custom Js Link-->
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/plugins/js/md5_5034.js?v=1727344697"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/plugins/js/profile_sha.js?v=1727344697"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/plugins/js/sha512.js?v=1727344697"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/custom/js/functions.js?v=1761903317"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/custom/js/common.js?v=1728027533"></script>
+
+
+	<script>
+		var base_url = "https://diac.ind.in/";
+		var role_code = "DEPUTY_COUNSEL";
+	</script>
+</head>
+
+<body class="hold-transition skin-blue fixed sidebar-mini" id="root">
+	<!-- Site Loader -->
+	<div class="site-loader">
+		<div class="site-loader-col">
+			<div class="site-loader-image">
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="248" height="248" style="shape-rendering: auto; display: block;" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<g>
+						<circle stroke-width="6" stroke="#e98f0c" fill="none" r="0" cy="50" cx="50">
+							<animate begin="0s" calcMode="spline" keySplines="0 0.2 0.8 1" keyTimes="0;1" values="0;21" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="r"></animate>
+							<animate begin="0s" calcMode="spline" keySplines="0.2 0 0.8 1" keyTimes="0;1" values="1;0" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="opacity"></animate>
+						</circle>
+						<circle stroke-width="6" stroke="#ec0000" fill="none" r="0" cy="50" cx="50">
+							<animate begin="-1.3157894736842106s" calcMode="spline" keySplines="0 0.2 0.8 1" keyTimes="0;1" values="0;21" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="r"></animate>
+							<animate begin="-1.3157894736842106s" calcMode="spline" keySplines="0.2 0 0.8 1" keyTimes="0;1" values="1;0" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="opacity"></animate>
+						</circle>
+						<g></g>
+					</g>
+				</svg>
+			</div>
+			<h1 class="site-loader-text">PROCESSING...</h1>
+		</div>
+	</div>
+	<div class="wrapper">
+		<header class="main-header">
+			<a href="#" class="logo">
+				<span class="logo-mini"><i class="fa fa-xing" aria-hidden="true"></i></span>
+				<span class="logo-lg" style="color: #fff"><b style="color: #fff">DIAC:</b>DELHI</span>
+			</a>
+
+			<nav class="navbar navbar-static-top">
+				<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+					<span class="sr-only">Toggle navigation</span>
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+													<li>
+								<a href="https://diac.ind.in/case-noting-notifications" id="" title="Case Noting Notifications"><i class="fa fa-book"></i>
+								</a>
+							</li>
+																			<li>
+								<a href="https://diac.ind.in/payment-notifications" id=""><i class="fa fa-money"></i>
+								</a>
+							</li>
+												<li>
+							<a href="javascript:void(0)" id="btn_show_pending_work_calender_modal"><i class="fa fa-sticky-note-o"></i>
+							</a>
+						</li>
+
+						<li>
+														<a href="#" data-toggle="control-sidebar"><i class="fa fa-clock-o"></i>
+								<span class="label label-primary">0</span>
+							</a>
+						</li>
+						
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-bell-o"></i>
+									<span class="label label-warning" id="notification_count"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<!-- inner menu: contains the actual data -->
+										<ul class="menu" id="notification_menu_list">
+										</ul>
+									</li>
+									<li class="footer"><a href="https://diac.ind.in/notifications"><strong>View all</strong></a></li>
+								</ul>
+							</li>
+						
+						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<img src="https://diac.ind.in/public/upload/profile/defult.png" class="user-image" alt="User Image">
+								
+								<span class="hidden-xs">Ms. Saumya</span>
+							</a>
+							<ul class="dropdown-menu">
+
+								<li class="user-header">
+																			<img src="https://diac.ind.in/public/upload/profile/defult.png" class="img-circle" alt="User Image" />
+									
+									<p>
+										Ms. Saumya										<small>Deputy Counsel</small>
+									</p>
+								</li>
+								<li class="user-footer">
+									<div class="pull-left">
+										<a href="https://diac.ind.in/my-account" class="btn btn-warning"><i class="fa fa-user-o"></i> My Account</a>
+									</div>
+									<div class="pull-right">
+										<a href="https://diac.ind.in/user/logout" class="btn btn-danger"><i class="fa fa-power-off"></i> Log out</a>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header><!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<!-- Sidebar user panel -->
+		<div class="user-panel">
+			<div class="pull-left image">
+									<img src="https://diac.ind.in/public/upload/profile/defult.png" class="img-circle" alt="User Image">
+				
+			</div>
+			<div class="pull-left info sm-online-box">
+				<p class="sm-online-dn">
+					Ms. Saumya				</p>
+
+				<a href="#" class="sm-online-icon">
+					<i class="fa fa-circle text-success"></i> 						(DC13)
+									</a>
+			</div>
+		</div>
+
+		<ul class="sidebar-menu" data-widget="tree">
+			<li class="">
+								<a href='https://diac.ind.in/diac-admin-dashboard'>
+									<i class="fa fa-dashboard"></i>&nbsp;&nbsp;<span>Dashboard</span>
+								</a>
+								
+						</li><li class="treeview groupactive active">			
+							<a href='#'>
+								<i class="fa fa-book"></i>&nbsp;&nbsp;<span>Case Management</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/allotted-case'>
+								<i class="fa fa-check"></i>&nbsp;&nbsp;Alloted Case
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/status-of-pleadings'>
+								<i class="fa fa-pencil"></i>&nbsp;&nbsp;Status of Pleadings
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/tag-cases'>
+								<i class="fa fa-random"></i>&nbsp;&nbsp;Tag Cases
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/response-format'>
+								<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Draft Letters
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/claimant-respondant-details'>
+								<i class="fa fa-users"></i>&nbsp;&nbsp;Claimant & Respondant
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/counsels'>
+								<i class="fa fa-retweet"></i>&nbsp;&nbsp;Counsels
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/arbitral-tribunal'>
+								<i class="fa fa-sticky-note-o"></i>&nbsp;&nbsp;Arbitral Tribunal
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/fee-pending-allotted-cases'>
+								<i class="fa fa-money"></i>&nbsp;&nbsp;Fee Pending Cases
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/case-order'>
+								<i class="fa fa-book"></i>&nbsp;&nbsp;Case Order
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/case-fees-details'>
+								<i class="fa fa-money"></i>&nbsp;&nbsp;Case Fee
+							</a>
+						</li><li class="active bold">
+							<a href='https://diac.ind.in/termination'>
+								<i class="fa fa-trophy"></i>&nbsp;&nbsp;Termination
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/cause-list'>
+								<i class="fa fa-bars"></i>&nbsp;&nbsp;Cause List
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/noting'>
+								<i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;Noting
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/all-cases'>
+								<i class="fa fa-bookmark-o"></i>&nbsp;&nbsp;All Cases
+							</a>
+						</li>
+					</ul>
+					</li><li class="treeview ">			
+							<a href='#'>
+								<i class="fa fa-address-book-o"></i>&nbsp;&nbsp;<span>Rooms Availability</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/hearings-today'>
+								<i class="fa fa-map-o"></i>&nbsp;&nbsp;Hearings Today
+							</a>
+						</li>
+					</ul>
+					</li><li class="treeview ">			
+							<a href='#'>
+								<i class="fa fa-sticky-note-o"></i>&nbsp;&nbsp;<span>Work Status</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/work-status/pending'>
+								<i class="fa fa-circle-o"></i>&nbsp;&nbsp;Pending
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/work-status/completed'>
+								<i class="fa fa-circle-o"></i>&nbsp;&nbsp;Completed
+							</a>
+						</li>
+					</ul>
+					</li><li class="treeview ">			
+							<a href='#'>
+								<i class="fa fa-list"></i>&nbsp;&nbsp;<span>Master Setup</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/arbitrator-setup'>
+								<i class="fa fa-circle"></i>&nbsp;&nbsp;Arbitrator Setup
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/counsel-setup'>
+								<i class="fa fa-circle"></i>&nbsp;&nbsp;Counsel Setup
+							</a>
+						</li>
+					</ul>
+					</li><li class="">
+								<a href='https://diac.ind.in/efiling-users'>
+									<i class="fa fa-user-circle"></i>&nbsp;&nbsp;<span>eFiling Users</span>
+								</a>
+								
+						</li><li class="">
+								<a href='https://diac.ind.in/reports'>
+									<i class="fa fa-file"></i>&nbsp;&nbsp;<span>Reports</span>
+								</a>
+								
+						</li>		</ul>
+	</section>
+</aside><div class="content-wrapper">
+
+	<section class="content-header">
+    <h1 style="display: inline-block;">
+        Termination                    </h1>
+    <a href="Javascript:void(0)" onclick="history.back()" class="btn btn-default pull-right"><span class="fa fa-backward"></span> Go Back</a>
+</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<div class="box box-danger">
+					<div class="box-header with-border">
+						<h4 class="box-title">
+							Select DIAC Registration No. to proceed  to Termination:
+						</h4>
+					</div>
+					<div class="box-body">
+						<div class="col-md-6 col-xs-12 mt-10">
+							<form action="https://diac.ind.in/termination" class="wfst" id="ecn_form" method="post" accept-charset="utf-8">
+							<input type="hidden" name="csrf_case_form_token" id="ecn_case_form" value="6fbbae244d871ba4923c51c14327e64cf93cbed2">
+
+							<input type="hidden" name="ecn_type" id="ecn_type" value="AWARD_TERMINATION">
+
+							<input type="hidden" name="op_type" id="ecn_op_type" value="CHECK_CASE_NUMBER">
+
+							<div class="form-group">
+								<select name="ecn_case_no" id="ecn_case_no" class="form-control select2">
+									<option value="">DIAC Reg. No./Case Title</option>
+																			<option value="d117be68a4be6d006714c23f0559dba1">* DIAC/12090/12-25 (HIND TERMINALS PRIVATE LIMITED  VS M/S SRI EXPORT CO.  )</option>
+																			<option value="ee5a33c1ee9ed690645ad6044c5d202f">* DIAC/12089/12-25 (M/S THERMAL ENGINEERS AND INSULATORS PVT. LTD. VS GOVT OF NCT OF DELHI )</option>
+																			<option value="f24b3ea4f5f490b7e2b7924f650d0668">* DIAC/12088/12-25 (INDO ALUSYS FACADE SOLUTIONS PVT. LTD.  VS FOREVER INFRABUILD INDIA LLP  )</option>
+																			<option value="37f54688bbbc85a3bb9c1437705873cd">* DIAC/12087/12-25 (JHANKAR BANQUETS THROUGH ITS PARTNER MR. MAHESH KAPOOR VS DELHI DEVELOPMENT AUTHORITY  )</option>
+																			<option value="77c0d7ce03578275a699ddafbae239bc">* DIAC/12086/12-25 (JHANKAR BANQUETS THROUGH ITS PARTNER MR. MAHESH KAPOOR VS DELHI DEVELOPMENT AUTHORITY )</option>
+																			<option value="d729a5ac72c0274149c11ca2cfe64d15">* DIAC/11990/11-25 (TUV SUD SOUTH ASIA PVT. LTD. VS BUREAU OF INDIAN STANDARDS )</option>
+																			<option value="efbcaeaf13752caff82d171e993f6c6a">* DIAC/11989/11-25 (MC CONSTRUCTION CO.  VS GOVT. OF NCT OF DELHI )</option>
+																			<option value="c34577dc433d420c3939859f8348775b">* DIAC/11988/11-25 (M/S MONEYWISE FINANCIAL SERVICES PVT. LTD. VS MR. AJIT SINGH SETHI, M/S SIMAR FORGE & ANR.)</option>
+																			<option value="4d1c9b9693a2b24421f5b867dcb4b62c">* DIAC/11987/11-25 (INSIGHT DIRECT INDIA PVT LTD VS CAPITALGRAM MARKETING AND TECHNOLOGY PVT LTD.  )</option>
+																			<option value="6ad7b43db0c01abca602f6d5f527d29e">* DIAC/11986/11-25 (CHAND VIJ VS GOVT OF NCT OF DELHI & ANR.)</option>
+																			<option value="88a386594d2d34132240a8c0c5bbe838">* DIAC/11890/11-25 (M/S NEXUS ENTERPRISE VS M/S FOOD CORPORATION OF INDIA )</option>
+																			<option value="af6df9ae055f9439ea56443924b4aa21">* DIAC/11889/11-25 (M/S MACH WORLDWIDE LOGISTICS INDIA PRIVATE LIMITED  VS M/S ROZE LOGISTICS )</option>
+																			<option value="e95b217caaebcb393652b2639d04177d">* DIAC/11888/11-25 (M/S MACH WORLDWIDE LOGISTICS INDIA PRIVATE LIMITED VS M/S AMBE NS AGRO PRODUCTS PRIVATE LIMITED )</option>
+																			<option value="e97b5ae53f0c56c9aeea03d98b56e0e1">* DIAC/11887/11-25 (M/S GLOWRIA LIFECARE PRIVATE LIMITED  VS M/S AVINASH SHIVPURI )</option>
+																			<option value="efa1df6c06b6c984602aee98ab0c0e15">* DIAC/11886/11-25 (M/S GLOWRIA LIFECARE PRIVATE LIMITED VS M/S AVINASH SHIVPURI )</option>
+																			<option value="31aca9c7aae49fe7dca3fdb095c24125">* DIAC/11790/10-25 (SHRI AMIT MITTAL, AGGARWAL ESTATE MANAGEMENT CO. VS INDER RAJ SACHDEVA )</option>
+																			<option value="7665ad5ecf9b6b3fe199b69113fe01db">* DIAC/11789/10-25 (SHRI AMIT MITTAL, AGGARWAL ESTATE MANAGEMENT CO. VS SUNIL KAUSHIK )</option>
+																			<option value="10240c87a32c7d0269059d5f8afc10b0">* DIAC/11788/10-25 (SHRI AMIT MITTAL, AGGARWAL ESTATE MANAGEMENT CO. VS SANTOSH )</option>
+																			<option value="f97954d42953d720270553f9acbda5c5">* DIAC/11787/10-25 (SHRI AMIT MITTAL, AGGARWAL ESTATE MANAGEMENT CO. VS RAJ KUMAR )</option>
+																			<option value="4d4a97aa1b958c0c70472ef111666b58">* DIAC/11786/10-25 (SHRI AMIT MITTAL, AGGARWAL ESTATE MANAGEMENT CO. VS KANTA BHATNAGAR )</option>
+																			<option value="e0c8adba6fc07d6f0eea021e4b5693af">* DIAC/11690/10-25 (MR. SUNMEET SINGH VS M/S AYOLEEZA CONSULTANTS PRIVATE LIMITED )</option>
+																			<option value="35cdef75510cf8cb520ee32d5dd35694">* DIAC/11689/10-25 (M/S NIRAMAYA PATHLABS PRIVATE LIMITED VS M/S SHRI KARAM PRAKASH KHATTAR PUBLIC CHARITABLE TRUST )</option>
+																			<option value="764e4809330125ca779f0798a0ad1fc4">* DIAC/11688/10-25 (MRS. UMA & ANR. VS RAJIV PARASHAR )</option>
+																			<option value="3af29a9140bb38fe52238b4a5b229201">* DIAC/11687/10-25 (M/S SMAS  AUTO LEASING INDIA PRIVATE LIMITED VS M/S NTC SUPPLY CHAIN SOLUTIONS PRIVATE LIMITED )</option>
+																			<option value="9a596b11b655eb5097203c7cf900f9b9">* DIAC/11686/10-25 (M/S INDUS INTELLIRISK AND INTELLISENSE SERVICES PVT. LTD. VS TRIBAL CO-OPERATIVE MARKETING FEDERATION OF INDIA(TRIFED) )</option>
+																			<option value="c1230f60104467502fb2eaf25e4ad894">* DIAC/11595/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="5ede6a5682a18632293d57e08c437345">* DIAC/11594/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="71c83fda2be30aed3da704039bbc90a5">* DIAC/11593/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="adc77219563281ecdc9a8e02fd38c40d">* DIAC/11592/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="e079a95eb654a9a6d19bed60eb8eb9da">* DIAC/11591/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="8f106aa7cfc2276590fdbe67c5d66381">* DIAC/11590/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="db799a9ac7bcfd389c3eb8f786ff8e97">* DIAC/11589/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="d968459f8230818baedffd4cf1e2ef1b">* DIAC/11588/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="8e245369ceab6ba7df9b873ca6204333">* DIAC/11587/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="c34428e6e8c81428811466948e913837">* DIAC/11586/09-25 (KALPATARU PROJECTS INTERNATIONAL LIMITED VS SANTOSHI HYVOLT ELECTRICALS PRIVATE LIMITED )</option>
+																			<option value="4febffd7d1b85c12cb9b98ba95c3da56">* DIAC/11490/09-25 (AJANTA BUILDERS PRIVATE LIMITED VS  SHANTANU MEHROTRA & ANR.)</option>
+																			<option value="296e0623ef5babd3318d8a76424c5a71">* DIAC/11489/09-25 (ADITYA ENERGY HOLDINGS VS SUNSURE ENERGY PRIVATE LIMITED & ANR.)</option>
+																			<option value="b0115df22684b54aa87ac65b4e525bec">* DIAC/11488/09-25 (SAEVESH SECURITY SERVICES PVT. LTD. VS MORARJI DESAI NATIONAL INSTITUTE OF YOGA )</option>
+																			<option value="caeace3266a1d93e5efdf15a78350bb7">* DIAC/11487/09-25 (M/S AGRJA PAPERS PVT. LTD. VS M/S PRIME PACKAGING INDUSTRIES )</option>
+																			<option value="fb05e263faea317c602c3ba43b2346f3">* DIAC/11486/09-25 (M/S BABA HANS CONSTRUCTION PVT. LTD. VS SUPERINTENDING ENGINEER, NH CIRCLE, MUZAFFARPUR & ORS.)</option>
+																			<option value="1d4444b40954ea811be602bfb3bcdc27">* DIAC/11390/08-25 (M/S BIOCON ELECTRIC PRIVATE LIMITED DELHI VS M/S KUNAL AGENCY SIWAN BIHAR )</option>
+																			<option value="182e140de86004eb719a962962f65340">* DIAC/11389/08-25 (M/S NS INTERIOR CONTRACTS PVT. LTD. VS M/S KARIGARI VENTUREES PVT. LTD. GURUGRAM HR. )</option>
+																			<option value="6119e08366fa48853a759e17b3806803">* DIAC/11388/08-25 (M/S SWAGAT FASHION CO. VS M/S ADARSH TRADERS )</option>
+																			<option value="da0cad3e533c19cce4ed1ad9a3aefbc4">* DIAC/11387/08-25 (M/S BHARAT MINERALS & REFRACTORIES  VS M/S AMP ENTERPRISES )</option>
+																			<option value="f2a346641d9ab96cc5eecd901976662b">* DIAC/11386/08-25 (ENERGY EFFICIENCY SERVICES LIMITED VS NATIONAL FEDERATION OF FARMERS PROCUREMENT PROCESSING AND RETAILING COOPRATIVE OF INDIA LTD. )</option>
+																			<option value="58076b91dcdc6be28d3d86f1cdec8683">* DIAC/11290/07-25 (RAJESH GUPTA VS HOMESPOON FOOD INDUSTRIES PVT. LTD. & ORS.)</option>
+																			<option value="dc1783114722a709ff9a76d30f692c8d">* DIAC/11289/07-25 (M/S GUPTA TRADERS VS M/S TRIDENT ENGINEERS )</option>
+																			<option value="9133eaa9f9a1a0d30cde0c977d09cf49">* DIAC/11288/07-25 (ALEXA ENTERPRISES VS PUBLIC WORKS DEPARTMENT (PWD), DELHI & ORS.)</option>
+																			<option value="45c01584c1f4f913557ba76f5b7b33b4">* DIAC/11287/07-25 (ECOWARE SOLUTIONS PRIVATE LIMITED VS INDRAPRASTHA GAS PRIVATE LIMITED )</option>
+																			<option value="b44c8b196baf2988b5d09b7cf2185bce">* DIAC/11286/07-25 (AXALTA COATING SYSTEMS INDIA PVT. LTD.  VS M/S AMG ROTANA MOTOR LLP )</option>
+																			<option value="6e976c3f95ba6e684a5ab51a7a53e55e">* DIAC/11190/07-25 (KONCEPT DESIGN PROJECTS PVT. LTD. VS D.J. INFRASTRUCTURE DEVELOPERS (P) LTD. )</option>
+																			<option value="429e3b9169b3a52ce5b8c344e68a3a3c">* DIAC/11189/07-25 (M/S H G GRAPHICS PRIVATE LIMITED VS M/S B9 BEVERAGES  )</option>
+																			<option value="209866130fafe03fa53b6ac541f7d44f">* DIAC/11188/07-25 (M/S UNISTAL SYSTEMS PRIVATE LIMITED VS AMP INFRA PRIVATE LIMITED )</option>
+																			<option value="9f3b2688f5f0020a195907bfaee91a55">* DIAC/11187/07-25 (M/S UNISTAL SYSTEMS PVT. LTD.  VS DEVDATT MAHENDRARAI DESAI )</option>
+																			<option value="eb52706fcdd36d4f5f606332a758534d">* DIAC/11186/07-25 (M/S UNISTAL SYSTEMS PRIVATE LIMITED VS JAIHIND PROJECTS LIMITED )</option>
+																			<option value="1eb0ce22c7e7060bbc85bddc295e8502">* DIAC/11090/06-25 (MR. DEEPAK KUMAR  & ANR. VS MR. MOHIT JAIN )</option>
+																			<option value="788d9412c7d7125edb4b9de5f8f6926d">* DIAC/11088/06-25 (CONTINENTAL CARBON INDIA PRIVATE LIMITED VS AEIFORIA CONSTRUCTIONS PVT. LTD.  )</option>
+																			<option value="cf32e9800930b4dfeb8343430e79f1b0">* DIAC/11087/06-25 (RAHUL KUMAR MISHRA VS OYO HOTELS & HOME PVT. LTD.  & ANR.)</option>
+																			<option value="bd2da44edadd1aee1596556c12cdd10e">* DIAC/11086/06-25 (M/S. SCHINDLER INDIA PRIVATE LIMITED VS PARNIKA COMMERCIAL AND ESTATES PRIVATE LIMITED )</option>
+																			<option value="d9d44ee0a2a2101d7517291ae165ff0e">* DIAC/10990/05-25 (M/S BANYAN TREE SCHOOL VS M/S GIRDHARI LAL & SONS SPORTS PVT. LTD. )</option>
+																			<option value="b8af8124a44a3c189bf6f0ba692995e2">* DIAC/10989/05-25 (M/S CARS24 SERVICES PRIVATE LIMITED VS ANANTHARAJ T )</option>
+																			<option value="27da78c45b10fef04287cad39c0caabf">* DIAC/10988/05-25 (TATA CAPITAL LTD. VS DINESH VASWANI )</option>
+																			<option value="27a48dc898204454d881b50101ec08ae">* DIAC/10987/05-25 (AXIS FINANCE LIMITED VS SHIWENDRA KUMAR YADAV )</option>
+																			<option value="26774572e8ebccb1a65946d16cfffecd">* DIAC/10986/05-25 (HT DIGITAL STREAMS LIMITED VS RUSK MEDIA PRIVATE LIMITED )</option>
+																			<option value="6415179efd73783f002935af5c0b0850">* DIAC/10887/05-25 (M/S PASSERINE WEALTH SOLUTION PRIVATE LIMITED VS MR. GURDEV SINGH BHATIA )</option>
+																			<option value="7598f7d55f185632224f5db77327f92f">* DIAC/10886/05-25 (M/S SHINKOLITE FINANCE LTD. VS SH. HEERA LAL  )</option>
+																			<option value="d3c9a10934c0ba4bd62708afd81c5001">* DIAC/10790/04-25 (AXIS FINANCE LIMITED VS ANKESH KUMAR )</option>
+																			<option value="051fa9bb7b6d9f74fbe052863538dd57">* DIAC/10789/04-25 (KOTAK MAHINDRA PRIME LTD. VS VIBHAV GUPTA )</option>
+																			<option value="70c2827ed48add3bc7c92c7a48a3b690">* DIAC/10788/04-25 (KOTAK MAHINDRA PRIME LTD.  VS RAJ KUMAR )</option>
+																			<option value="75786a070d3cb5fe79a0161043446c8b">* DIAC/10787/04-25 (KOTAK MAHINDRA PRIME LTD. VS ASHISH NAIN & ANR.)</option>
+																			<option value="b071fddfeec8489a1283b43d8804e5c6">* DIAC/10786/04-25 (M/S M.V. OMNI PROJECTS (INDIA) LTD. VS UNION OF INDIA THROUGH DY CHIEF ENGG NORTHERN RAILWAY & ANR.)</option>
+																			<option value="679be4ba651683d75a10c3a0ea46f0dd">* DIAC/10690/04-25 (L D SULANIA AND CO VS CG POWER AND INDUSTRIAL SOLUTIONS LIMITED )</option>
+																			<option value="e0ec66cf874e4003497081a1e3401416">* DIAC/10689/04-25 (MAHAVIR TRANSPORT VS CMD DELHI STATE CIVIL SUPPLIES CORPORATION LTD.)</option>
+																			<option value="2495c562b15d8fa14c5f9fe086c010c6">* DIAC/10688/04-25 (M/S SARR FREIGHTS CORPORATION VS BORDER SECURITY FORCE )</option>
+																			<option value="0005f818a7cff7186f14d0aef806d27e">* DIAC/10687/04-25 (AVIVA LIFE INSURANCE COMPANY INDIA LTD  VS BAANI HOSPITALITY SERVICES PVT. LTD.)</option>
+																			<option value="0189f919d18b9c71df54df2cb5c68879">* DIAC/10686/04-25 (MONEYWISE FINANCIAL SERVICES PVT. LTD.  VS KRM TYRES THROUGH ITS PARTNERS & ORS.)</option>
+																			<option value="6aae277b088a3de65c05aaa725bb983c">* DIAC/10590/03-25 (SH. MADAN LAL BOKARIA, M/S ASHOKA APPARELS  VS M/S KGN MAHAL CHAND BHAI(ODISHA) )</option>
+																			<option value="a451a80d48938da318ba46852d458685">* DIAC/10589/03-25 (SH. MADAN LAL BOKARIA, M/S ASHOKA APPARELS  VS M/S ALISHAN, SANKHCHILLA, JAIPUR ROAD )</option>
+																			<option value="d5f0b9b6333b5560fd021ecd4c08c8b9">* DIAC/10588/03-25 (SH. MADAN LAL BOKARIA, M/S ASHOKA APPARELS  VS SH. DEVRAJ SAHOO, M/S GENTS PALACE (ODISHA) )</option>
+																			<option value="20c99364fe3266b18c21ecbd4148d2c6">* DIAC/10587/03-25 (SH. MADAN LAL BOKARIA, M/S ASHOKA APPARELS VS M/S RADHA GOPI BASTRALAYA(ODISHA) )</option>
+																			<option value="46d576178392f9cc96e21a1154cc087f">* DIAC/10586/03-25 (M/S ARIF ENTERPRISES VS M/S OMG MEDIACOM PRIVATE LIMITED  )</option>
+																			<option value="9a7474a54550967c267f02258dadd39f">* DIAC/10490/03-25 (SOPHISTICATED INDUSTRIAL MATERIAL ANALYTIC LABS PVT. LTD.  VS STEEL AUTHORITY OF INDIA LTD  )</option>
+																			<option value="261d77c80c58335246fea4220169a82a">* DIAC/10489/03-25 (CHEQUERED FLAG SPORTS PVT. LTD. VS T V TODAY NETWORK LIMITED )</option>
+																			<option value="1a6f3d48298f5afcc7f0cf0107d11e8b">* DIAC/10488/03-25 (LIVGUARD ENERGY TECHNOLOGIES PRIVATE LIMITED VS DURGA CORPORATION & ANR.)</option>
+																			<option value="3b8540d1d3128ce7cf68e0f6a8fc5036">* DIAC/10487/03-25 (HERO MOTOCORP LTD. VS M/S B.M. ENTERPRISES )</option>
+																			<option value="f61ff1168fcfde569253032b9b16f096">* DIAC/10486/03-25 (TATA CAPITAL LIMITED  VS JASVIT CONSTRUCTIONS PRIVATE LIMITED AND ORS. )</option>
+																			<option value="e5eaaaa72d968a0a4314a28b7f860dfb">* DIAC/10390/03-25 (MONEYWISE FINANCIAL SERVICES PRIVATE LIMITED  VS ANA INTERVENTIONAL PVT. LTD. THROUGH ITS DIRECTORS & ORS.)</option>
+																			<option value="ed9ef81bd9f566831cb69800a88a49aa">* DIAC/10389/03-25 (MONEYWISE FINANCIAL SERVICES PVT LTD  VS BHAGWATI TRADERS THROUGH ITS PROPRIETOR SH. DEEPAK KUMAR  & ANR.)</option>
+																			<option value="9497c543c151025dcac9033d6dbf9dfd">* DIAC/10388/03-25 (MONEYWISE FINANCIAL SERVICES PRIVATE LIMITED VS KISHAN VEGETABLE COMPANY & ORS.)</option>
+																			<option value="7d665f13968cc1137b2bdaa44d53e5c9">* DIAC/10387/03-25 (AXIS FINANCE LIMITED VS CHAPPAN BHOG & ORS.)</option>
+																			<option value="936c07a00278ca5fc8d2fcb7872e590b">* DIAC/10386/03-25 (AXIS FINANCE LIMITED VS JOSEPH KURIAN & ANR.)</option>
+																			<option value="bf64356b94b422f479a9c92ce19ce3b5">* DIAC/10290/02-25 (M/S BUNCH MICROTECHONOLOGIES PVT. LTD. VS MR. GAGAN BHASKAR )</option>
+																			<option value="7b961710db16fb77e7ed1af64880e42b">* DIAC/10289/02-25 (M/S K.S. ENGINEERS VS M/S AAIC BUILDING SOLUTIONS LIMITED)</option>
+																			<option value="a8f5b51310efdadb47efe834c486b5f6">* DIAC/10288/02-25 (BINA & ORS. VS ASHOK BANSAL )</option>
+																			<option value="ead59391adaa8032e4d253be77d929c7">* DIAC/10287/02-25 (VIHAAN NETWORKS PRIVATE LTD  VS M/S BHARAT SANCHAR NIGAM LTD  )</option>
+																			<option value="06b9c074535c4459a21bf922c64ddbac">* DIAC/10286/02-25 (DIGITAL RADIO(DELHI) BROADCASTING LTD. VS DELHI TOURISM AND TRANSPORTATION DEVELOPMENT CORPORATION LTD. )</option>
+																			<option value="44027903a476d7480c142792a2471811">* DIAC/10190/01-25 (M/S RANK INDIA INC. VS M/S SURGITECH )</option>
+																			<option value="69a364b3d1c885a05f4443522fa92b95">* DIAC/10189/01-25 (M/S RANK INDIA INC.  VS M/S MAHADEV EXPORTS )</option>
+																			<option value="8787ee06cc221c4f4ef7be38f5ffb55c">* DIAC/10188/01-25 (M S POLY VINYL CORPORATION  VS ASHOK KUMAR PURI  )</option>
+																			<option value="af341a2e0d61babba257833a55e28fe7">* DIAC/10091/01-25 (INFINITY INTERIORS PRIVATE  LTD. VS ESPIRE RESORTS PRIVATE LIMITED )</option>
+																			<option value="933b823ef859a2e4d71187c14cdec3e6">* DIAC/10090/01-25 (INFINITY INTERIORS PRIVATE LTD. VS ESPIRE RESORTS PRIVATE LIMITED )</option>
+																			<option value="55c43defe6c83fd89f2fbdb6ec444a47">* DIAC/10089/01-25 (INFINITY INTERIORS PRIVATE LTD.  VS ESPIRE RESORTS PRIVATE LIMITED )</option>
+																			<option value="aa7ebb9bed5cc5a4b265766fdf51b7ef">* DIAC/10088/01-25 (INFINITY INTERIORS PRIVATE LTD. VS ESPIRE RESORTS PRIVATE LIMITED )</option>
+																			<option value="47b6e252ab2a1ef1ce29e2bdd52ecc71">* DIAC/10087/01-25 (M/S AMAZON TRANSPORTATION SERVICES PRIVATE LIMITED VS M/S SAI LAXMI NARAYANA LOGISTICS   )</option>
+																			<option value="0f20401f4f52dc5f9779979c6fd64277">* DIAC/10086/01-25 (MS HINDUSTAN ENGINEERING AND INDUSTRIES LIMITED VS UNION OF INDIA MINISTRY OF DEFENCE )</option>
+																			<option value="454b42af277f723895114e759ac839f9">* DIAC/9990/12-24 (SMT. LALITA GUPTA, M/S RAHUL ENGINEERING COMPANY VS AURANGABAD MUNICIPAL CORPORATION )</option>
+																			<option value="d9a436c171e160f7194d821428bd31ca">* DIAC/9989/12-24 (SANJAY PAL, M/S HINDUSTAN RASAYAN PRIVATE LIMITED VS HINDUSTAN INSECTICIDES LTD. )</option>
+																			<option value="6aa4b9bfc82a4f951a98b02366ce6f06">* DIAC/9988/12-24 (M/S INNOVATIVE ROADZTECH PRIVATE LIMITED VS M/S SALASAR HIGHWAYS PRIVATE LIMITED )</option>
+																			<option value="61b6215461125face5a7fe5375a460ad">* DIAC/9987/12-24 (M/S SHAFFER ENERGY PRIVATE LIMITED VS M/S PATRATU VIDYUT UTPADAN NIGAM LTD. )</option>
+																			<option value="0cd5e192b54d36f35a1ac03020ce1516">* DIAC/9986/12-24 (M/S ATF PROJECTS VS M/S THE INDIAN HUME PIPE CO. LIMITED )</option>
+																			<option value="ea90e4d409b86624fde222d6f66c0d5c">* DIAC/9890/12-24 (M/S ENVIRO COMFORT ENGINEERING SERVICES VS M/S DESIGN ACCORD CONSULTANTS  )</option>
+																			<option value="2012f1155b7a074ffe27d792ee63b91b">* DIAC/9889/12-24 (M/S CARGO CHANNELS PRIVATE LIMITED VS M/S JAZZ MY HOME )</option>
+																			<option value="d6c81f7a42abdb685370409a94e64473">* DIAC/9888/12-24 (M/S MANERS EVENTS AND PROMOTIONS PRIVATE LIMITED VS M/S RELIANCE RETAIL LIMITED )</option>
+																			<option value="1bd38a27daafea8c36bd1509cafcc8d2">* DIAC/9887/12-24 (M/S ANH CONSTRUCTION PRIVATE LIMITED VS M/S ISHAN EQUIPMENT PVT. LTD. )</option>
+																			<option value="027f0318bd2a84bdd5ad27699d02596c">* DIAC/9886/12-24 (M/S KANSAL GRAPHICS VS M/S K G DENIM LIMITED )</option>
+																			<option value="030a72bb56e3931bec35cecc08f08ba4">* DIAC/9790/11-24 (M/S DARBAN SINGH SUGARA, EASY CARE INTEGRATED SOLUTIONS INDIA PVT. LTD. VS M/S BADAMI RESTAURANT LLP )</option>
+																			<option value="1a592ec1d021302d6c018c8f5de758ea">* DIAC/9789/11-24 (M/S DARBAN SINGH SUGARA, EASY CARE INTEGRATED SOLUTIONS INDIA PVT. LTD. VS M/S HYATT REGENCY )</option>
+																			<option value="1f3920bcc0016ca0bf0896834ffc2f98">* DIAC/9788/11-24 (M/S UNITED MULTICHEM LLP  VS M/S CHAITANYA TAGADE )</option>
+																			<option value="495782b5db866b7fc55b08b87117354f">* DIAC/9787/11-24 (M/S TUSHAR AGGARWAL, EQX ANALYTICS PRIVATE LIMITED VS M/S KOLI SHUBHANGI SANDIP )</option>
+																			<option value="0b08eeb8d1421e1da8ecc273a7a16e8c">* DIAC/9786/11-24 (M/S TUSHAR AGGARWAL, EQX ANALYTICS PRIVATE LIMITED  VS M/S AMIT RAIKWAR )</option>
+																			<option value="4cad0d4af87498acb49303e015581cef">* DIAC/9690/11-24 (M/S BEETA MACHINES PRIVATE LIMITED VS M/S MARKKETO RETAILER )</option>
+																			<option value="35d9a814a747e6018b9a5477878037cb">* DIAC/9689/11-24 (M/S INNOVATIVE ROADZTECH PRIVATE LIMITED VS M/S KASHIPUR SITARGANJ HIGHWAYS PRIVATE LIMITED )</option>
+																			<option value="41ddddb0b5517388ef98d15e743334c2">* DIAC/9688/11-24 (M/S OFFCOM SYSTEMS PRIVATE LIMITED VS M/S OFFICE OF EXECUTIVE ENGINEER )</option>
+																			<option value="71c0640b6346dfd8924e075a21ac130f">* DIAC/9687/11-24 (M/S OFFCOM SYSTEMS PRIVATE LIMITED VS M/S HIMACHAL FUTURISTIC COMMUNICATION LTD. )</option>
+																			<option value="b6f80d24fb77f475a02902bf0d7b2ea6">* DIAC/9686/11-24 (M/S ADVANCED LIFESCIENCES PRIVATE LIMITED VS M/S RALLIS THERAPEUTICS PVT. LTD. )</option>
+																			<option value="63d1d13b8407ef82a38f0d092eae1b0d">* DIAC/9590/11-24 (MS INAM AND CO VS AIRPORT AUTHORITY OF INDIA, THROUGH ITS CHAIRMAN & ORS.)</option>
+																			<option value="e7a78dadfbc4f83ea0c7f969a3f0372e">* DIAC/9589/11-24 (NIKHIL AGARWAL & ORS. VS VIKASH KUMAR )</option>
+																			<option value="f3ffeb9e7970112473a333ac1b9757b4">* DIAC/9588/11-24 (SH. RUPESH A BAGADI, M/S ONUS INTERNATIONAL VS M/S I TRIANGLE INFOTECH PVT. LTD. BANGLORE )</option>
+																			<option value="b107aded2e47c0fb6cfb7a93132c10f0">* DIAC/9587/11-24 (SH. RUPESH A BAGADI, M/S ONUS INTERNATIONAL VS M/S IL JIN ELECTRONICS INDIA PVT. LTD. )</option>
+																			<option value="1f92b656d6bea1cf02a186b8eb2331ea">* DIAC/9586/11-24 (MS. SUMAN R BAGADI, M/S NEXTECH VS M/S GOLDFLAME TECHNOLOGIES PVT. LTD. )</option>
+																			<option value="d29e10c011456294320ae8f8daa79f4d">* DIAC/9490/10-24 (SONA BLW PRECISION FORGINGS LIMITED VS PRACTICE LEAGUE LEGAL TECH PVT LTD )</option>
+																			<option value="9cacc2411a925f6e0045447e09815031">* DIAC/9489/10-24 (PNB HOUSING FINANCE LTD. VS PARAMJEET SINGH ARORA & ORS.)</option>
+																			<option value="83153210502f9dd70af19342ac57bd63">* DIAC/9488/10-24 (M/S S C AGARWAL VS UNION OF INDIA )</option>
+																			<option value="69f1f7d833d6b8e206b2ccfbf5f8b588">* DIAC/9487/10-24 (DR. ALOK AHUJA VS THE DIRECTOR, REGIONAL CENTRE ECHS, DEHRADUN & ANR.)</option>
+																			<option value="289929a9907f33a6811d0c9cee00e71e">* DIAC/9486/10-24 (M/S. CLASSKLAP PRIVATE LIMITED VS ELSHADDAI CAMBRIDGE SCHOOL )</option>
+																			<option value="9d1568821f6aadc2d56fd96bb6781958">* DIAC/9390/10-24 (SH. SHARAFAT ALI, M/S DEZIRE GROUP VS M/S HARMEET HEALTHCARE AND FITNESS PVT LTD )</option>
+																			<option value="66fb327a3926b29991f5611c34cf26b5">* DIAC/9389/10-24 (SH. AMIT GUPTA, M/S DIYA APPAREL VS M/S VISHAL MEGA MART LTD )</option>
+																			<option value="c298fc3aa28a04074e79a7d9d6395eac">* DIAC/9388/10-24 (SH. ANIL KUMAR SHARMA, M/S E-GREEN DEVELOPERS & PROMOTERS PRIVATE LIMITED  VS SH SURESH CHAND AGRAWAL M/S AGRAWAL TRADERS )</option>
+																			<option value="44d3f0afac8c69ea8a89cc266941d4d3">* DIAC/9387/10-24 (SH. ANIL KUMAR SHARMA, M/S E-GREEN DEVELOPERS & PROMOTERS PRIVATE LIMITED VS MS RITIKA AGRAWAL M/S AGRAWAL ENTERPRISES )</option>
+																			<option value="7b67bcb680645a85d6ba09453a4b19da">* DIAC/9386/10-24 (SH. JATIN GUPTA, M/S V K READY MIX CONCRETE PRIVATE LIMITED VS M/S KONSTRUCT PROP SH YOGESH YADAV  )</option>
+																			<option value="6abb0782028d7d3ca4db7e48e3df3613">* DIAC/9290/09-24 (MOGLI LABS (INDIA) PVT. LTD. THROUGH  ITS AUTHORIZED SIGNATORY MR. SANIDHYA JAIN  VS M/S SHUBAN PRINTS )</option>
+																			<option value="3c0189a0e661c2d1d5fe8b3557fc37b2">* DIAC/9289/09-24 (M/S SHIVPURI BUILDSPACE PVT. LTD. VS KIRAN KAPUR & ANR.)</option>
+																			<option value="73cebb6fa4a0e3160588889a812d6cf8">* DIAC/9288/09-24 (AAKASH EDUCATIONAL SERVICES LIMITED VS VIVEK SRIVASTAVA  )</option>
+																			<option value="30f103196f1915be77486e1e81b76ae1">* DIAC/9287/09-24 (RADICO KHAITAN LIMITED  VS NARGESH KUMAR  )</option>
+																			<option value="0cfdebeeac6623d9c84739d2d043ea77">* DIAC/9286/09-24 (LORD SHIVA TEX EXPORTS PVT. LTD. VS NILOFER IPNINDER SINGH@ NILOFER SINGH )</option>
+																			<option value="470e99c385a8620e4bb0ef2906a0d656">* DIAC/9190/09-24 (SH. ADITYA JAIN, (PROP.) M/S CONTRA PACKAGING VS M/S GURBANI FOODS AND BEVERAGES LLP )</option>
+																			<option value="a5d13afbfc9a2585d47a63b5f6cdfb71">* DIAC/9189/09-24 (SH. VINAY GOEL, M/S V S TRADERS VS M/S PRAKHAR ENGINEERING PVT. LTD.  )</option>
+																			<option value="ad3b47614b3583a257f09bba626d2215">* DIAC/9188/09-24 (SH. VINAY GOEL, M/S V S TRADERS VS M/S SK ELECTRICAL  )</option>
+																			<option value="c000b1dde969a60a20d53f3bfeeb7dd9">* DIAC/9187/09-24 (SH. RUPESH A BAGADI, M/S ONUS INTERNATIONAL  VS M/S M.V.S. ENGINEERS  )</option>
+																			<option value="aaac10264ace6945965fc961f495367e">* DIAC/9186/09-24 (AAKASH EDUCATIONAL SERVICES LIMITED VS DILIP KUMAR )</option>
+																			<option value="877b9cd5c87f9e6c82d12ac352d451cb">* DIAC/9090/08-24 (M/S ENVICON TECHNOLOGIES (I) PVT. LTD. VS M/S V C SOLUTIONS PVT. LTD. )</option>
+																			<option value="f1d923d7af115e4573f695e1c4b59159">* DIAC/9089/08-24 (M/S ENVICON TECHNOLOGIES (I) PVT. LTD. VS M/S VIPUL IT INFRASOFT P. LTD. )</option>
+																			<option value="2ce54583616667bec85c289c8f902b6a">* DIAC/9088/08-24 (LLOYD INSULATIONS (INDIA) LIMITED VS M/S SEPCO ELECTRIC POWER CONSTRUCTION CORPORATION  )</option>
+																			<option value="129c17dbdd62c36ccf5f1fa07ec4014e">* DIAC/9087/08-24 (CORPORATE INFOTECH PRIVATE LIMITED  VS UNION PUBLIC SERVICES COMMISSION  )</option>
+																			<option value="8661835ede6cfef5b0b171d20c263a9c">* DIAC/9086/08-24 (M/S RATHI STEEL AND POWER LIMITED VS INDUSTRIAL ENERGY )</option>
+																			<option value="f905dbf9c0704d40a5c7794feedf3d66">* DIAC/9001/08-24 (SPAWN VENTURES SERVICES PVT. LTD. VS PARUL YADAV )</option>
+																			<option value="7660b8cc7c3a2a8c29b7a800f7eee16a">* DIAC/8990/08-24 (SPAWN VENTURES SERVICES PVT. LTD. VS SHAILESH SHARMA )</option>
+																			<option value="c3c49ed616784c68a6d7df6241121e9f">* DIAC/8989/08-24 (SPAWN VENTURES SERVICES PVT. LTD. VS ARTI YADAV )</option>
+																			<option value="758d5b6358346cff9eec811d63276ca4">* DIAC/8988/08-24 (SPAWN VENTURES SERVICES PRIVATE LIMITED VS IMMANUEL GEORGE )</option>
+																			<option value="42f06bd6a8ab22e333b9f601c960ee8d">* DIAC/8987/08-24 (CEMENT CORPORATION OF INDIA LIMITED VS M/S HIND ENERGY AND COAL BENFICATION (I) LIMITED )</option>
+																			<option value="a4d32d28dcf2751d3d3e820685c3d341">* DIAC/8986/08-24 (CARATLANE TRADING PRIVATE LIMITED VS  RAUNAK RETAILS PRIVATE LIMITED )</option>
+																			<option value="5e67b412c86b95010f6824fb9de1a9b0">* DIAC/8890/07-24 (MAHESH EDIBLE AGRO OIL INDUSTRIES PVT LTD & ORS. VS MAHESH EDIBLE OIL INDUSTRIES LIMITED )</option>
+																			<option value="5024e85aee1b1f31b52b5175c7cffbe6">* DIAC/8889/07-24 (MAHESH EDIBLE AGRO OIL INDUSTRIES PVT LTD  & ORS. VS MAHESH EDIBLE OIL INDUSTRIES LIMITED & ORS.)</option>
+																			<option value="e0c7815845077c339ad2813270392cad">* DIAC/8888/07-24 (MAHESH EDIBLE AGRO OIL INDUSTRIES PVT LTD  & ORS. VS SMT. KALPANA RATHORE  & ORS.)</option>
+																			<option value="ad63c1135b11d9634afd18b10ea69dbf">* DIAC/8887/07-24 (M/S AMAZON TRANSPORTATION SERVICES PRIVATE LIMITED  VS M/S OMEGA GEN SERVICES  )</option>
+																			<option value="994332705171255e14c5945915c2e54a">* DIAC/8886/07-24 (M/S AMAZON TRANSPORTATION SERVICES PRIVATE LIMITED  VS M/S  GET IN SHAPE )</option>
+																			<option value="bcfcc13d76a25db64a72904a8d816f67">* DIAC/8790/07-24 (M/S SHRI JI GASES OF MS SHRI JI GASES  VS M/S OXBOW O2 )</option>
+																			<option value="600791bcb7ae4230e1aa0cdf975dc48a">* DIAC/8789/07-24 (M/S SHRI JI GASES OF MS SHRI JI GASES  VS M/S ADITYA OXYGEN COMPANY )</option>
+																			<option value="c5c52e2d6850008de2ada139e187bda1">* DIAC/8788/07-24 (M/S SANJAY YADAV OF NATURE PACKAGING  VS M/S SARAHNA INDUSTRIES PRIVATE LIMITED )</option>
+																			<option value="744c259ca409a34cf4c245b9cd90175f">* DIAC/8787/07-24 (M/S KARAN GUPTA OF D PARADISE VS M/S SARA ELECTRICA PVT. LTD )</option>
+																			<option value="afd05bcf5302fbac95b230b7b638786e">* DIAC/8786/07-24 (M/S. RAMAN SHARMA OF ABHAY GRAPHICS VS M/S TIME GRAPHICS RAKESH KUMAR KUSHWAHA )</option>
+																			<option value="37abcbecc24383e7fdff140c7de6f1e6">* DIAC/8690/07-24 (M/S KUNAL LALANI OF CRAYONS ADVERTISING PRIVATE LIMITED VS   M/S BHARAT SANCHAR NIGAM LTD. )</option>
+																			<option value="2ed77c5bfb8a750005197aeb4b7c1bbd">* DIAC/8689/07-24 (M/S. MANILA AGARWAL OF MS NIRMAN CONSULTANTS PRIVATE LIMITED VS M/S CPP THERMO DEVICES PVT. LTD )</option>
+																			<option value="03889accec80f12dbbbbd335f395c23c">* DIAC/8688/07-24 (M/S AJESH KUMAR GARG OF BESURE HEALTHCARE PVT LTD  VS M/S ATG HOME CARE PRODUCTS )</option>
+																			<option value="b002ac7c6c4fd5400863abbf1d890391">* DIAC/8687/07-24 (M/S. RISHI NATH KHANNA OF M/S TRUE NORTH TECHNOLOGIES PRIVATE LIMITED VS M/S CYRUS TRADERS  )</option>
+																			<option value="ba4a0c3a6184e7abc6c9e30fb8d9a008">* DIAC/8686/07-24 (M/S ARVINDER SINGH BRARA OF MANTEC CONSULTANTS PRIVATE LIMITED   VS M/S ASTHA INFRA DEVELOPERS PVT. LTD. )</option>
+																			<option value="a9265e8c3629ec69473a1d3dc793478e">* DIAC/8590/07-24 (M/S SUNDER SINGH OF HANGERS WORLD INDIA  VS M/S MITESH BAIJAL (DIN-02623165) )</option>
+																			<option value="6b87afbd2779bfc7c5af3b240d59c397">* DIAC/8589/07-24 (M/S SUNDER SINGH OF HANGERS WORLD INDIA  VS M/S MITESH BAIJAL (DIN-02623165) )</option>
+																			<option value="0e67ced0ae6c98998a12c6c3424797da">* DIAC/8588/07-24 (M/S DAYAL SINGH OF HARGOBIND SAHIB TAXI SERVICE VS M/S RAJAN )</option>
+																			<option value="e530ab080638cca51400fdfc7da618b8">* DIAC/8587/07-24 (M/S KUBER RATHI OF RATHI & CO. VS M/S SANKALP ARORA )</option>
+																			<option value="d7637ed60bf2d96035ad8914e6130235">* DIAC/8586/07-24 (M/S NAJEEB ASHRAF KHAN OF IMMEDIATE COURIER & LOGISTICS VS M/S  MR. VIKASH )</option>
+																			<option value="dc8e8bdbfbbb14aba399e53e26103949">* DIAC/8490/06-24 (M/S. GULATI LUBRICANTS & CHEMICALS  VS M/S. RPS MANAGEMENT AND CONSULTANCY PVT. LTD.  )</option>
+																			<option value="4bae02d2b4c96db4b314b067794dc470">* DIAC/8489/06-24 (M/S. KP TECH INDIA SYSTEMS PVT. LTD.  VS M/S. ASPG INFRASTRUCTURES PVT. LTD.  )</option>
+																			<option value="8db50d839cdef5ba5213186141cc0bfc">* DIAC/8488/06-24 (M/S. KP TECH INDIA SYSTEMS PVT. LTD.  VS M/S. DAKSH ENTERPRISE )</option>
+																			<option value="cf3e4c1897465a3a08bbbd6d6ba05bc1">* DIAC/8487/06-24 (M/S. PRP SERVICES PVT. LTD. VS M/S. APROPOS CAREERS PVT. LTD )</option>
+																			<option value="70b8af5ebfd00a75c2611f570aaa5537">* DIAC/8486/06-24 (M/S. KUMAR TRADING CORPORATION  VS M/S. JMJ TOOLS INDIA  )</option>
+																			<option value="7ab7542d15d00a38b2effc9e3957be1e">* DIAC/8390/05-24 (TATA CAPITAL LTD. VS M/S PRIME BIZWORLD PVT LTD )</option>
+																			<option value="4f066a3e85357676dc4f03cdff932c33">* DIAC/8389/05-24 (ANTIQUE ART EXPORTS PVT LTD VS UNITED INDIA INSURANCE CO. LTD )</option>
+																			<option value="acf79b537e360a2abeb40229a6d85d36">* DIAC/8388/05-24 (ROYAL INDIA VACATION PVT. LTD.  VS M/S. GOYAL GROUP OF HOTELS  & ANR.)</option>
+																			<option value="3193ec74fbe07ef7f5b6756c9f136120">* DIAC/8387/05-24 (ADITYA BIRLA FINANCE LIMITED  VS BALISHTHA E-TECH PRIVATE LIMITED  & ANR.)</option>
+																			<option value="583d582c1c21c928f632560dbd4e943b">* DIAC/8386/05-24 (CENTAURUS GREEN ENERGY PVT LTD VS PDM EDUCATIONAL AND CHARITABLE TRUST )</option>
+																			<option value="164c72026613ca48d1f0b7f4d00f2aad">* DIAC/8290/05-24 (M/S. BUDDHAM BUILDERS VS M/S. GUPTA POWER INFRASTRUCTURE LTD)</option>
+																			<option value="9235f4c124291d924f78222faf7659a6">* DIAC/8289/05-24 (M/S BUDDHAM BUILDERS PRIVATE LIMITED V/S  M/S GUPTA POWER INFRASTRUCTURE LTD.)</option>
+																			<option value="d013344499b0268dd40a119ed71accbf">* DIAC/8288/05-24 (M/S GREEN EARTH CARE CONSULTANTS PVT. LTD. V/S M/S ABHISHEK TYAGI)</option>
+																			<option value="f605dad11493b3527baca050c7e594c8">* DIAC/8287/05-24 (KURUVITADAM AGENCIES (P) LTD VS M/S. SONY INDIA (P) LTD )</option>
+																			<option value="cf8ce2a46453f554c5041f4a5844d660">* DIAC/8286/05-24 (CSL FINANCE LIMITED VS SARTHIK EDUCATIONAL TRUST & ORS)</option>
+																			<option value="a63798e7-2262-11ef-902b-089798b183f5_8894">* DIAC/8190/04-24 (GOYAL EBIKES  VS OKINAWA AUTOTECH PVT LTD )</option>
+																			<option value="a6374640-2262-11ef-902b-089798b183f5_8668">* DIAC/8189/04-24 (M/S. BAJRANG IRON PVT LTD  VS HN STEEL CASTINGS PVT LTD & ORS)</option>
+																			<option value="a636f957-2262-11ef-902b-089798b183f5_4816">* DIAC/8188/04-24 (SH. BALJEET SINGH GILL PROPRIETOR M/S. GIANI RAM TAXI SERVICE VS M/S. EXL SERVICE.COM (INDIA) PVT LTD )</option>
+																			<option value="a636aca3-2262-11ef-902b-089798b183f5_1804">* DIAC/8187/04-24 (M/S. AMBA ENTERPRISES PVT LTD  VS CENTRAL WAREHOUSING CORPORATION )</option>
+																			<option value="a6366ce4-2262-11ef-902b-089798b183f5_1402">* DIAC/8186/04-24 (MS G4S SECURITY SERVICES INDIA PVT LTD  VS MS VALLEY IRON AND STEEL CO LIMITED DEPARTMENT CONSTRUCTION DIVISION )</option>
+																			<option value="14e9e124-2b01-11ef-a9de-2574d8dcc750_5996">* DIAC/8090/03-24 (CARITAS ECO SYSTEMS PVT LTD  VS M/S. ANTEA INDIA PVT LTD   )</option>
+																			<option value="a631c967-2262-11ef-902b-089798b183f5_3392">* DIAC/8089/03-24 (NARESH KUMAR BANSAL VS CHIEF ENGINEER, CENTRAL PUBLIC WORKS DEPARTMENT NEW DELHI & ANR )</option>
+																			<option value="14e99dd8-2b01-11ef-a9de-2574d8dcc750_7335">* DIAC/8088/03-24 (MS AHLAWAT & ASSOCIATES VS M/S. SOMPRABH SINGH  )</option>
+																			<option value="a6314b7e-2262-11ef-902b-089798b183f5_8387">* DIAC/8087/03-24 (M/S. RETURN ON IDEAS PVT LTD VS M/S. DUNZO DIGITAL PVT LTD )</option>
+																			<option value="a6310c12-2262-11ef-902b-089798b183f5_4742">* DIAC/8086/03-24 (MS. CARITAS ECO SYSTEMS PVT LTD  VS M/S. RAJIV RANJAN GURU)</option>
+																			<option value="14e8b54d-2b01-11ef-a9de-2574d8dcc750_3461">* DIAC/7990/03-24 (NARESH KUMAR BANSAL VS CHIEF ENGINEER, CENTRAL PUBLIC WORKS DEPARTMENT NEW DELHI & ANR  )</option>
+																			<option value="14e89257-2b01-11ef-a9de-2574d8dcc750_4473">* DIAC/7989/03-24 (NARESH KUMAR BANSAL VS CHIEF ENGINEER, CENTRAL PUBLIC WORKS DEPARTMENT NEW DELHI & ANR  )</option>
+																			<option value="14e8718f-2b01-11ef-a9de-2574d8dcc750_6302">* DIAC/7988/03-24 (RAKESH KAPOOR VS RAHUL KAPOOR & ORS. )</option>
+																			<option value="14e82e56-2b01-11ef-a9de-2574d8dcc750_5142">* DIAC/7986/03-24 (M/S ISHU BUILDCON PVT. LTD. VS M/S CAPITAL INFRATECHOMES PVT. LTD. AND ORS. )</option>
+																			<option value="14e77d99-2b01-11ef-a9de-2574d8dcc750_5314">* DIAC/7890/02-24 (SANDEEP KAPUR  VS INDIA ASSIST INSIGHTS PVT LTD & ANR )</option>
+																			<option value="14e76580-2b01-11ef-a9de-2574d8dcc750_9061">* DIAC/7889/02-24 (M/S. NEW DELHI U P ROAD CARRIERS PVT LTD  VS M/S. JPFL FILMS PVT LTD  )</option>
+																			<option value="14e74ca5-2b01-11ef-a9de-2574d8dcc750_9997">* DIAC/7888/02-24 (MS. ECKLECTIC INTERNATIONAL PVT LTD  VS MS. SECURITAS ELECRONIC SECURITY INDIA PVT  )</option>
+																			<option value="14e7336d-2b01-11ef-a9de-2574d8dcc750_6976">* DIAC/7887/02-24 (AAKASH EDUCATIONAL SERVICES LTD  VS M/S. LOTUS EDUCATION & ORS )</option>
+																			<option value="14e71a60-2b01-11ef-a9de-2574d8dcc750_1627">* DIAC/7886/02-24 (AAKASH EDUCATIONAL SERVICES LTD  VS M/S. LOTUS EDUCATION & ORS )</option>
+																			<option value="14e6995a-2b01-11ef-a9de-2574d8dcc750_8152">* DIAC/7790/02-24 (DAPL-ABC-JV VS CONTAINER CORPORATION OF INDIA LTD (CONCOR) AND ANR )</option>
+																			<option value="14e67efb-2b01-11ef-a9de-2574d8dcc750_0200">* DIAC/7789/02-24 (NIKHIL SACHAR  VS FRIENDS HOSPITALITY & ORS )</option>
+																			<option value="14e661ee-2b01-11ef-a9de-2574d8dcc750_7617">* DIAC/7788/02-24 (M/S.  A.K. BUILDERS VS ALL INDIA INSTITUTE OF MEDICAL SCIENCES (ENGINEERING SERVICE DEPARTMENT) )</option>
+																			<option value="14e63ec9-2b01-11ef-a9de-2574d8dcc750_5961">* DIAC/7787/02-24 (DIAC/7787/02-24 AMANDEEP VS GAURAV SAINI & ANR CASE NO .ARB.P.815/2023)</option>
+																			<option value="14e56a69-2b01-11ef-a9de-2574d8dcc750_2046">* DIAC/7690/02-24 (ECOM EXPRESS LIMITED VS MODERN MODE APPERALS  )</option>
+																			<option value="14e5475a-2b01-11ef-a9de-2574d8dcc750_9079">* DIAC/7689/02-24 (SUDHAKAR SAMAL  VS GOVT OF NCTD )</option>
+																			<option value="14e523a9-2b01-11ef-a9de-2574d8dcc750_1117">* DIAC/7688/02-24 (VINGRO DEVELOPERS PVT LTD VS NITYA SHREE DEVELOPERS PVT LTD  )</option>
+																			<option value="14e50040-2b01-11ef-a9de-2574d8dcc750_5502">* DIAC/7687/02-24 (PRAVEEN KUMAR KAPOOR  VS RAJ KUMAR JAIN AND ANR )</option>
+																			<option value="14e4ed43-2b01-11ef-a9de-2574d8dcc750_5465">* DIAC/7686/02-24 (SINGLA CABLE VS UNION OF INDIA & ANR  )</option>
+																			<option value="14e48261-2b01-11ef-a9de-2574d8dcc750_1188">* DIAC/7590/01-24 (HITACHI PAYMENTS SERVICES PVT. LTD. VS JASMEET SINGH MARWAH )</option>
+																			<option value="14e46e93-2b01-11ef-a9de-2574d8dcc750_6908">* DIAC/7589/01-24 (GUERRILLA INFRA SOLUTIONS PVT LTD VS   VIEROOTS WELLNESS SOLUTIONS PVT. LTD )</option>
+																			<option value="14e45bf0-2b01-11ef-a9de-2574d8dcc750_1117">* DIAC/7588/01-24 (BHASWATI GHOSH AND ORS VS RAJ BAHADUR SINGH )</option>
+																			<option value="14e448a7-2b01-11ef-a9de-2574d8dcc750_9559">* DIAC/7587/01-24 (M/S.TPM GURU PVT LTD VS M/S. AFORSERVE .COM LTD )</option>
+																			<option value="14e435be-2b01-11ef-a9de-2574d8dcc750_8893">* DIAC/7586/01-24 (M/S.ENVICON TECHNOLOGIES(I) PVT LTD VS M/S. BLUE STAR LTD )</option>
+																			<option value="14e3dbe7-2b01-11ef-a9de-2574d8dcc750_3592">* DIAC/7490/01-24 (MS. DIVINE THERMAL WRAP PVT LTD VS M/S. TEJAS INDIA BUILDTECH PVT LTD )</option>
+																			<option value="14e3c98d-2b01-11ef-a9de-2574d8dcc750_9653">* DIAC/7489/01-24 (MS NEUTECH  VS M/S. NIKOM INFRASOLUTIONS PVT LTD )</option>
+																			<option value="14e3b978-2b01-11ef-a9de-2574d8dcc750_1557">* DIAC/7488/01-24 (PARAGON NETWORK SERVICES  VS M/S. MR. VIPUL GAMBHIR M/S. RANJAN GAMBHIR LEGACY PVT LTD )</option>
+																			<option value="14e3a7ac-2b01-11ef-a9de-2574d8dcc750_6045">* DIAC/7487/01-24 (MS GREENON ENERGY SERVICES VS M/S. MISHRA DHATU NIGAM LTD )</option>
+																			<option value="14e395d6-2b01-11ef-a9de-2574d8dcc750_6222">* DIAC/7486/01-24 (MS ADISUN BONDING TECHNOLOGIES LLP VS M/S. SWEET INDUSTRIES INDIA P LTD )</option>
+																			<option value="14e33f43-2b01-11ef-a9de-2574d8dcc750_8803">* DIAC/7390/01-24 (M/S. ANJALI CREATION  VS M/S. SH. KASHIMAL  )</option>
+																			<option value="14e32f81-2b01-11ef-a9de-2574d8dcc750_4545">* DIAC/7389/01-24 (M/S. ATISHAY INTERNATIONAL  VS M/S. KUMAR SINGH RAJPUROHIT )</option>
+																			<option value="14e3202d-2b01-11ef-a9de-2574d8dcc750_4641">* DIAC/7388/01-24 (M/S. ATISHAY INTERNATIONAL  VS M/S.ASHA AGARWAL/SH. RUPESH AGARWAL )</option>
+																			<option value="14e30fd1-2b01-11ef-a9de-2574d8dcc750_2887">* DIAC/7387/01-24 (M/S. ATISHAY INTERNATIONAL  VS M/S.KASHIMAL 1)</option>
+																			<option value="14e2fd99-2b01-11ef-a9de-2574d8dcc750_6598">* DIAC/7386/01-24 (FIITJEE LTD VS MS. PALLAVI MOGHE AND ANR )</option>
+																			<option value="14e2a789-2b01-11ef-a9de-2574d8dcc750_1406">* DIAC/7290/12-23 (M/S. RISHABH HYDROTECH ENGINEERS VS M/S. KAP CONES PVT LTD )</option>
+																			<option value="14e293de-2b01-11ef-a9de-2574d8dcc750_2696">* DIAC/7289/12-23 (M/S. LAXMI HYDRAULICS & ENGINEERING WORKS VS M/S. GALAXY HYDRAULICS  )</option>
+																			<option value="14e27f2b-2b01-11ef-a9de-2574d8dcc750_4025">* DIAC/7288/12-23 (M/S. EXPERIVA ENGINEERING PVT LTD VS M/S. CRESCON PROJECTS AND SERVICES PVT LTD )</option>
+																			<option value="14e26c05-2b01-11ef-a9de-2574d8dcc750_9144">* DIAC/7287/12-23 (M/S. BSM MIGRATION SERVICES VS M/S. EGOVERNANCE CELL KERALA PWD )</option>
+																			<option value="14e258a5-2b01-11ef-a9de-2574d8dcc750_3898">* DIAC/7286/12-23 (M/S. MORPHEUS SERVICES VS M/S. VIKAS INDUSTRIES  )</option>
+																			<option value="14e1f92d-2b01-11ef-a9de-2574d8dcc750_7948">* DIAC/7190/11-23 (MR. KULDEEP  VS M/S. FUTURE NETWINGS SOLUTIONS PVT LTD  )</option>
+																			<option value="14e1e802-2b01-11ef-a9de-2574d8dcc750_2400">* DIAC/7189/11-23 (SRF LIMITED  VS MANIPAL NETECH  )</option>
+																			<option value="14e1d502-2b01-11ef-a9de-2574d8dcc750_8018">* DIAC/7188/11-23 (RAJINDER PARSHAD GUPTA VS DELHI DEVELOPMENT AUTHORITY  )</option>
+																			<option value="14e1c49d-2b01-11ef-a9de-2574d8dcc750_2563">* DIAC/7187/11-23 (M/S. SIDHI INTERNATIONAL METALLOYS PVT LTD VS M/S. JPM AUTOMOBILES LTD )</option>
+																			<option value="14e1b46a-2b01-11ef-a9de-2574d8dcc750_1599">* DIAC/7186/11-23 (SUSHIL KUMAR SOOD VS SAMBHAV CHUGH AND ANR )</option>
+																			<option value="a62cc08d-2262-11ef-902b-089798b183f5_7365">* DIAC/7090/10-23 (M/S SUNRISE ENTERPRISES V/S GOVT OF NCT OF DELHI I AND FC DEPARTMENT)</option>
+																			<option value="a62c7867-2262-11ef-902b-089798b183f5_2371">* DIAC/7089/10-23 (G4S SECURE SOLUTIONS INDIA PVT LTD V/S D S HOME CONSTRUCTION PVT LTD)</option>
+																			<option value="a62c1b72-2262-11ef-902b-089798b183f5_4830">* DIAC/7088/10-23 (GAURAV CHOPRA & ORS V/S KOTAK MAHINDRA LIFE INSURANCE COMPANY LTD)</option>
+																			<option value="a62bdbe2-2262-11ef-902b-089798b183f5_0593">* DIAC/7087/10-23 (OYO HOTEL AND HOMES PVT LTD  V/S MR. JOYDEEP MAJUMDER)</option>
+																			<option value="a62b9cee-2262-11ef-902b-089798b183f5_6045">* DIAC/7086/10-23 (OYO HOTEL AND HOMES PVT LTD  V/S MONA AGARWALLA)</option>
+																			<option value="a62744a6-2262-11ef-902b-089798b183f5_9649">* DIAC/6990/10-23 (M/S. MS PAKSON INDIA PVT. LTD V/S SH. DEVCHAND)</option>
+																			<option value="a6270544-2262-11ef-902b-089798b183f5_4013">* DIAC/6989/10-23 (M/S. PRINT LABLE SOLUTIONS PVT LTD V/S M/S. ESJAY INTERNATIONAL PVT LTD)</option>
+																			<option value="a626c3af-2262-11ef-902b-089798b183f5_0140">* DIAC/6988/10-23 (M/S. RAVI INDUSTRIES V/S M/S TAMIL NADU TRANSMISSION CORPORATION GENERAL CONSTRUCTION CIRCLE)</option>
+																			<option value="a62678d1-2262-11ef-902b-089798b183f5_2228">* DIAC/6987/10-23 (M/S. RELEMAC INDIA V/S M/S. SIMPLEX INFRASTRUCTURE LIMITED)</option>
+																			<option value="a6261934-2262-11ef-902b-089798b183f5_3667">* DIAC/6986/10-23 (M/S CENTRAL TRANSPORT CORPORATION OF INDIA V/S M/S. H.V.METAL ARC PVT LTD)</option>
+																			<option value="a621a820-2262-11ef-902b-089798b183f5_6890">* DIAC/6890/09-23 (TEAMASIA MARKETING PVT LTD  V/S M/S. ARJUN TRADERS )</option>
+																			<option value="a6216705-2262-11ef-902b-089798b183f5_5687">* DIAC/6889/09-23 (TEAMASIA MARKETING PVT LTD  V/S M/S. PARUL LEATHER )</option>
+																			<option value="a62127bf-2262-11ef-902b-089798b183f5_3849">* DIAC/6888/09-23 (NIAARA WELDFAB INDUSTRIES  V/S ST BOILER & ENGINEERING CONSTRUCTION CO P.LTD)</option>
+																			<option value="a620e870-2262-11ef-902b-089798b183f5_1186">* DIAC/6887/09-23 (JERATH SOLUTIONS PVT LTD  V/S MAHINDRA RETAIL PVT LTD )</option>
+																			<option value="a620a468-2262-11ef-902b-089798b183f5_0694">* DIAC/6886/09-23 (MILLENNIUM EDUCATION MANAGEMENT PVT LTD  V/S KINGS EDUCATIONAL AND WELFARE SOCIETY )</option>
+																			<option value="a61cacb9-2262-11ef-902b-089798b183f5_6411">* DIAC/6792/09-23 (M/S MADURAI MULTI FUNCTIONAL COMPLEX PVT. LTD.  V/S  IRCON INFRASTRUCTURE AND SERVICES LTD.)</option>
+																			<option value="a61c6aba-2262-11ef-902b-089798b183f5_5749">* DIAC/6791/09-23 (JODHPUR MULTI FUNCTIONAL COMPLEX PVT. LTD.  V/S  IRCON INFRASTRUCTURE AND SERVICES LTD.)</option>
+																			<option value="a61c29de-2262-11ef-902b-089798b183f5_4111">* DIAC/6790/09-23 (M/S INDORE MULTI FUNCTIONAL COMPLEX PVT. LTD. V/S  IRCON INFRASTRUCTURE AND SERVICES LTD.)</option>
+																			<option value="a61be8ae-2262-11ef-902b-089798b183f5_4936">* DIAC/6789/09-23 ( IIFL HOME FINANCE LTD. V/S SHYAM RANCHHOD LAL GANATRA & ORS.  )</option>
+																			<option value="a61ba484-2262-11ef-902b-089798b183f5_0190">* DIAC/6788/09-23 (M/S LA LAGOS SANTE HOSPITALITY PVT. LTD. V/S  M/S SURIDHI COMMERCIAL INFRA PVT. LTD. & ORS. )</option>
+																			<option value="a61b4e93-2262-11ef-902b-089798b183f5_2005">* DIAC/6787/09-23 (SHEELA FOAM LTD.  V/S  PMG DISTRIBUTION PVT. LTD. )</option>
+																			<option value="a61afccb-2262-11ef-902b-089798b183f5_9945">* DIAC/6786/09-23 (MONEYWISE FINANCIAL SERVICES PVT. LTD.  V/S  BHORUKA CLASSIC FINANCE PVT. LTD. & ANR.)</option>
+																			<option value="a6168fd7-2262-11ef-902b-089798b183f5_2762">* DIAC/6690/08-23 (M/S S B FLAVOURS PVT. LTD.  V/S  APPOLLO DISTILLERIES PVT. LTD. )</option>
+																			<option value="a6162a69-2262-11ef-902b-089798b183f5_5317">* DIAC/6689/08-23 (M/S SHIV SHAKTI CONSTRUCTION  V/S  RAPIDMAX GROWTH INFRATECH LLP)</option>
+																			<option value="a615dfb3-2262-11ef-902b-089798b183f5_4608">* DIAC/6688/08-23 (M/S NV ORGANICS PVT. LTD.  V/S  VAIPANI HERBAL)</option>
+																			<option value="a6159fa5-2262-11ef-902b-089798b183f5_2575">* DIAC/6687/08-23 (M/S BIG STOCK LOGISTICS PVT. LTD.  V/S  GLOBAL SEAMLESS TUBES & PIPES PVT. LTD.  )</option>
+																			<option value="a6155e5a-2262-11ef-902b-089798b183f5_9422">* DIAC/6686/08-23 (M/S AMTEX SAFETY SYSTEMS  V/S  NORTHERN RAILWAY ZONE)</option>
+																			<option value="a610f032-2262-11ef-902b-089798b183f5_2052">* DIAC/6590/07-23 (M/S BIG STOCK LOGISTICS PVT. LTD.  V/S  SHUBHSAMAY PRODUCTS PVT. LTD.  )</option>
+																			<option value="a610ae34-2262-11ef-902b-089798b183f5_0261">* DIAC/6589/07-23 (M/S BIG STOCK LOGISTICS PVT. LTD.  V/S  M/S MEENAKSHI ASSOCIATES PVT. LTD. )</option>
+																			<option value="a6106b8d-2262-11ef-902b-089798b183f5_6418">* DIAC/6588/07-23 (M/S AVNG INFRASTRUCUTRE PVT. LTD.  V/S  MUNICIPAL CORPORATION OF DELHI )</option>
+																			<option value="a6102c73-2262-11ef-902b-089798b183f5_0610">* DIAC/6587/07-23 (GUERRILLA INFRA SOLUTIONS PVT. LTD.  V/S  MERAPASHU360 PVT. LTD.)</option>
+																			<option value="a60fede5-2262-11ef-902b-089798b183f5_5545">* DIAC/6586/07-23 (M/S MUBARAK OVERSEAS PVT. LTD.  V/S  UNION OF INDIA)</option>
+																			<option value="a60b8c84-2262-11ef-902b-089798b183f5_9048">* DIAC/6490/07-23 (M/S SHRI METAL CONSTAINERS  V/S  M/S CAPITAL AUTO RUBBER PRODUCTS (P) LTD. )</option>
+																			<option value="a60b4cc0-2262-11ef-902b-089798b183f5_9144">* DIAC/6489/07-23 (M/S ALPNA VISUAL PACKAGING AIDS  V/S  M/S ARUNODAYA OFFSET PRINTERS )</option>
+																			<option value="a60b0d82-2262-11ef-902b-089798b183f5_2224">* DIAC/6488/07-23 (M/S SANGAM RAIL  V/S  M/S PAARTH GARPHICS)</option>
+																			<option value="a60ace3f-2262-11ef-902b-089798b183f5_0659">* DIAC/6487/07-23 (M/S NAVAIR INTERNATIONAL PVT. LTD.  V/S  M/S FIRST ALERT FIRE SERVICES)</option>
+																			<option value="a60a8eb3-2262-11ef-902b-089798b183f5_3690">* DIAC/6486/07-23 (M/S NAVAIR INTERNATIONAL PVT. LTD.  V/S  M/S JAI PRAKASH & SONS)</option>
+																			<option value="a6062516-2262-11ef-902b-089798b183f5_8453">* DIAC/6390/06-23 (M/S SERVITOR INTELLIGENCE SERVICES   V/S   ICAR – CENTRAL SHEEP AND WOOL RESEARCH INSTITUTE)</option>
+																			<option value="a605e4e2-2262-11ef-902b-089798b183f5_7537">* DIAC/6389/06-23 (M/S VICHITRA CONSTRUCTION PVT. LTD.   V/S   M/S BHARAT SANCHAR NIGAM LTD)</option>
+																			<option value="a605a49e-2262-11ef-902b-089798b183f5_6411">* DIAC/6388/06-23 (M/S MS SHUBHI & POORNIMA ENTERPRISES   V/S   M/S UMA SHANKAR)</option>
+																			<option value="a6056461-2262-11ef-902b-089798b183f5_1506">* DIAC/6387/06-23 (M/S MAA BRAHAMRI INFRA   V/S   M/S JAIPRAKASH ASSOCIATES LTD. )</option>
+																			<option value="a6052278-2262-11ef-902b-089798b183f5_3707">* DIAC/6386/06-23 (ARVIND KUMAR ARORA, M/S LUCID HEALTHCARE PVT. LTD.   V/S  GANYA MARKETING)</option>
+																			<option value="a600d383-2262-11ef-902b-089798b183f5_0189">* DIAC/6290/05-23 (M/S HOSCIV MANAGEMENT SERVICES  V/S  M/S L&T CONSTRUCTION LTD.  )</option>
+																			<option value="a6009392-2262-11ef-902b-089798b183f5_0352">* DIAC/6289/05-23 (M/S HOSCIV MANAGEMENT SERVICES  V/S  M/S L&T CONSTRUCTION LTD. )</option>
+																			<option value="a6005356-2262-11ef-902b-089798b183f5_0524">* DIAC/6288/05-23 (M/S HOSCIV MANAGEMENT SERVICES  V/S  M/S L&T CONSTRUCTION LTD.  )</option>
+																			<option value="a6001276-2262-11ef-902b-089798b183f5_7422">* DIAC/6287/05-23 (M/S ULTIMA SWITCHGEARS LTD.  V/S  M/S JHARKHAND BIJLI VITRAN NIGAM LTD. )</option>
+																			<option value="a5ffd039-2262-11ef-902b-089798b183f5_2196">* DIAC/6286/05-23 (M/S PREMIER TECH BRISANZIA PVT. LTD.  V/S  M/S SHREE KHODIYAR ENGINEERS (INDIA) PVT. LTD.)</option>
+																			<option value="a5fb82d2-2262-11ef-902b-089798b183f5_6078">* DIAC/6190/04-23 (M/S MODERN WATER ENGINEERING PVT. LTD.  V/S  M/S ATLAS CYCLES (HARYANA) LTD. )</option>
+																			<option value="a5fa7346-2262-11ef-902b-089798b183f5_7977">* DIAC/6186/04-23 (VIKVA SAS  V/S  J AND J EXPORTS (INDIA))</option>
+																			<option value="a5f60399-2262-11ef-902b-089798b183f5_5077">* DIAC/6090/03-23 (NITIN M NAGPAL  V/S  DLF UNIVERSAL LTD. )</option>
+																			<option value="a5f5c34f-2262-11ef-902b-089798b183f5_6504">* DIAC/6089/03-23 (NITIN M NAGPAL  V/S  DLF UNIVERSAL LTD)</option>
+																			<option value="a5f57cd2-2262-11ef-902b-089798b183f5_2482">* DIAC/6088/03-23 (NEERAJ INDIA INTERNATIONAL  V/S  SAGAR FOOTWEAR )</option>
+																			<option value="a5f51ca6-2262-11ef-902b-089798b183f5_5302">* DIAC/6087/03-23 (M/S YARU TECH  V/S  M/S MINISTRY OF NEW AND RENEWABLE ENERGY )</option>
+																			<option value="a5f4cf6e-2262-11ef-902b-089798b183f5_4676">* DIAC/6086/03-23 (M/S GOOD MARK AGENCIES PVT. LTD.  V/S  M/S SARTHAK FIBROTEX PVT. LTD.  )</option>
+																			<option value="a5f0722f-2262-11ef-902b-089798b183f5_4073">* DIAC/5990/02-23 (M/S REAL ONES TECHNOLOGY  V/S  M/S R K INFOTECH & SECURITY SYSTEM)</option>
+																			<option value="a5f02c43-2262-11ef-902b-089798b183f5_5104">* DIAC/5989/02-23 ( M/S EMPHATIC VANS & TESTING LABS PVT. LTD.  V/S  M/S VISION TECHZONE PVT. LTD.)</option>
+																			<option value="a5efd06d-2262-11ef-902b-089798b183f5_7149">* DIAC/5988/02-23 (M/S SUN ERECTORS PVT. LTD.  V/S  M/S PARADISE POWER)</option>
+																			<option value="a5ef9086-2262-11ef-902b-089798b183f5_6881">* DIAC/5987/02-23 (M/S SHUBHAM ENTERPRISES  V/S  M/S DEPARTMENT OF SCHOOL EDUCATION AND LITERACY)</option>
+																			<option value="a5ef503e-2262-11ef-902b-089798b183f5_5752">* DIAC/5986/02-23 (M/S NTS SCAFFOLDINGS PVT. LTD.  V/S  M/S ALSTOM SYSTEMS INDIA PVT. LTD.)</option>
+																			<option value="a5eae863-2262-11ef-902b-089798b183f5_0744">* DIAC/5890/01-23 (M/S SURESH GOEL AND ASSOCIATES  V/S  M/S ENVIRONMENT PLANNING AND CORDINATION ORGANISATION )</option>
+																			<option value="a5eaa730-2262-11ef-902b-089798b183f5_6048">* DIAC/5889/01-23 (M/S ENVICON TECHNOLOGIES (I) PVT. LTD.  V/S  M/S LOGIX INFRASTRUCTURE PVT. LTD. )</option>
+																			<option value="a5ea6671-2262-11ef-902b-089798b183f5_9833">* DIAC/5888/01-23 (M/S PARAMOUNT WIRES AND CABLES LTD.  V/S  BHARAT SANCHAR NIGAM LTD. )</option>
+																			<option value="a5ea2519-2262-11ef-902b-089798b183f5_7706">* DIAC/5887/01-23 (M/S PARAMOUNT WIRES AND CABLES LTD.  V/S  BHARAT SANCHAR NIGAM LTD. )</option>
+																			<option value="a5e9e258-2262-11ef-902b-089798b183f5_2898">* DIAC/5886/01-23 (M/S PARAMOUNT WIRES AND CABLES LTD.  V/S  BHARAT SANCHAR NIGAM LTD. )</option>
+																			<option value="a5e59093-2262-11ef-902b-089798b183f5_4194">* DIAC/5790/12-22 (M/S OMKARA TRANSPORT PVT. LTD.  V/S  M/S BUILDMET PVT. LTD.)</option>
+																			<option value="a5e5519b-2262-11ef-902b-089798b183f5_4491">* DIAC/5789/12-22 (YASH PLASTICS  V/S  SHRAMAN INDUSTRIES)</option>
+																			<option value="a5e511a3-2262-11ef-902b-089798b183f5_9421">* DIAC/5788/12-22 (YASH PLASTICS  V/S  RADHE KRISHNA POLYMERS)</option>
+																			<option value="a5e4d34d-2262-11ef-902b-089798b183f5_4205">* DIAC/5787/12-22 (YASH PLASTICS  V/S  MAHARISHI CHARK AYURVEDA AUSHDHALYA)</option>
+																			<option value="a5e49504-2262-11ef-902b-089798b183f5_3868">* DIAC/5786/12-22 (GOLDEN LOGISTICS  V/S  SAR NAIK C/O CHAKRESHWAR LAUNDRY )</option>
+																			<option value="a5dfd5cd-2262-11ef-902b-089798b183f5_3965">* DIAC/5690/11-22 ( KUMAR GUEST HOUSE PVT. LTD.  V/S  ORAVEL STAYS LTD. AND ANR.)</option>
+																			<option value="a5df95b1-2262-11ef-902b-089798b183f5_4053">* DIAC/5689/11-22 (TC GLOBAL INDIA PVT. LTD.  V/S  DEEPAK SETHI   )</option>
+																			<option value="a5df570d-2262-11ef-902b-089798b183f5_2100">* DIAC/5688/11-22 (M/S KRAFT LAND INDIA  V/S  NYSAA RETAIL LTD)</option>
+																			<option value="a5df1677-2262-11ef-902b-089798b183f5_8816">* DIAC/5687/11-22 (M/S PRACHI ENTERPRISES  V/S  M/S NETRAPAL SINGH NAGAR PANCHAYAT NIDHOLI KALAN)</option>
+																			<option value="a5ded55e-2262-11ef-902b-089798b183f5_0661">* DIAC/5686/11-22 (M/S DIGITECH MEDICARE  V/S  M/S MOTHER MEDICAL PVT. LTD. )</option>
+																			<option value="a5d99e3b-2262-11ef-902b-089798b183f5_0934">* DIAC/5590/10-22 (BEAUTY ART PRINTES PVT. LTD.  V/S  TOP STITCH FASHION HOUSE)</option>
+																			<option value="a5d9545d-2262-11ef-902b-089798b183f5_2665">* DIAC/5589/10-22 (ART PRINTS INDIA PVT. LTD.  V/S  DYNAMIC AURA )</option>
+																			<option value="a5d90975-2262-11ef-902b-089798b183f5_7463">* DIAC/5588/10-22 (INDOTEX (MS. ANITA SAXENA, AR)  V/S  M/S RIDDHIMA APPARELS PVT. LTD. )</option>
+																			<option value="a5d8c9bb-2262-11ef-902b-089798b183f5_1551">* DIAC/5587/10-22 (M/S AARIJ MART INDIA PVT. LTD.  V/S  M/S TLI IMPEX)</option>
+																			<option value="a5d8898c-2262-11ef-902b-089798b183f5_6764">* DIAC/5586/10-22 (M/S KRISHAN KUMAR DHOOT  V/S  M/S SHOU RESTAURANTS PVT. LTD.)</option>
+																			<option value="a5d43e0b-2262-11ef-902b-089798b183f5_9949">* DIAC/5490/10-22 (SHRI TIRUPATI PACKAGING  V/S  M/S BHOOMIYA FOOD PRODUCTS)</option>
+																			<option value="a5d3f6c8-2262-11ef-902b-089798b183f5_1928">* DIAC/5489/10-22 (SHRI TIRUPATI PACKAGING  V/S  M/S KARPO INDUSTRIES)</option>
+																			<option value="a5d3b4cc-2262-11ef-902b-089798b183f5_3231">* DIAC/5488/10-22 (SHRI BALAJI ENTERPRISES  V/S  GOYAL TRADERS)</option>
+																			<option value="a5d373ae-2262-11ef-902b-089798b183f5_1408">* DIAC/5487/10-22 (MM TRADERS AND SONS  V/S  TISANE BEVERAGES PVT. LTD.)</option>
+																			<option value="a5d33272-2262-11ef-902b-089798b183f5_4604">* DIAC/5486/10-22 (SHRI TIRUPATI PACKAGING  V/S  ANNAPURNA PACKERS)</option>
+																			<option value="a5cd086b-2262-11ef-902b-089798b183f5_3265">* DIAC/5390/10-22 (M/S ENHANCED WAPP SYSTEMS INDIA PVT. LTD.  V/S  M/S KANAKIA RESIDENTAL PVT. LTD. )</option>
+																			<option value="a5ccc4e2-2262-11ef-902b-089798b183f5_9614">* DIAC/5389/10-22 (M/S CTM ENGINEERING  V/S  M/S OPTIMUM CONTRACTS PVT. LTD. )</option>
+																			<option value="a5cc761b-2262-11ef-902b-089798b183f5_8268">* DIAC/5388/10-22 (M/S INDCON PROJECT AND EQUIPMENT LTD.  V/S  M/S ASSAM PETROCHEMICAL LTD)</option>
+																			<option value="a5cc1b56-2262-11ef-902b-089798b183f5_7242">* DIAC/5387/10-22 ( M/S INDULGE SIGN & GRAPHICS  V/S  M/S JAI AMBEY EVENTS)</option>
+																			<option value="a5cbdb18-2262-11ef-902b-089798b183f5_9314">* DIAC/5386/10-22 (M/S BESURE HEALTHCARE PVT. LTD.  V/S  UP GOVERNMENT EMPLOYEES WELFARE CORPORATION)</option>
+																			<option value="a5c77bdb-2262-11ef-902b-089798b183f5_6727">* DIAC/5290/09-22 (M/S YOUNGMAN INDIA PVT. LTD.  V/S  M/S CREATION INFRA INDIA PVT. LTD.)</option>
+																			<option value="a5c72c7e-2262-11ef-902b-089798b183f5_4628">* DIAC/5289/09-22 (M/S YOUNGMAN INDIA PVT. LTD.  V/S  M/S GIANT ENGINEERING PVT. LTD.)</option>
+																			<option value="a5c6e5d7-2262-11ef-902b-089798b183f5_5472">* DIAC/5288/09-22 (M/S YOUNGMAN INDIA PVT. LTD.  V/S  M/S ADVANCE ENGINEERING AND CONSTRUCTION)</option>
+																			<option value="a5c69bcb-2262-11ef-902b-089798b183f5_7577">* DIAC/5287/09-22 (M/S YOUNGMAN INDIA PVT. LTD.  V/S  M/S MARK TRADING)</option>
+																			<option value="a5c65da4-2262-11ef-902b-089798b183f5_0805">* DIAC/5286/09-22 (M/S YOUNGMAN INDIA PVT. LTD.  V/S  M/S AUDIO LOGIC)</option>
+																			<option value="10875596-2338-11ef-a9de-2574d8dcc750_3411">* DIAC/5190/09-22 (MS. CRYSTAL CHEMICAL V/SSH. SURESH KUMAR LALWANI )</option>
+																			<option value="108735b9-2338-11ef-a9de-2574d8dcc750_0507">* DIAC/5189/09-22 (APECO INFRASTRUCTURE INDIA PVT LTD.V/SBHARAT HEAVY ELECTRICALS LIMITED )</option>
+																			<option value="10871895-2338-11ef-a9de-2574d8dcc750_9708">* DIAC/5188/09-22 (GENNEXT LOGISTICS PVT.LTDV/STRUE HOME DECORE PVT.LTD )</option>
+																			<option value="1086fb9e-2338-11ef-a9de-2574d8dcc750_9344">* DIAC/5187/09-22 (MAHA SHAKTI ELECTRICAL V/SSS AIR HYDRO POWER )</option>
+																			<option value="1086de08-2338-11ef-a9de-2574d8dcc750_5671">* DIAC/5186/09-22 (SHARP TRAVELS INDIA LTDV/SDIVYANJALI AYURVEDA PVT LTD)</option>
+																			<option value="1084feb8-2338-11ef-a9de-2574d8dcc750_1767">* DIAC/5090/09-22 (CDPS ELECTRONICS V/SSUNRISE MILK FOOD LLP)</option>
+																			<option value="1084e14d-2338-11ef-a9de-2574d8dcc750_7432">* DIAC/5089/09-22 (CDPS ELECTRONICS V/SWHOLLY JOY PRODUCTS PVT.LTD)</option>
+																			<option value="1084c16b-2338-11ef-a9de-2574d8dcc750_5132">* DIAC/5088/09-22 (J.L. JAIN & CO. V/S THE EXECUTIVE OFFICER, MUNICIPAL COUNCIL GONIANA)</option>
+																			<option value="1084a33d-2338-11ef-a9de-2574d8dcc750_2742">* DIAC/5087/09-22 (SP CHOPRA & AMP CO. CHARTERED ACCOUNTANTS V/S TEN STRIKE CONSULTANCY PVT. LTD.)</option>
+																			<option value="1084865c-2338-11ef-a9de-2574d8dcc750_2860">* DIAC/5086/09-22 (PRENIT WORLD LLP V/S M/S KING INFRASTRUCTURE LTD. )</option>
+																			<option value="1082b176-2338-11ef-a9de-2574d8dcc750_6306">* DIAC/4990/08-22 (M/S SARDANA GUMS AND CHEMICALS INDS V/S VIKAS BANSAL)</option>
+																			<option value="108291fe-2338-11ef-a9de-2574d8dcc750_7445">* DIAC/4989/08-22 (VINAY SINGHAL MANGAT RAM DAL MILLS PVT. LTD. V/S AMBIKA ENTERPRISES)</option>
+																			<option value="1082643e-2338-11ef-a9de-2574d8dcc750_3640">* DIAC/4988/08-22 (M/S INDO ORGANICS PVT. LTD V/S UTKARSH KHAD AVEM BEEJ BHANDAR)</option>
+																			<option value="10824cad-2338-11ef-a9de-2574d8dcc750_6918">* DIAC/4987/08-22 (M/S DAL MILLS PVT. LTD. V/S G.K. STORES  )</option>
+																			<option value="10822c75-2338-11ef-a9de-2574d8dcc750_0317">* DIAC/4986/08-22 (M/S MAX INC V/S SPENCERS RETAIL LTD. )</option>
+																			<option value="1080b1eb-2338-11ef-a9de-2574d8dcc750_3238">* DIAC/4890/08-22 (SH. SACHIN GUPTA (M/S AVG POLYMERS PVT. LTD ) V/S SH. MANISH SRIVASTAVA)</option>
+																			<option value="108097c2-2338-11ef-a9de-2574d8dcc750_0775">* DIAC/4889/08-22 (SH. KRANTI ANAND (M/S KONCEPT KREATION) V/S M/S SAFDARJUNG CLUB OFFICE)</option>
+																			<option value="10807d14-2338-11ef-a9de-2574d8dcc750_6880">* DIAC/4888/08-22 (SH. PRAMOD SONI FANKAAR INTERIOR PVT. LTD.V/S MAHAMAYA INFRASTRUCTURE PVT. LTD.)</option>
+																			<option value="1080627f-2338-11ef-a9de-2574d8dcc750_4541">* DIAC/4887/08-22 (SH. JAGMOHAN, M/S KRITIVAAS FREIGHT MOVERS PVT. LTD. V/S SH. VIMAL JOSHI)</option>
+																			<option value="10804884-2338-11ef-a9de-2574d8dcc750_1942">* DIAC/4886/08-22 (SH. RISHI SABHARWAL, ARDOUR PACK PVT. LTD. V/S TBC BY NATURE PVT. LTD.)</option>
+																			<option value="107e9771-2338-11ef-a9de-2574d8dcc750_1085">* DIAC/4790/08-22 (DIAC/4790-D/08-22SH. SANJEEV RATRA OF M/S SAVI VISION PVT. LTD. V/S M/S NEXTAGE TECHNOLOGIESCASE NO. )</option>
+																			<option value="107e806d-2338-11ef-a9de-2574d8dcc750_1211">* DIAC/4789/08-22 (SH. RAGHUVEER SHARMA OF PIONEER PLASTIC INDUSTRIES LTD. V/S M/S PATHAK SALES CORPORATION)</option>
+																			<option value="107e68a7-2338-11ef-a9de-2574d8dcc750_1656">* DIAC/4788/08-22 (SH. SUDHIR KUMAR BAHUGUNA OF M/S VEDANG CONSULTANCY SERVICE PVT. LTD. V/S UTTAR PRADESH RAJKIYA NIRMAN NIGAM)</option>
+																			<option value="107e5200-2338-11ef-a9de-2574d8dcc750_2357">* DIAC/4787/08-22 (DIAC/4787-D/08-22SH. RAJIV JAIN M/S RADICURA PHARMACEUTICAL PVT. LTD. V/S M/S DURAENT BIOLOGICAL LTD. CASE NO. )</option>
+																			<option value="107e3b0f-2338-11ef-a9de-2574d8dcc750_6710">* DIAC/4786/08-22 (SH MANISH SACHDEV OF M/S AANAV CONSTRUCTION CO V/S M/S POWER GRID CORPORATION OF INDIA LTD. )</option>
+																			<option value="107cd3a3-2338-11ef-a9de-2574d8dcc750_2419">* DIAC/4690/08-22 (M/S FIARA SHOE INDUSTRIESV/SM/S REVA SHRI SALES)</option>
+																			<option value="107cbd69-2338-11ef-a9de-2574d8dcc750_7237">* DIAC/4689/08-22 (M/S EARTH EQUIPMENTSV/SM/S AJMER SINGH)</option>
+																			<option value="107ca6e9-2338-11ef-a9de-2574d8dcc750_4588">* DIAC/4688/08-22 (M/S EARTH EQUIPMENTSV/SM/S MARS PROJECT)</option>
+																			<option value="107c9055-2338-11ef-a9de-2574d8dcc750_8568">* DIAC/4687/08-22 (M/S EARTH EQUIPMENTSV/SM/S BELIEF BUILDCON PVT. LTD.)</option>
+																			<option value="107c7a26-2338-11ef-a9de-2574d8dcc750_6084">* DIAC/4686/08-22 (M/S CHAUDHARY TIMBER INDUSTRIES PVT. LTD.V/SM/S SANJARI TRADERS)</option>
+																			<option value="107af8ba-2338-11ef-a9de-2574d8dcc750_2363">* DIAC/4590/08-22 (ADVANCE PANELS AND SWITCHGEARS PVT. LTD.V/SPACIFIC DEVELOPMENT CORPORATION LTD.)</option>
+																			<option value="107ae201-2338-11ef-a9de-2574d8dcc750_1690">* DIAC/4589/08-22 (SPC ENGINEERS PRIVATE LIMITEDV/SM/S DDF CONSULTANTS PRIVATE LIMITED)</option>
+																			<option value="107acb71-2338-11ef-a9de-2574d8dcc750_8695">* DIAC/4588/08-22 (MEGALOGIXV/SST. PAUL DIOCESAN SCHOOL)</option>
+																			<option value="107ab4a2-2338-11ef-a9de-2574d8dcc750_3929">* DIAC/4587/08-22 (ASHOK KUMARV/SBHAWANI AGENCIES)</option>
+																			<option value="107a9e78-2338-11ef-a9de-2574d8dcc750_0317">* DIAC/4586/08-22 (ASHOK KUMARV/SBALAJI FOOTWEAR)</option>
+																			<option value="10790cec-2338-11ef-a9de-2574d8dcc750_4524">* DIAC/4490/07-22 (ADVANCE PANELS AND SWITCHGEARS PVT. LTD.V/SPACIFIC DEVELOPMENT CORPORATION UNIT PDCL GOLF ESTATE)</option>
+																			<option value="1078f3ed-2338-11ef-a9de-2574d8dcc750_5922">* DIAC/4489/07-22 (KIRAN PAL JAIN JAI SAMBHAV INDUSTRIESV/SZEELOCITY INFRA INDIA PVT. LTD.)</option>
+																			<option value="1078d9f9-2338-11ef-a9de-2574d8dcc750_1696">* DIAC/4488/07-22 (MS BRIGHT COVE GOODSV/STOWEL CENTRE)</option>
+																			<option value="1078c117-2338-11ef-a9de-2574d8dcc750_7520">* DIAC/4487/07-22 (VIJAY SINGHAL MANGAT RAM DAL MILLS PRIVATE LIMITEDV/SJAI PARAS ENTERPRISES)</option>
+																			<option value="1078a7b4-2338-11ef-a9de-2574d8dcc750_8634">* DIAC/4486/07-22 (GOLDEN LOGISTICSV/SNIHON SHIEN PROJECTS PRIVATE LIMITED)</option>
+																			<option value="1076ce70-2338-11ef-a9de-2574d8dcc750_1862">* DIAC/4390/07-22 (M/S ARSH CONSTRUCTIONV/SCENTRAL PUBLIC WORKS DEPARTMENT)</option>
+																			<option value="1076b758-2338-11ef-a9de-2574d8dcc750_4252">* DIAC/4389/07-22 (M/S VITERRA CHARTERING B. V.V/SM/S RASHTRIYA ISPAT NIGAM LTD.)</option>
+																			<option value="10769ff1-2338-11ef-a9de-2574d8dcc750_9800">* DIAC/4388/07-22 (TUF METALLURGICAL PRIVATE LIMITEDV/SMR. KIRON ROY)</option>
+																			<option value="107669c4-2338-11ef-a9de-2574d8dcc750_1593">* DIAC/4386/07-22 (ALLIED ENGINEERING WORKS PVT. LTD.V/SCENTRAL ELECTRICITY SUPPLY UTILITY OF ORISSA)</option>
+																			<option value="1074fc8f-2338-11ef-a9de-2574d8dcc750_6178">* DIAC/4290/07-22 (M/S MANWICK ELECTRICALS PVT. LTD.V/SM/S GIFFORD INDIA PVT. LTD.)</option>
+																			<option value="1074e5da-2338-11ef-a9de-2574d8dcc750_7431">* DIAC/4289/07-22 (M/S BSP DIAGNOSTIC SYSTEMS P LTD.V/SM/S DIAGNO LABS PVT. LTD.)</option>
+																			<option value="1074cf6d-2338-11ef-a9de-2574d8dcc750_0325">* DIAC/4288/07-22 (M/S PREMIER ROADLINES LIMITEDV/SM/S PRIME RIGS LIMITED)</option>
+																			<option value="1074b886-2338-11ef-a9de-2574d8dcc750_8065">* DIAC/4287/07-22 (M/S PREMIER ROADLINES LIMITEDV/SM/S RIDDHIMA INFRASTRUCTURE)</option>
+																			<option value="1074a1ef-2338-11ef-a9de-2574d8dcc750_3334">* DIAC/4286/07-22 (M/S PREMIER ROADLINES LIMITEDV/SM/S BAIJNATH STONE INDUSTRIES PRIVATE LIMITED)</option>
+																			<option value="1072fb26-2338-11ef-a9de-2574d8dcc750_2309">* DIAC/4190/05-22 (MS VIKAS & ASSOCIATEV/SM/S JAIPRAKASH ASSOCIATES LTD.)</option>
+																			<option value="1072e0ee-2338-11ef-a9de-2574d8dcc750_3276">* DIAC/4189/05-22 (MS VIKAS & ASSOCIATEV/SM/S JAIPRAKASH ASSOCIATES LTD.)</option>
+																			<option value="1072c7ce-2338-11ef-a9de-2574d8dcc750_4691">* DIAC/4188/05-22 (M/S SURYA UDYOGV/SSH. BHAGWAN NANDAL PROP. BABA BODY WORKS)</option>
+																			<option value="1072aec9-2338-11ef-a9de-2574d8dcc750_6727">* DIAC/4187/05-22 (M/S SURYA UDYOGV/SM/S M. R. MANUFACTURING CO. PRO. NAVITA)</option>
+																			<option value="107294ba-2338-11ef-a9de-2574d8dcc750_2981">* DIAC/4186/05-22 (M/S ASAHI ROPES PRIVATE LIMITEDV/SM/S SIMPLEX INFRASTRUCTURE LTD.)</option>
+																			<option value="1070d408-2338-11ef-a9de-2574d8dcc750_5931">* DIAC/4090/05-22 (M/S KALYANI ENGINEERING CO.V/SM/S IREO PVT. LTD.)</option>
+																			<option value="1070baf3-2338-11ef-a9de-2574d8dcc750_5089">* DIAC/4089/05-22 (SCAVIN INTERNATIONAL EXIM PVT. LTD.V/SFLIPKART INDIA PVT. LTD.)</option>
+																			<option value="10709f23-2338-11ef-a9de-2574d8dcc750_9838">* DIAC/4088/05-22 (AVISH GUPTAV/SANKUR PARWAL)</option>
+																			<option value="107085be-2338-11ef-a9de-2574d8dcc750_8034">* DIAC/4087/05-22 (PRIYANKA TAKSH SOOD & ORS.V/SSUNWORLD RESIDENCY PVT. LTD. & ANR.)</option>
+																			<option value="10706ad4-2338-11ef-a9de-2574d8dcc750_6777">* DIAC/4086/05-22 (M/S PARAGON CONSTRUCTION INDIA PVT. LTD. THROUGH ITS DIRECTOR S C SALHOTRAV/SYOUNG WOMEN'S CHRISTIAN ASSOCIATION OF DELHI THROUGH ITS GENERAL SECRETARY YWCA)</option>
+																			<option value="106e58a3-2338-11ef-a9de-2574d8dcc750_1781">* DIAC/3990/05-22 (DIMPLE THEATREV/SJOP INTERNATIONAL LTD.)</option>
+																			<option value="106e379b-2338-11ef-a9de-2574d8dcc750_6233">* DIAC/3989/05-22 (GUPTA TRADERSV/SDELHI TRANSCO LIMITED)</option>
+																			<option value="106de11f-2338-11ef-a9de-2574d8dcc750_9795">* DIAC/3988/05-22 (ARORA GIFTS PVT. LTD.V/SLOTUS AGENCIES)</option>
+																			<option value="106dc256-2338-11ef-a9de-2574d8dcc750_4247">* DIAC/3987/05-22 (ENVIRO INFRA ENGINEERS PVT. LTD.V/STHE MANAGING DIRECTOR, HSIIDC LTD.)</option>
+																			<option value="106b8098-2338-11ef-a9de-2574d8dcc750_9633">* DIAC/3890/04-22 (LKT ENGINEERING CONSULTANTS LTD.V/SM/S PLANNING AND INFRASTRUCTURAL DEVELOPMENTS CONSULTANTS PVT. LTD.)</option>
+																			<option value="106b5d3c-2338-11ef-a9de-2574d8dcc750_7778">* DIAC/3889/04-22 (RIDDHI SIDDHI FOODS & ORS.V/SMAHARAJ NEGI)</option>
+																			<option value="106b3bb3-2338-11ef-a9de-2574d8dcc750_6419">* DIAC/3888/04-22 (M/S SUDHIR POWER PROJECTS LTD.V/SM/S UNIPOWER PROJECTS PVT. LTD.)</option>
+																			<option value="106b1544-2338-11ef-a9de-2574d8dcc750_4772">* DIAC/3887/04-22 (M/S CHADHA POWER SA PTY. LTD.V/SLUMINOUS POWER TECHNOLOGIES PVT. LTD.)</option>
+																			<option value="106afacc-2338-11ef-a9de-2574d8dcc750_9147">* DIAC/3886/04-22 (KONE ELEVATOR (INDIA) PVT. LTD.V/SCENTRAL PUBLIC WORKS DEPARTMENT)</option>
+																			<option value="106879b9-2338-11ef-a9de-2574d8dcc750_2081">* DIAC/3792/03-22 (VISHWANATHAN & ANR.V/SPNB HOUSING FINANCE LIMITED THROUGH MANAGER)</option>
+																			<option value="10684c47-2338-11ef-a9de-2574d8dcc750_2516">* DIAC/3790/03-22 (PATIL RAIL INFRASTRUCTURE PVT. LTD.V/SMINISTRY OF RAILWAY & ANR.)</option>
+																			<option value="10683574-2338-11ef-a9de-2574d8dcc750_8218">* DIAC/3789/03-22 (M/S SKYLINE POWER SOLUTIONSV/SM/S DEPARTMENT OF POSTS, M/O COMMUNICATION)</option>
+																			<option value="10681d44-2338-11ef-a9de-2574d8dcc750_6191">* DIAC/3788/03-22 (M/S LSR MEDICAL PRIVATE LIMITEDV/SM/S MALANI CONSTRUCTION COMPANY ENGINEERS & CONTRACTORS)</option>
+																			<option value="10680527-2338-11ef-a9de-2574d8dcc750_0913">* DIAC/3787/03-22 (M/S LSR MEDICAL PRIVATE LIMITEDV/SM/S MALANI CONSTRUCTION COMPANY ENGINEERS & CONTRACTORS)</option>
+																			<option value="1067eb37-2338-11ef-a9de-2574d8dcc750_2792">* DIAC/3786/03-22 (MR. INDERJEET DHALWALV/SALCHEMIST HOSPITALS LIMITED)</option>
+																			<option value="1065cab2-2338-11ef-a9de-2574d8dcc750_8755">* DIAC/3690/01-22 (CHOICE HOTELS LICENSING B. V.V/SHOTEL BLUE WAVES PVT. LTD. & ORS.)</option>
+																			<option value="1065a897-2338-11ef-a9de-2574d8dcc750_1947">* DIAC/3689/01-22 (CHOICE HOTELS LICENSING B. V.V/SNEST HOTEL AND MOTELS & ORS.)</option>
+																			<option value="10658619-2338-11ef-a9de-2574d8dcc750_3660">* DIAC/3688/01-22 (M/S GAYTRI INTERNATIONALV/SM/S GMTD, BSNL (KARNAL))</option>
+																			<option value="10656ccf-2338-11ef-a9de-2574d8dcc750_2118">* DIAC/3687/01-22 (M/S PRENIT WORLD LLPV/SM/S NCC LIMITED)</option>
+																			<option value="10655113-2338-11ef-a9de-2574d8dcc750_2311">* DIAC/3686/01-22 (M/S G S BUILDTECH PRIVATE LIMITEDV/SM/S INDIAN OIL CORPORATION LIMITED)</option>
+																			<option value="1063af5d-2338-11ef-a9de-2574d8dcc750_1480">* DIAC/3590/12-21 (M/S MS SOLTECH PUMPS AND EQUIPMENT PRIVATE LIMITEDV/SM/S RDS PNEUMATICS ENGINEERS)</option>
+																			<option value="106396b8-2338-11ef-a9de-2574d8dcc750_0519">* DIAC/3589/12-21 (M/S RAINCHEM INDIA PVT. LTD.V/SM/S SHRIPAL MORAKHIA)</option>
+																			<option value="10637450-2338-11ef-a9de-2574d8dcc750_7038">* DIAC/3588/12-21 (M/S OMNIPRESENT ROBOT TECHNOLOGIES PVT. LTD.V/SM/S ANDHRA PRADESH STATE SKILL DEVELOPMENT CORPORATION)</option>
+																			<option value="10634ccf-2338-11ef-a9de-2574d8dcc750_8224">* DIAC/3587/12-21 (/S KALYANI ENGINEERING CO.V/SM/S IMPERIAL HOUSING VENTURES PVT. LTD.)</option>
+																			<option value="10633446-2338-11ef-a9de-2574d8dcc750_8028">* DIAC/3586/12-21 (M/S KALYANI ENGINEERING CO.V/SM/S PIONEER URBAN LAND AND INFRASTRUCTURE LTD.)</option>
+																			<option value="106107fd-2338-11ef-a9de-2574d8dcc750_4217">* DIAC/3490/11-21 (M/S NEXTRA COMMUNICATIONS PRIVATE LIMITEDV/SM/S  SARASWATI DIGITAL PRIVATE LIMITED)</option>
+																			<option value="1060ebae-2338-11ef-a9de-2574d8dcc750_1487">* DIAC/3489/11-21 (M/S NEXTRA COMMUNICATIONS PRIVATE LIMITEDV/SM/S TELEVISION HOME SHOPPING NETWORK LIMITED)</option>
+																			<option value="1060d500-2338-11ef-a9de-2574d8dcc750_1073">* DIAC/3488/11-21 (M/S SUSTAINABLE PACKAGING PRIVATE LIMITEDV/SM/S SHREERAM AND SONS)</option>
+																			<option value="1060bbad-2338-11ef-a9de-2574d8dcc750_4626">* DIAC/3487/11-21 (ENGINEERING FILTERS PRIVATE LIMITEDV/SENERTIA FABRITECH PRIVATE LIMITED)</option>
+																			<option value="10609e21-2338-11ef-a9de-2574d8dcc750_7353">* DIAC/3486/11-21 (M/S ELLINE TECHMART PVT. LIMITEDV/S M/S DINESH BATRA)</option>
+																			<option value="105eb414-2338-11ef-a9de-2574d8dcc750_6538">* DIAC/3390/10-21 (M/S ADARSH MARKAN & CO.V/SM/S ERA INFRA ENGINEERING LTD.)</option>
+																			<option value="105e9433-2338-11ef-a9de-2574d8dcc750_4802">* DIAC/3389/10-21 (M/S ADARSH MARKAN & CO.V/SM/S FEMC.PRATIBHA J. V.)</option>
+																			<option value="105e74bf-2338-11ef-a9de-2574d8dcc750_9158">* DIAC/3388/10-21 (M/S ADARSH MARKAN & CO.V/SM/S J KUMAR.CRTG JOINT VENTURE)</option>
+																			<option value="105e556e-2338-11ef-a9de-2574d8dcc750_0329">* DIAC/3387/10-21 (M/S B KAUSHIK & ASSOCIATESV/SM/S VIRAT AGENCIES)</option>
+																			<option value="105e367d-2338-11ef-a9de-2574d8dcc750_7496">* DIAC/3386/10-21 (M/S B KAUSHIK & ASSOCIATESV/SM/S VIRAT TECHNOFAB PRIVATE LIMITED)</option>
+																			<option value="105c1e2a-2338-11ef-a9de-2574d8dcc750_9161">* DIAC/3290/09-21 (M/S NIKUNJ WOODS PVT. LTD.V/SM/S R. K. ENTERPRISES)</option>
+																			<option value="105bc3e4-2338-11ef-a9de-2574d8dcc750_7827">* DIAC/3289/09-21 (M/S NIKUNJ WOODS PVT. LTD.V/SM/S SAARTHI MARKETING)</option>
+																			<option value="105ba66f-2338-11ef-a9de-2574d8dcc750_6658">* DIAC/3288/09-21 (M/S NIKUNJ WOODS PVT. LTD.V/SM/S RAINBOW VENEERS)</option>
+																			<option value="105b88b8-2338-11ef-a9de-2574d8dcc750_1821">* DIAC/3287/09-21 (M/S NIKUNJ WOODS PVT. LTD.V/SM/S GOEL FURNITURE)</option>
+																			<option value="105b6a40-2338-11ef-a9de-2574d8dcc750_0817">* DIAC/3286/09-21 (M/S NIKUNJ WOODS PVT. LTD.V/SM/S KRISHNA STEEL FURNITURE)</option>
+																			<option value="1059c12c-2338-11ef-a9de-2574d8dcc750_7545">* DIAC/3190/09-21 (M/S VNS MERCANTILE PVT. LTD.V/SM/S M I BUILDTECH PVT. LTD.)</option>
+																			<option value="1059aaf5-2338-11ef-a9de-2574d8dcc750_0488">* DIAC/3189/09-21 (M/S VNS MERCANTILE PVT. LTD.V/SM/S BINDU)</option>
+																			<option value="105993da-2338-11ef-a9de-2574d8dcc750_1632">* DIAC/3188/09-21 (M/S VNS MERCANTILE PVT. LTD.V/SM/S PURE PORT ENGINEERING'S PVT. LTD.)</option>
+																			<option value="10597d2f-2338-11ef-a9de-2574d8dcc750_9225">* DIAC/3187/09-21 (M/S NUMERIC ADVISORY SERVICES PRIVATE LIMITEDV/SM/S INDEPENDENT TV LTD.)</option>
+																			<option value="1059657f-2338-11ef-a9de-2574d8dcc750_8164">* DIAC/3186/09-21 (M/S KPMC & CO.V/SM/S A K INFRA SOLUTIONS PRIVATE LIMITED)</option>
+																			<option value="10574914-2338-11ef-a9de-2574d8dcc750_4766">* DIAC/3090/08-21 (M/S G. T. MAGNETICS PVT. LTD.V/SM/S MR. AMAN)</option>
+																			<option value="10572b51-2338-11ef-a9de-2574d8dcc750_9274">* DIAC/3089/08-21 (M/S G. T. MAGNETICS PVT. LTD.V/SM/S MR. ABHISHEK SHARMA)</option>
+																			<option value="1057076b-2338-11ef-a9de-2574d8dcc750_7201">* DIAC/3088/08-21 (M/S G. T. MAGNETICS PVT. LTD.V/SM/S MR. SATISH SHARMA)</option>
+																			<option value="1056dee8-2338-11ef-a9de-2574d8dcc750_8911">* DIAC/3087/08-21 (M/S G. T. MAGNETICS PVT. LTD.V/SM/S MR. SATISH SHARMA)</option>
+																			<option value="1056c804-2338-11ef-a9de-2574d8dcc750_2451">* DIAC/3086/08-21 (NAVYUG PAPER PRODUCTS & ANR.V/SORIENTAL INSURANCE COMPANY LTD.)</option>
+																			<option value="1054fb91-2338-11ef-a9de-2574d8dcc750_9479">* DIAC/2990/05-21 (MR. NARESH NANUBHAI DESAIV/SM/S EMAAR MGF LAND LIMITED)</option>
+																			<option value="1054e143-2338-11ef-a9de-2574d8dcc750_4775">* DIAC/2989/05-21 (MR. ROHIT DESAIV/SM/S EMAAR MGF LAND LIMITED)</option>
+																			<option value="1054c44b-2338-11ef-a9de-2574d8dcc750_1466">* DIAC/2988/05-21 (MR. MAKRAND DESAIV/SM/S EMAAR MGF LAND LIMITED)</option>
+																			<option value="1054a900-2338-11ef-a9de-2574d8dcc750_0852">* DIAC/2987/05-21 (AJIT SINGH BAWAV/SVIPLAV SHARMA)</option>
+																			<option value="10548b8e-2338-11ef-a9de-2574d8dcc750_4265">* DIAC/2986/05-21 (MYPREFERRED TRANSFORMATION AND HOSPITALITY PVT. LTD.V/SPRADEEP KUMAR & ANR.)</option>
+																			<option value="10532dee-2338-11ef-a9de-2574d8dcc750_6561">* DIAC/2890/02-21 (M/S. EKSTAZE INDIA (P) LTD.V/SMR. ASGAR ALI)</option>
+																			<option value="10531dd5-2338-11ef-a9de-2574d8dcc750_2227">* DIAC/2889/02-21 (STERLITE TECHNOLOGIES LIMITEDV/SPARAMOUNT WIRES AND CABLES)</option>
+																			<option value="10530915-2338-11ef-a9de-2574d8dcc750_8191">* DIAC/2888/02-21 (NAVRANG INFRASTRUCTURES INCV/SRUDRA BUILDWELL HOMES PRIVATE LIMITED)</option>
+																			<option value="1052f94e-2338-11ef-a9de-2574d8dcc750_9577">* DIAC/2887/02-21 (IL AND FS ENGINEERING AND CONSTRUCTION COMPANY LIMITEDV/SGAIL (INDIA) LIMITED)</option>
+																			<option value="1052e899-2338-11ef-a9de-2574d8dcc750_3231">* DIAC/2886/02-21 (STERLITE TECHNOLOGIES LIMITEDV/SPARAMOUNT WIRES AND CABLES)</option>
+																			<option value="1051e339-2338-11ef-a9de-2574d8dcc750_4242">* DIAC/2790/08-20 (LAXMI ANAND PRAKASH (THROUGH ATTORNEY SAURABH PRAKASH)V/SM/S. MORE VISAS IMMIGRATION SERVICES PVT. LTD. AND ANR.)</option>
+																			<option value="1051d1b1-2338-11ef-a9de-2574d8dcc750_5122">* DIAC/2789/08-20 (AMBUJ HOTELS AND REAL ESTATE PVT. LTD.V/SMINISTRY OF RAILWAYS & ANR.)</option>
+																			<option value="1051c0eb-2338-11ef-a9de-2574d8dcc750_3789">* DIAC/2788/08-20 (INSTANT IT TECHNOLOGYV/SINFOCOM NETWORK LIMITED)</option>
+																			<option value="1051b24f-2338-11ef-a9de-2574d8dcc750_7942">* DIAC/2787/08-20 (OYO HOTELS AND HOMES PVT. LIMITEDV/SV R S  NATARAJAN)</option>
+																			<option value="1051a3f7-2338-11ef-a9de-2574d8dcc750_5307">* DIAC/2786/08-20 (IMZ CORPORATE PVT. LTD.V/SMSD TELEMATICS PRIVATE LIMITED)</option>
+																			<option value="6ad3e79b-23ec-11ef-a9de-2574d8dcc750_6030">* DIAC/2690/01-20 (M/S. DELTA GUARDS PRIVATE LTD. V/S M/S. SPICE CORPORATION PVT. LTD.)</option>
+																			<option value="6ad3cf63-23ec-11ef-a9de-2574d8dcc750_4848">* DIAC/2689/01-20 (M/S. MAHARANI INDUSTRIAL EQUIPMENTS PRIVATE LIMITED V/S M/S. MEEM AGRO FOODS PVT. LTD.)</option>
+																			<option value="6ad3b873-23ec-11ef-a9de-2574d8dcc750_9404">* DIAC/2688/01-20 (M/S. MAHARANI INDUSTRIAL EQUIPMENTS PRIVATE LIMITED V/S M/S. SPRAY ALCAN)</option>
+																			<option value="6ad3a130-23ec-11ef-a9de-2574d8dcc750_4057">* DIAC/2687/01-20 (M/S. MAHARANI INDUSTRIAL EQUIPMENTS PRIVATE LIMITED V/S M/S. SHAKTI BHOG FOODS LTD.)</option>
+																			<option value="6ad38aa4-23ec-11ef-a9de-2574d8dcc750_0294">* DIAC/2686/01-20 (M/S. MAHARANI INDUSTRIAL EQUIPMENTS PRIVATE LIMITED V/S M/S. SHREE SHYAM PULP BOARD MILLS LTD.)</option>
+																			<option value="6ad21495-23ec-11ef-a9de-2574d8dcc750_9036">* DAC/2590/10-19 (M/S DELTA GUARDS PVT.LTD  V/S M/S COMPASS INDIA SUPPORT SERVICES PVT. LTD)</option>
+																			<option value="6ad1f8ab-23ec-11ef-a9de-2574d8dcc750_7278">* DAC/2589/10-19 (M/S DELTA GUARDS PVT.LTD  V/S M/S DLF UTILITIES)</option>
+																			<option value="6ad1e3c0-23ec-11ef-a9de-2574d8dcc750_9118">* DAC/2588/10-19 (M/S ACURO ORGANICS LTD  V/S M/S NEWGEN SPECIALITY PLASTICS LTD.)</option>
+																			<option value="6ad1ccdf-23ec-11ef-a9de-2574d8dcc750_9438">* DAC/2587/10-19 (M/S COMMANDO MUSCLE POWER LTD  V/S M/S VOLER CAR PVT LTD)</option>
+																			<option value="6ad1b5d9-23ec-11ef-a9de-2574d8dcc750_6024">* DAC/2586/10-19 (M/S CAPARO PROCAM INFRASTRUCTURE LTD  V/S M/S TECHNOFAB ENGG. LTD )</option>
+																			<option value="6ad02e3d-23ec-11ef-a9de-2574d8dcc750_9923">* DIAC/2490/07-19 (M/S. SARR FRIEGHTS CORPORATION  V/S M/S. GUN CARRIAGE FACTORY )</option>
+																			<option value="6ad01711-23ec-11ef-a9de-2574d8dcc750_7279">* DIAC/2489/07-19 (M/S. MKM TECHNOLOGIES PVT. LTD. V/S M/S. LEEL ELECTRICALS LTD.)</option>
+																			<option value="6acfffc8-23ec-11ef-a9de-2574d8dcc750_5491">* DIAC/2488/07-19 (M/S. SLIPCO CONSTRUCTION PVT. LTD. V/S M/S. ABIR INFRASTRUCTURE PVT. LTD.)</option>
+																			<option value="6acfe81d-23ec-11ef-a9de-2574d8dcc750_0059">* DIAC/2487/06-19 (CLEAN WIND POWER (ANTAPUR) PVT. LTD.  V/S ENERFRA PROJECTS (I) PVT. LTD.)</option>
+																			<option value="6acfcfff-23ec-11ef-a9de-2574d8dcc750_8268">* DIAC/2486/06-19 (ASK PROMOTION & TRADING  V/S BAUSCH & LOMB INDIA PVT. LTD.)</option>
+																			<option value="6ace68da-23ec-11ef-a9de-2574d8dcc750_7778">* DIAC/2390/01-19 (DHCMC MITSUBHISHI ELEVATOR INDIA PVT. LTD. V/S BRYS HOTELS PVT. LTD.)</option>
+																			<option value="6ace5180-23ec-11ef-a9de-2574d8dcc750_4538">* DIAC/2389/01-19 (P.K. BHATIA V/S H.S.C.C. (I) LTD.)</option>
+																			<option value="6ace3af6-23ec-11ef-a9de-2574d8dcc750_8304">* DIAC/2388/01-19 (ANURADHA BHATIA V/S ARDEE INFRASTRUCTURE PVT. LTD.)</option>
+																			<option value="6ace23f2-23ec-11ef-a9de-2574d8dcc750_5661">* DIAC/2387/01-19 (YASHPAL & SONS V/S ARDEE INFRASTRUCTURE PVT. LTD.)</option>
+																			<option value="6ace0cad-23ec-11ef-a9de-2574d8dcc750_6668">* DIAC/2386/01-19 (SH. JAIDEEP SINGH V/S GOVT. OF NCT OF DELHI & ORS.)</option>
+																			<option value="6acc4141-23ec-11ef-a9de-2574d8dcc750_3721">* DIAC/2290/11-18 (PHAETHON INTERNATIONAL V/S SAIL )</option>
+																			<option value="6acc1e84-23ec-11ef-a9de-2574d8dcc750_5590">* DIAC/2289/11-18 (LALIT GROVER & ANR. V/S WORLD TELECOM HOUSE)</option>
+																			<option value="6acbfc4b-23ec-11ef-a9de-2574d8dcc750_8076">* DAC/2288/11-18 (PARAGON CABLE INDIA  V/S M/S IVAN MULTITRADING )</option>
+																			<option value="6acbe056-23ec-11ef-a9de-2574d8dcc750_8264">* DIAC/2287/11-18 (MIND EDUTAINMENT V/S AURA EDIFY GLOBAL)</option>
+																			<option value="6acbc595-23ec-11ef-a9de-2574d8dcc750_1081">* DAC/2286/11-18 (PARAGON CABLE INDIA  V/S HUBLI DIVISION )</option>
+																			<option value="6aa871b3-23ec-11ef-a9de-2574d8dcc750_8646">* DAC/2189/08-18 (ISGEC HEAVY ENGG. LTD.  V/S IOCL)</option>
+																			<option value="6aa84fae-23ec-11ef-a9de-2574d8dcc750_4064">* DAC/2188/08-18 (ISGEC HEAVY ENGG. LTD.  V/S IOCL)</option>
+																			<option value="6aa81ed5-23ec-11ef-a9de-2574d8dcc750_3892">* DAC/2187/08-18 (ISGEC HEAVY ENGG. LTD.  V/S IOCL)</option>
+																			<option value="6aa7fbfc-23ec-11ef-a9de-2574d8dcc750_8465">* DAC/2186/08-18 (ISGEC HEAVY ENGG. LTD.  V/S IOCL)</option>
+																			<option value="6aa5d2ac-23ec-11ef-a9de-2574d8dcc750_6752">* DAC/2090/06-18 (GODREJ & BOYCE MFG. CO. LTD.  V/S MRS. SONI DAVE & ORS. )</option>
+																			<option value="6aa5bb1c-23ec-11ef-a9de-2574d8dcc750_9563">* DAC/2089/06-18 (SAGAR RATNA RESTAURANTS PVT. LTD.  V/S RITISHA ENTERPRISES & ORS. )</option>
+																			<option value="6aa5a528-23ec-11ef-a9de-2574d8dcc750_7020">* DAC/2088/06-18 (DEVRASHI, PROP. M/S SHARANS ASSOCIATES  V/S PLATINUM PLASTER LTD.)</option>
+																			<option value="6aa58dcf-23ec-11ef-a9de-2574d8dcc750_8513">* DAC/2087/06-18 (RAM KUMAR SHARMA & ANR. V/S DELHI METRO RAIL CORPORATION LTD.)</option>
+																			<option value="6aa57590-23ec-11ef-a9de-2574d8dcc750_1849">* DAC/2086/06-18 (PRASAR BHARTI V/S CITYCOM NETWORKS PVT. LTD.)</option>
+																			<option value="6aa40ac6-23ec-11ef-a9de-2574d8dcc750_9466">* DAC/1990/04-18 (PARAMJIT SINGH ARORA V/S GETMORE DEVELOPMENTS PVT. LTD.)</option>
+																			<option value="6aa3f2df-23ec-11ef-a9de-2574d8dcc750_0335">* DAC/1989/04-18 (KEI INDUSTRIES LTD.  V/S KEE PROJECT LTD. )</option>
+																			<option value="6aa3dc10-23ec-11ef-a9de-2574d8dcc750_7403">* DAC/1988/04-18 (MD. MENON CONSULTING PVT. LTD. V/S PRASAR BHARTI (BCI))</option>
+																			<option value="6aa3c5f9-23ec-11ef-a9de-2574d8dcc750_8894">* DAC/1987/04-18 (A.K. BUILDERS THROUGH PROP. ARUN KUMAR  V/S INDIAN INSTITUTE OF PACKAGING )</option>
+																			<option value="6aa3ae9c-23ec-11ef-a9de-2574d8dcc750_2356">* DAC/1986/03-18 (CHECKMATE SERVICE PVT. LTD.  V/S QUIPPO OIL & GAS INFRASTRUCTURE LTD. )</option>
+																			<option value="6aa22673-23ec-11ef-a9de-2574d8dcc750_7126">* DAC/1890/01-18 (DIMPLE THEATER  V/S JOP INTERNATIONAL LTD.)</option>
+																			<option value="6aa20f62-23ec-11ef-a9de-2574d8dcc750_9787">* DAC/1889/01-18 (HOLY CHILD ACADEMY NOORBHAI V/S EDUCOMP SOLUTION LTD.)</option>
+																			<option value="6aa1f8a5-23ec-11ef-a9de-2574d8dcc750_0602">* DAC/1888/01-18 (LALIT THUKRAL V/S BLENDZ FOOD PVT. LTD.)</option>
+																			<option value="6aa1e17e-23ec-11ef-a9de-2574d8dcc750_7742">* DAC/1887/01-18 (WUERTH INDIA PVT. LTD. V/S VALO AUTOMOTIVE PVT. LTD.)</option>
+																			<option value="6aa1caee-23ec-11ef-a9de-2574d8dcc750_9369">* DAC/1886/01-18 (AUM MEDIA & ENTERTAINMENT V/S PRASAR BHARTI)</option>
+																			<option value="6aa056e4-23ec-11ef-a9de-2574d8dcc750_6264">* DAC/1790/09-17 (PREM CONSTRUCTION CO.  V/S UOI)</option>
+																			<option value="6aa040dd-23ec-11ef-a9de-2574d8dcc750_6895">* DAC/1789/09-17 (S.B. FLAVOURS PVT. LTD.  V/S MOHAN BREWERIES & DISTILLERIES LTD. )</option>
+																			<option value="6aa02a98-23ec-11ef-a9de-2574d8dcc750_6071">* DAC/1788/09-17 (SIRIUS GLOBAL LTD.  V/S COMMISSIONER OF INCOME TAX )</option>
+																			<option value="6aa0147a-23ec-11ef-a9de-2574d8dcc750_7820">* DAC/1787/09-17 (INDICON PROJECTS & EQUIPMENTS LTD.  V/S GAS AUTHORITY OF INDIA )</option>
+																			<option value="6a9ffe59-23ec-11ef-a9de-2574d8dcc750_1010">* DAC/1786/09-17 (SIRIUS GLOBAL LTD.  V/S OIL NATURAL GAS CORP. )</option>
+																			<option value="6a9e51c8-23ec-11ef-a9de-2574d8dcc750_5860">* DAC/1690/05-17 (HARVEST INTERNATIONAL SCHOOL V/S EDUCAMP SOLUTION LTD. & ANR.)</option>
+																			<option value="6a9e3b7e-23ec-11ef-a9de-2574d8dcc750_9522">* DAC/1689/05-17 (LOYOLA GROUP SCHOOL V/S EDU SMART SERVICES PVT. LTD. )</option>
+																			<option value="6a9e250a-23ec-11ef-a9de-2574d8dcc750_0584">* DAC/1688/05-17 (FASHION TV HOSPITALITY V/S BRAVO HOTELS PVT. LTD.)</option>
+																			<option value="6a9e0e5a-23ec-11ef-a9de-2574d8dcc750_4466">* DAC/1687/05-17 (RAKESH KUMAR V/S UNION OF INDIA)</option>
+																			<option value="6a9df7e0-23ec-11ef-a9de-2574d8dcc750_0582">* DAC/1686/05-17 (SREE VIDYANIKETAN INTERNATIONAL V/S EDU SMART SERVICES PVT. LTD.)</option>
+																			<option value="6a9c7472-23ec-11ef-a9de-2574d8dcc750_0698">* DAC/1590/02-17 (ARIVND TECHNO ENGINEER PVT. LTD. V/S NOTHERN RAILWAY)</option>
+																			<option value="6a9bd88a-23ec-11ef-a9de-2574d8dcc750_8767">* DAC/1589/02-17 (ECS ENGINEERING  V/S PIYUSH DEVELOPER)</option>
+																			<option value="6a9aabe9-23ec-11ef-a9de-2574d8dcc750_4379">* DAC/1588/02-17 (AJIT BIDANI V/S GRAND VENEZIA COMMERCIAL TOWER )</option>
+																			<option value="6a9a86ad-23ec-11ef-a9de-2574d8dcc750_1042">* DAC/1587/02-17 (XJ ELEVATION LTD. V/S MANIK ENTERPRISES PVT. )</option>
+																			<option value="6a9a6445-23ec-11ef-a9de-2574d8dcc750_3611">* DAC/1586/02-17 (RAJIV AGGARWAL  V/S NORTHERN RAILWAY)</option>
+																			<option value="6a985be4-23ec-11ef-a9de-2574d8dcc750_7686">* DAC/1490/12-16 (SRL LIMITED  V/S PIONEER & ORS.)</option>
+																			<option value="6a98143d-23ec-11ef-a9de-2574d8dcc750_3489">* DAC/1489/12-16 (HONSHU BUILDCON PVT. V/S N.D.M.C)</option>
+																			<option value="6a97f99a-23ec-11ef-a9de-2574d8dcc750_3252">* DAC/1488/12-16 (SRL LIMITED V/S PRAGYA DIAGNOSTICS )</option>
+																			<option value="6a97d688-23ec-11ef-a9de-2574d8dcc750_0925">* DAC/1487/12-16 (ANSAL BULIDWELL LTD. V/S MONA DASO)</option>
+																			<option value="6a97b3a3-23ec-11ef-a9de-2574d8dcc750_3790">* DAC/1486/12-16 (P.E ANALYTICS PVT. LTD. V/S IYOGI TECHNICAL )</option>
+																			<option value="6a95826d-23ec-11ef-a9de-2574d8dcc750_2147">* DAC/1390/11-16 (DREAM VALLEY FARMS V/S RELIGARE FINVEST LTD.)</option>
+																			<option value="6a956042-23ec-11ef-a9de-2574d8dcc750_0312">* DAC/1389/11-16 (SURINDER PAL SINGH V/S RAJ KRISHAN BAJAJ)</option>
+																			<option value="6a954002-23ec-11ef-a9de-2574d8dcc750_9804">* DAC/1388/11-16 (MAHESH PREFAB PVT. V/S AHUJA BUILDERS)</option>
+																			<option value="6a951fcc-23ec-11ef-a9de-2574d8dcc750_9569">* DAC/1387/11-16 (SATISH KUMAR MISHRA V/S HARISH AGGARWAL)</option>
+																			<option value="6a94fdf6-23ec-11ef-a9de-2574d8dcc750_9348">* DAC/1386/11-16 (SRL LIMITED                                 V/S LABLINE PATIENT CARE CENTRE)</option>
+																			<option value="6a933ff9-23ec-11ef-a9de-2574d8dcc750_5847">* DAC/1290/09-16 (IMPERIA STRUCTURES LTD. V/S M/S. F4S SAFEGUARD AND FACILITIES PVT. LTD.)</option>
+																			<option value="6a931f81-23ec-11ef-a9de-2574d8dcc750_6149">* DAC/1289/09-16 (KRISHAN MURARI SHARMA & SONS V/S NEW DELHI MUNICIPAL COUNCIL & ANR.)</option>
+																			<option value="6a92fd00-23ec-11ef-a9de-2574d8dcc750_1632">* DAC/1288/09-16 (K.K. RADHU & ANR. V/S RAKESH MISHRA & ANR.)</option>
+																			<option value="6a92db2c-23ec-11ef-a9de-2574d8dcc750_4004">* DAC/1287/09-16 (M/S. XJ ELEVATORS INDIA PVT. LTD. V/S SIMRAN LAL)</option>
+																			<option value="6a928a59-23ec-11ef-a9de-2574d8dcc750_2797">* DAC/1286/09-16 (M/S. XJ ELEVATORS INDIA PVT. LTD. V/S M/S. POLYCAB WIRES PVT. LTD.)</option>
+																			<option value="6a902880-23ec-11ef-a9de-2574d8dcc750_9556">* DAC/1190/04-16 (PARUL GOEL & ORS. V/S NIIT & ORS. )</option>
+																			<option value="6a900ed5-23ec-11ef-a9de-2574d8dcc750_3324">* DAC/1189/04-16 (ARTSON ENGINEERING LTD. V/S INDIAN OIL CORPORATION LTD. )</option>
+																			<option value="c5e7c630-2724-11ef-a9de-2574d8dcc750_8351">* DAC/1189/02-16 (ZION PROMOTERS & DEVELOPERS PVT. LTD.   V/S  FERROUS INFRSTRUCTURE PVT. LTD. )</option>
+																			<option value="6a8ff5bb-23ec-11ef-a9de-2574d8dcc750_9022">* DAC/1188/04-16 (RAUNAQ EPC INTERNATIONAL LTD. V/S CEMENT CORPORATION OF INDIA LTD. )</option>
+																			<option value="6a8fd4a8-23ec-11ef-a9de-2574d8dcc750_3929">* DAC/1187/04-16 (CHEMPLAST SANMAR LTD. V/S GAIL (INDIA) LTD. )</option>
+																			<option value="6a8fb0f3-23ec-11ef-a9de-2574d8dcc750_6874">* DAC/1186/04-16 (RAJ KUMAR TRADING COMPANY V/S THE CONTROLLER OF PUBLICATION (ADMIN.) )</option>
+																			<option value="6a7e8890-23ec-11ef-a9de-2574d8dcc750_8631">* DAC/1090/11-15 (BENCHMARC HOSPITALITY PVT. LTD. V/S NELOFAR CURRIMBHOY)</option>
+																			<option value="6a7e6344-23ec-11ef-a9de-2574d8dcc750_8385">* DAC/1089/11-15 (CHOICE HOSPITALITY (I) PVT. LTD. V/S ANSARI ESTATES PVT. LTD.)</option>
+																			<option value="6a7e3e1b-23ec-11ef-a9de-2574d8dcc750_4431">* DAC/1088/11-15 (ARVINDER SINGH JAGGI V/S MANISH ANAND)</option>
+																			<option value="6a7e18eb-23ec-11ef-a9de-2574d8dcc750_4591">* DAC/1087/11-15 (OMEGA DESIGNS PVT. LTD. V/S BIG SHOE BAZAAR INDIA PVT. LTD.)</option>
+																			<option value="6a7df181-23ec-11ef-a9de-2574d8dcc750_6174">* DAC/1086/11-15 (RAJ KUMAR MALHOTRA V/S AJAY MUNJAL & ORS.)</option>
+																			<option value="6a6b40ca-23ec-11ef-a9de-2574d8dcc750_7022">* DAC/990/05-15 (MEDORS BIOTECH V/S EXOTIC BUILDCON)</option>
+																			<option value="6a6b2326-23ec-11ef-a9de-2574d8dcc750_7329">* DAC/989/06-15 (SARTAJ SINGH PANNU V/S GURBANI MEDIA PVT. LTD. & ANR.)</option>
+																			<option value="6a6b0aee-23ec-11ef-a9de-2574d8dcc750_9875">* DAC/988/06-15 (KANTA BATRA V/S SCHOLASTIC (INDIA) PVT. LTD. & ORS.)</option>
+																			<option value="6a6af1be-23ec-11ef-a9de-2574d8dcc750_4015">* DAC/987/06-15 (SDB CONSULTANTS PVT. LTD. V/S SMC PNEUMATICS (INDIA) PVT. LTD.)</option>
+																			<option value="6a6ad95e-23ec-11ef-a9de-2574d8dcc750_3400">* DAC/986/06-15 (SOCIETY FOR AUTOMATION AND TECHNOLOGY ADVANCE V/S MINISTRY OF EARTH SCIENCES)</option>
+																			<option value="6a692526-23ec-11ef-a9de-2574d8dcc750_9185">* DAC/890/03-15 (DAC/890/03-15 HYUNDAI MOTOR INDIA LTD. V/S R.C. BUDHWAR & ORS. ARB.P. NO. 549/2014)</option>
+																			<option value="6a690c87-23ec-11ef-a9de-2574d8dcc750_6679">* DAC/889/03-15 (DAC/889/03-15 M/S VENIRE LTD. V/S HARINDER PAUL SINGH & ANR. ARB.P. NO. 16/2015)</option>
+																			<option value="6a68f344-23ec-11ef-a9de-2574d8dcc750_8070">* DAC-I/888/03-15 (SAGAR RATNA RESTAURANTS PVT. LTD. & ANR. V/S OCEAN PEARL HOTELS PVT. LTTD. & ANR.)</option>
+																			<option value="6a68da36-23ec-11ef-a9de-2574d8dcc750_1224">* DAC/887/03-15 (M.R. SHAH LOGISTICS PVT. LTD.  V/S INDIAN OIL CORPORATION LTD. & ANR.)</option>
+																			<option value="6a68c02b-23ec-11ef-a9de-2574d8dcc750_9351">* DAC/886/03-15 (DAC/886/03-15 M/S INSTRUMENTATION LABORATORY INDIA PVT. LTD. V/S LAZARUS HOSPITAL LTD. ARB.P. NO. 501/2014)</option>
+																			<option value="6a66cb4f-23ec-11ef-a9de-2574d8dcc750_0017">* DAC/790/02-15 (ROSHAN LAL V/S CHANDER PARKASH RAJE & ANR. )</option>
+																			<option value="6a66b198-23ec-11ef-a9de-2574d8dcc750_4540">* DAC/789/02-15 (DAC/789/02-15 MUKESH JAIN V/S TULIP TELECOM LTD. )</option>
+																			<option value="6a66953e-23ec-11ef-a9de-2574d8dcc750_0894">* DAC/788/02-15 (AMAR DEVI FAMILY WELFARE TRUST V/S S.K.T. MOTELS )</option>
+																			<option value="6a667c10-23ec-11ef-a9de-2574d8dcc750_9977">* DAC./787/02-15 (ESTER INDUSTRIES LTD. V/S NCUBE PLANNING AND DESIGN PVT. LTD. )</option>
+																			<option value="6a666300-23ec-11ef-a9de-2574d8dcc750_6330">* DAC/786/02-15 (BHARAT SANCHAR NIGAM LTD. V/S SOMA NETWORKS SOFTWARE ENGINEERING PVT. LTD. )</option>
+																			<option value="6a64bc87-23ec-11ef-a9de-2574d8dcc750_2083">* DAC/690/01-15 (HANS U NAGAR V/S CIVCON ENGINEERING & CONTRACTING CO. (INDIA) PVT. LTD. & ORS. )</option>
+																			<option value="6a64a3cb-23ec-11ef-a9de-2574d8dcc750_8464">* DAC/689/01-15 (WISHWA MITTAR BAJAJ & SONS V/S SHIPRA ESTATE LTD. & JAI KRISHAN ESTATE DEVELOPERS PVT. LTD. )</option>
+																			<option value="6a648a73-23ec-11ef-a9de-2574d8dcc750_3412">* DAC/688/01-15 (NARENDER KUMAR V/S NORTH DELHI MUNICIPAL CORPORATION )</option>
+																			<option value="6a6471f8-23ec-11ef-a9de-2574d8dcc750_6199">* DAC/687/01-15 (G.S. DEVELOPERS & CONTRACTORS (P) LTD. V/S NEW RISE HEALTHCARE PVT. LTD. & ORS. OMP 358/2014)</option>
+																			<option value="6a6456b9-23ec-11ef-a9de-2574d8dcc750_2528">* DAC/686/01-15 (LAMBA INNS (PVT.) LTD. V/S EMAAR MGF LAND LTD. )</option>
+																			<option value="6a62827f-23ec-11ef-a9de-2574d8dcc750_5313">* DAC/590/08-14 (PUNEET MAHAN V/S RELIANCE INFRATEL LTD. & ANR. )</option>
+																			<option value="6a626cc3-23ec-11ef-a9de-2574d8dcc750_7400">* DAC/589/08-14 (REINFORCED EARTH INDIA PVT. LTD. V/S ERA INFRATECH ENGINEERING LTD. )</option>
+																			<option value="6a625714-23ec-11ef-a9de-2574d8dcc750_0562">* DAC/588/08-14 (IRIS WORLD WIDE INTEGRATED MARKETING  V/S SONY INDIA PVT. LTD. )</option>
+																			<option value="6a623d5a-23ec-11ef-a9de-2574d8dcc750_8470">* DAC/587/08-14 (CREATIVE ENTERPRENEURS  V/S RELIANCE INFOCOM ENGG. PVT. LTD. )</option>
+																			<option value="6a621d54-23ec-11ef-a9de-2574d8dcc750_7262">* DAC/586/08-14 (OVERVIEW CONSULTANTS  V/S PURE EARTH INFRASTRUCTURE LTD. )</option>
+																			<option value="6a5f2387-23ec-11ef-a9de-2574d8dcc750_7720">* DAC/489/09-13 (INTEGRITY PROJECTS & TECHNOLOGIES (I) PVT. LTD. V/S SIMPLEX PROJECTS LTD. & ORS. )</option>
+																			<option value="6a44321e-23ec-11ef-a9de-2574d8dcc750_9973">* DAC/488/02-14 (ANIL KUMAR DANG &ANR. V/S INVOTEK ENGINEERING & CONSTRUCTION )</option>
+																			<option value="6a440d45-23ec-11ef-a9de-2574d8dcc750_0715">* DAC/486/08-13 (VOLTAS LTD. V/S NCC LTD. & ANR. )</option>
+																			<option value="6a423854-23ec-11ef-a9de-2574d8dcc750_2675">* DAC/390/03-13 (CHOICE HOSPITALITY (I) PVT. LTD.. V/S SEWA EXPORTS )</option>
+																			<option value="6a4227e8-23ec-11ef-a9de-2574d8dcc750_8852">* DAC/389/03-13 (CHOICE HOSPITALITY (I) PVT. LTD.. V/S SEWA EXPORTS )</option>
+																			<option value="6a4215fc-23ec-11ef-a9de-2574d8dcc750_0528">* DAC/388/01-13 (SUDHIR TYAGI  V/S NORTHERN RAILWAYS THROUGH ITS DEPUTY CHIEF SIGNAL & TELECOM ENGINEER & ORS. )</option>
+																			<option value="6a4207fe-23ec-11ef-a9de-2574d8dcc750_1263">* DAC/387/01-13 (KARAM CHAND THAPAR & BROS. (COAL SALES) LTD. V/S TEHRI HYDRO DEVELOPMENT CORPORATION INDIA LTD. & ANR. )</option>
+																			<option value="6a41f6b0-23ec-11ef-a9de-2574d8dcc750_8596">* DAC/386/04-13 (EVIAN PROJECTS LTD. V/S ANGHAILA HOUSING PVT. LTD. )</option>
+																			<option value="6a40d5f4-23ec-11ef-a9de-2574d8dcc750_8434">* DAC/290/08-13 (DAC/290/08-13 HIMALAYA EDUCATION FOUNDATION V/S MOTHERS PRIDE EDUCATION PERSONNA PVT. LTD. )</option>
+																			<option value="6a40c301-23ec-11ef-a9de-2574d8dcc750_3713">* DAC/289/08-13 ( GRAVISS CATERING PVT. LTD. V/S DELHI TOUR & TRANSPORTATION DEVELOPMENT CORP. LTD. )</option>
+																			<option value="6a40b103-23ec-11ef-a9de-2574d8dcc750_6710">* DAC/288/03-13 (DAC/288/03-13/AG-1 GAIL (INDIA) LTD. V/S SAMTEL COLOR LTD. & ORS. )</option>
+																			<option value="6a409fbf-23ec-11ef-a9de-2574d8dcc750_9947">* DAC/287/12-12 (DAC/287/12-12 RAVINDER SINGH V/S JAYANTA BOSE & ANR. )</option>
+																			<option value="6a408d69-23ec-11ef-a9de-2574d8dcc750_1008">* DAC/286/08-13 ( KIDDE INDIA LTD. V/S BHARAT HEAVY ELECTRICALS LTD. )</option>
+																			<option value="dda407cc-2724-11ef-a9de-2574d8dcc750_8161">* DAC/190/ 07-12 ( EVEREST INDUSTRIES LTD. V/S ALL CARGO GLOBAL LOGISTICS LTD. )</option>
+																			<option value="dda3f81d-2724-11ef-a9de-2574d8dcc750_0219">* DAC/189/ 08-12 ( UPPAL BUILDERS PVT. LTD. V/S PRESTRESS WIRE INDUSTRIES )</option>
+																			<option value="dda3dc14-2724-11ef-a9de-2574d8dcc750_7646">* DAC/188/ 08-12 ( JAMA CORPORATION PVT. LTD. V/S TATA AIG GENERAL INSURANCE CO. LTD. )</option>
+																			<option value="dda3b934-2724-11ef-a9de-2574d8dcc750_6003">* DAC/187/ 09-12 ( KANWAR SINGH PRADHAN V/S OVERNITE EXPRESS LTD. )</option>
+																			<option value="dda39d8e-2724-11ef-a9de-2574d8dcc750_4123">* DAC/186/ 07-12 ( LALIT MOHAN MADHAN V/S CITI FINANCIAL CONSUMER FINANCE (I) LTD. )</option>
+																			<option value="dd86dfa9-2724-11ef-a9de-2574d8dcc750_9895">* DAC/90/ 08-11 ( N.N. PROJECTS LTD. V/S SPRY SPACE SOLUTIONS PVT. LTD. )</option>
+																			<option value="dd86be1c-2724-11ef-a9de-2574d8dcc750_2830">* DAC/88/ 07-11 ( PPT MAINTAINANCE PVT. LTD. V/S LAQSHYA DIGITAL MEDIA PVT. LTD. )</option>
+																			<option value="dd869a2c-2724-11ef-a9de-2574d8dcc750_4752">* DAC/87/ 07-11 ( VINOD KUMAR & SONS (P) LTD. V/S SWARNEEM REAL ESTATE PVT. LTD. )</option>
+																			<option value="dd867367-2724-11ef-a9de-2574d8dcc750_0310">* DAC/86/ 07-11 ( SHARMA CONTRACTS (I) PVT. LTD. V/S BHUSHAN POWER & STEEL LTD. )</option>
+																	</select>
+							</div>
+
+							<div class="form-group text-center">
+								<button type="submit" id="ecn_btn_submit" class="btn btn-custom"><span class="fa fa-paper-plane-o"></span> Proceed</button>
+							</div>
+							</form>						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	var base_url = "https://diac.ind.in/";
+	var role_code = "DEPUTY_COUNSEL";
+</script>
+
+<script type="text/javascript">
+	// Function to enable the submit button
+	function enable_submit_btn(button) {
+		$('#' + button).attr('disabled', false);
+	}
+
+	// Add case number form
+	$('#ecn_form').bootstrapValidator({
+		message: 'This value is not valid',
+		submitButtons: 'button[type="submit"]',
+		submitHandler: function(validator, form, submitButton) {
+			$('#award_term_btn_submit').attr('disabled', 'disabled');
+			var formData = new FormData(document.getElementById('ecn_form'));
+			var urls = base_url + "service/check_case_number";
+
+			$.ajax({
+				url: urls,
+				type: 'POST',
+				data: formData,
+				contentType: false,
+				processData: false,
+				complete: function() {
+					enable_submit_btn('ecn_btn_submit');
+				},
+				success: function(response) {
+					try {
+						var obj = JSON.parse(response);
+						if (obj.status == false) {
+							swal({
+								title: 'Error',
+								text: obj.msg,
+								type: 'error',
+								html: true
+							});
+						} else if (obj.status === 'validationerror') {
+							swal({
+								title: 'Validation Error',
+								text: obj.msg,
+								type: 'error',
+								html: true
+							});
+						} else {
+							window.location.href = obj.redirect_url;
+						}
+					} catch (e) {
+						sweetAlert("Sorry", 'Unable to Save.Please Try Again !', "error");
+					}
+				},
+				error: function(err) {
+					toastr.error("Something went wrong. Please try again.");
+				}
+			});
+		}
+	})
+</script><footer class="main-footer text-center">
+	<strong>Copyright &copy; DIAC 2025 <a href="#" target="_blank"></a> <span>All rights reserved; Delhi International Arbitration Center.</span></strong>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+	<!-- Create the tabs -->
+	<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+		<li><a href="#put-on-tab" data-toggle="tab"><i class="fa fa-clock-o"></i> Todays Reminders</a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<!-- Home tab content -->
+		<div class="tab-pane active" id="put-on-tab">
+			<div class="text-center">
+				<button class="btn btn-custom btn-sm" id="reminderModalBtn"><i class="fa fa-plus"></i> Add Reminder</button>
+			</div>
+			<hr>
+			<ul class="control-sidebar-menu">
+													<li>
+						<a href="javascript:void(0)">
+							<h4 class="control-sidebar-subheading">
+								No reminder found
+							</h4>
+						</a>
+					</li>
+				
+			</ul>
+			<!-- /.control-sidebar-menu -->
+		</div>
+		<!-- /.tab-pane -->
+
+	</div>
+</aside>
+
+		<div id="pending_work_status_calender_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title cause-list-modal-title" style="text-align: 	center;">Pending Work Status</h4>
+				</div>
+				<div class="modal-body">
+					<!-- THE CALENDAR -->
+					<div id="pending_work_calendar"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Csrf token -->
+<input type="hidden" name="csrf_token_universal" id="csrf_token_universal" value="cfea2dfb36900821f817e6059cb66602ceb41e75">
+</div>
+
+<!-- Common Modal Start -->
+<!-- Common Modal to show the same structered data -->
+<div id="common-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title common-modal-title" style="text-align: center;"></h4>
+			</div>
+			<div class="modal-body common-modal-body"></div>
+		</div>
+	</div>
+</div>
+<!-- Common Modal End -->
+
+<!-- =============================================================================== -->
+<!-- Reminder Modal to show the same structered data -->
+<div id="reminder-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title common-modal-title" style="text-align: center;"> Add Reminder</h4>
+            </div>
+            <div class="modal-body common-modal-body">
+                <form action="https://diac.ind.in/termination" class="wfst" id="reminder_form" method="post" accept-charset="utf-8">
+                    <input type="hidden" name="reminder_op_type" id="reminder_op_type" value="ADD_REMINDER">
+                    <input type="hidden" name="csrf_reminder_form_token" value="de2213052a782ce46a8eb507113892193989d978">
+
+                    <div class="row">
+
+                        <div class="form-group col-xs-12 required">
+                            <label class="control-label">Date:</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input type="text" class="form-control custom-all-date" id="reminder_date" name="reminder_date" autocomplete="off" readonly="true" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 required">
+                            <label class="control-label">Note:</label>
+                            <textarea type="text" class="form-control" id="reminder_note" name="reminder_note"  autocomplete="off"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="row text-center mt-25">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-custom" id="add_reminder_btn"><i class='fa fa-paper-plane'></i> Save</button>
+                        </div>
+                    </div>
+                </form>            </div>
+        </div>
+    </div>
+</div>
+<!-- Reminder Modal End -->
+<script type="text/javascript">
+	var base_url = 'https://diac.ind.in/';
+</script>
+
+	<script>
+		$(function() {
+			//var pending_work_status = '[{"id":"115093","case_no_slug":"3b8540d1d3128ce7cf68e0f6a8fc5036","next_date":"2025-12-27","marked_to":"40835434","noting_date":"2025-12-27 14:10:42","marked_by_display_name":"Mr. Rajesh Gautam","marked_by_job_title":"Judicial Assistant","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10487","case_no_prefix":"DIAC","case_no_year":"03-25","noting_text":null},{"id":"94400","case_no_slug":"933b823ef859a2e4d71187c14cdec3e6","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:54:46","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10090","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null},{"id":"94395","case_no_slug":"af341a2e0d61babba257833a55e28fe7","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:53:00","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10091","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null}]';
+			//pending_work_status = JSON.parse(pending_work_status);
+
+			// Generate the JSON string in PHP and safely output it into JavaScript
+			var pending_work_status = [{"id":"115093","case_no_slug":"3b8540d1d3128ce7cf68e0f6a8fc5036","next_date":"2025-12-27","marked_to":"40835434","noting_date":"2025-12-27 14:10:42","marked_by_display_name":"Mr. Rajesh Gautam","marked_by_job_title":"Judicial Assistant","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10487","case_no_prefix":"DIAC","case_no_year":"03-25","noting_text":null},{"id":"94400","case_no_slug":"933b823ef859a2e4d71187c14cdec3e6","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:54:46","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10090","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null},{"id":"94395","case_no_slug":"af341a2e0d61babba257833a55e28fe7","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:53:00","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10091","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null}];
+
+			// Parse the JSON string into a JavaScript object
+			pending_work_status = JSON.parse(JSON.stringify(pending_work_status));
+			//console.log(pending_work_status);
+			var pending_work_events = [];
+
+			if (pending_work_status.length > 0) {
+				pending_work_status.forEach((pws) => {
+					pending_work_events.push({
+						title: (pws.case_no) ? pws.case_no_prefix + '/' + pws.case_no + '/' + pws.case_no_year : 'N/A',
+						start: new Date(pws.noting_date),
+						end: (pws.next_date) ? new Date(pws.next_date) : '',
+						backgroundColor: "#3c8dbc", //yellow
+						borderColor: "#3c8dbc", //yellow
+						allDay: true // This ensures the event is shown as an all-day event
+
+					});
+				})
+			}
+
+			/* initialize the external events
+     -----------------------------------------------------------------*/
+			function init_events(ele) {
+				ele.each(function() {
+					// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+					// it doesn't need to have a start or end
+					var eventObject = {
+						title: $.trim($(this).text()), // use the element's text as the event title
+					};
+
+					// store the Event Object in the DOM element so we can get to it later
+					$(this).data("eventObject", eventObject);
+
+					// make the event draggable using jQuery UI
+					$(this).draggable({
+						zIndex: 1070,
+						revert: true, // will cause the event to go back to its
+						revertDuration: 0, //  original position after the drag
+					});
+				});
+			}
+
+			init_events($("#external-events div.external-event"));
+
+			/* initialize the calendar
+     -----------------------------------------------------------------*/
+			//Date for the calendar events (dummy data)
+			var date = new Date();
+			var d = date.getDate(),
+				m = date.getMonth(),
+				y = date.getFullYear();
+			$("#pending_work_calendar").fullCalendar({
+				header: {
+					left: "prev,next today",
+					center: "title",
+					right: "month,agendaWeek,agendaDay",
+				},
+				buttonText: {
+					today: "today",
+					month: "month",
+					week: "week",
+					day: "day",
+				},
+				//Random default events
+				events: pending_work_events,
+				editable: true,
+				droppable: true, // this allows things to be dropped onto the calendar !!!
+				drop: function(date, allDay) {
+					// this function is called when something is dropped
+
+					// retrieve the dropped element's stored Event Object
+					var originalEventObject = $(this).data("eventObject");
+
+					// we need to copy it, so that multiple events don't have a reference to the same object
+					var copiedEventObject = $.extend({}, originalEventObject);
+
+					// assign it the date that was reported
+					copiedEventObject.start = date;
+					copiedEventObject.allDay = allDay;
+					copiedEventObject.backgroundColor = $(this).css("background-color");
+					copiedEventObject.borderColor = $(this).css("border-color");
+
+					// render the event on the calendar
+					// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+					$("#calendar").fullCalendar("renderEvent", copiedEventObject, true);
+
+					// is the "remove after drop" checkbox checked?
+					if ($("#drop-remove").is(":checked")) {
+						// if so, remove the element from the "Draggable Events" list
+						$(this).remove();
+					}
+				},
+			});
+
+			/* ADDING EVENTS */
+			var currColor = "#3c8dbc"; //Red by default
+			//Color chooser button
+			var colorChooser = $("#color-chooser-btn");
+			$("#color-chooser > li > a").click(function(e) {
+				e.preventDefault();
+				//Save color
+				currColor = $(this).css("color");
+				//Add color effect to button
+				$("#add-new-event").css({
+					"background-color": currColor,
+					"border-color": currColor,
+				});
+			});
+			$("#add-new-event").click(function(e) {
+				e.preventDefault();
+				//Get value and make sure it is not null
+				var val = $("#new-event").val();
+				if (val.length == 0) {
+					return;
+				}
+
+				//Create events
+				var event = $("<div />");
+				event
+					.css({
+						"background-color": currColor,
+						"border-color": currColor,
+						color: "#fff",
+					})
+					.addClass("external-event");
+				event.html(val);
+				$("#external-events").prepend(event);
+
+				//Add draggable funtionality
+				init_events(event);
+
+				//Remove event from text input
+				$("#new-event").val("");
+			});
+		});
+	</script>
+
+<script type="text/javascript" src="https://diac.ind.in/public/custom/js/diac_dashboard/diac-common-js.js?v=1728027533"></script>
+<script type="text/javascript" src="https://diac.ind.in/public/custom/js/file_tag_configuration.js?v=1728027533"></script>
+
+</body>
+
+</html>

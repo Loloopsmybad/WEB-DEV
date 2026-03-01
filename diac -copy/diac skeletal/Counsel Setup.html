@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keyword" content="DIAC">
+	<meta name="description" content="Delhi International Arbitration Center">
+	<title>DIAC</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	<link rel="icon" type="image/png" sizes="96x96" href="https://diac.ind.in/public/custom/photos/logo.png">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrapValidator.css" />
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrap-select.css" />
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap/dist/css/bootstrap-multiselect.css" />
+
+	<!--Sweet Alert-->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/sweetalert/sweetalert.css">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/font-awesome/css/font-awesome.min.css">
+
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/Ionicons/css/ionicons.min.css">
+
+	<!-- DataTables -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css"> -->
+
+	<!-- Select2 -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/plugins/select2/select2.min.css">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/dist/css/AdminLTE.min.css">
+
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/iCheck/all.css" />
+
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+	    folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/dist/css/skins/_all-skins.min.css">
+
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+	<!-- Bootstrap TimePicker -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/timepicker/bootstrap-timepicker.min.css">
+
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+	<!-- bootstrap wysihtml5 - text editor -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+	<!--Tooltips-->
+	<link rel="stylesheet" type="text/css" href="https://diac.ind.in/public/bower_components/tooltip/tooltipster.css" />
+	<link rel="stylesheet" type="text/css" href="https://diac.ind.in/public/bower_components/tooltip/tooltipster-punk.css" />
+	<link rel="stylesheet" type="text/css" href="https://diac.ind.in/public/bower_components/toastr/toastr.min.css" />
+
+	<!-- Summernote -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+	<!-- Full Calender -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/fullcalendar/dist/fullcalendar.min.css" />
+	<link rel="stylesheet" href="https://diac.ind.in/public/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print" />
+
+
+	<!-- <link rel="stylesheet" href="https://diac.ind.in/public/plugins/summernote/summernote.min.css"> -->
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<!-- custom Css -->
+	<link rel="stylesheet" href="https://diac.ind.in/public/custom/css/admin.css?v=1727344696">
+
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	<!-- jQuery -->
+	<script src="https://diac.ind.in/public/bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="https://diac.ind.in/public/bower_components/jquery-ui/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script>
+	<!-- Sweet Alert Plugin -->
+	<script src="https://diac.ind.in/public/bower_components/sweetalert/sweetalert.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="https://diac.ind.in/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://diac.ind.in/public/plugins/select2/select2.full.min.js"></script>
+
+	<!-- Summernote -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<script type="text/javascript" src="https://diac.ind.in/public/bower_components/bootstrap/dist/js/bootstrapValidator.js"></script>
+
+	<script src="https://diac.ind.in/public/bower_components/bootstrap/dist/js/bootstrap-multiselect.js"></script>
+
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/bower_components/bootstrap-filestyle/bootstrap-filestyle.js"></script>
+
+	<!-- DataTables -->
+	<script src="https://diac.ind.in/public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+	<script src="https://diac.ind.in/public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script> -->
+
+	<!-- daterangepicker -->
+	<script src="https://diac.ind.in/public/bower_components/moment/min/moment.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<!-- datepicker -->
+	<script src="https://diac.ind.in/public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+	<!-- Bootstrap WYSIHTML5 -->
+	<script src="https://diac.ind.in/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+	<!-- Slimscroll -->
+	<script src="https://diac.ind.in/public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- FastClick -->
+	<script src="https://diac.ind.in/public/bower_components/fastclick/lib/fastclick.js"></script>
+
+	<!-- AdminLTE App -->
+	<script src="https://diac.ind.in/public/dist/js/adminlte.min.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/timepicker/bootstrap-timepicker.min.js"></script>
+
+	<!-- Flot -->
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.resize.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.pie.js"></script>
+	<script src="https://diac.ind.in/public/bower_components/Flot/jquery.flot.categories.js"></script>
+
+	<!-- AdminLTE for demo purposes -->
+	<script src="https://diac.ind.in/public/dist/js/demo.js"></script>
+
+	<!-- Tooltips Plugin -->
+	<script type="text/javascript" src="https://diac.ind.in/public/bower_components/tooltip/jquery.tooltipster.min.js"></script>
+	<script type="text/javascript" src="https://diac.ind.in/public/bower_components/toastr/toastr.min.js"></script>
+
+	<!-- the fileinput plugin styling CSS file -->
+	<link href="https://diac.ind.in/public/plugins/bootstrap_fileinput/fileinput.min.css" rel="stylesheet" type="text/css" />
+
+	<!-- the main fileinput plugin script JS file -->
+	<script src="https://diac.ind.in/public/plugins/bootstrap_fileinput/fileinput.min.js"></script>
+	<script src="https://diac.ind.in/public/plugins/bootstrap_fileinput/theme.min.js"></script>
+
+	<!-- Generate PDF using javascript -->
+	<script src="https://diac.ind.in/public/plugins/jsPDF/html2canvas.min.js"></script>
+	<script src="https://diac.ind.in/public/plugins/jsPDF/jspdf.umd.min.js"></script>
+
+	<!-- Ckeditor -->
+	<script src="https://diac.ind.in/public/plugins/ckeditor/build/ckeditor.js"></script>
+
+	<!-- FullCalender -->
+	<script src="https://diac.ind.in/public/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+
+	<!--custom Js Link-->
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/plugins/js/md5_5034.js?v=1727344697"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/plugins/js/profile_sha.js?v=1727344697"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/plugins/js/sha512.js?v=1727344697"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/custom/js/functions.js?v=1761903317"></script>
+	<script type="text/javascript" language="javascript" src="https://diac.ind.in/public/custom/js/common.js?v=1728027533"></script>
+
+
+	<script>
+		var base_url = "https://diac.ind.in/";
+		var role_code = "DEPUTY_COUNSEL";
+	</script>
+</head>
+
+<body class="hold-transition skin-blue fixed sidebar-mini" id="root">
+	<!-- Site Loader -->
+	<div class="site-loader">
+		<div class="site-loader-col">
+			<div class="site-loader-image">
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="248" height="248" style="shape-rendering: auto; display: block;" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<g>
+						<circle stroke-width="6" stroke="#e98f0c" fill="none" r="0" cy="50" cx="50">
+							<animate begin="0s" calcMode="spline" keySplines="0 0.2 0.8 1" keyTimes="0;1" values="0;21" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="r"></animate>
+							<animate begin="0s" calcMode="spline" keySplines="0.2 0 0.8 1" keyTimes="0;1" values="1;0" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="opacity"></animate>
+						</circle>
+						<circle stroke-width="6" stroke="#ec0000" fill="none" r="0" cy="50" cx="50">
+							<animate begin="-1.3157894736842106s" calcMode="spline" keySplines="0 0.2 0.8 1" keyTimes="0;1" values="0;21" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="r"></animate>
+							<animate begin="-1.3157894736842106s" calcMode="spline" keySplines="0.2 0 0.8 1" keyTimes="0;1" values="1;0" dur="2.6315789473684212s" repeatCount="indefinite" attributeName="opacity"></animate>
+						</circle>
+						<g></g>
+					</g>
+				</svg>
+			</div>
+			<h1 class="site-loader-text">PROCESSING...</h1>
+		</div>
+	</div>
+	<div class="wrapper">
+		<header class="main-header">
+			<a href="#" class="logo">
+				<span class="logo-mini"><i class="fa fa-xing" aria-hidden="true"></i></span>
+				<span class="logo-lg" style="color: #fff"><b style="color: #fff">DIAC:</b>DELHI</span>
+			</a>
+
+			<nav class="navbar navbar-static-top">
+				<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+					<span class="sr-only">Toggle navigation</span>
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+													<li>
+								<a href="https://diac.ind.in/case-noting-notifications" id="" title="Case Noting Notifications"><i class="fa fa-book"></i>
+								</a>
+							</li>
+																			<li>
+								<a href="https://diac.ind.in/payment-notifications" id=""><i class="fa fa-money"></i>
+								</a>
+							</li>
+												<li>
+							<a href="javascript:void(0)" id="btn_show_pending_work_calender_modal"><i class="fa fa-sticky-note-o"></i>
+							</a>
+						</li>
+
+						<li>
+														<a href="#" data-toggle="control-sidebar"><i class="fa fa-clock-o"></i>
+								<span class="label label-primary">0</span>
+							</a>
+						</li>
+						
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-bell-o"></i>
+									<span class="label label-warning" id="notification_count"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<!-- inner menu: contains the actual data -->
+										<ul class="menu" id="notification_menu_list">
+										</ul>
+									</li>
+									<li class="footer"><a href="https://diac.ind.in/notifications"><strong>View all</strong></a></li>
+								</ul>
+							</li>
+						
+						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<img src="https://diac.ind.in/public/upload/profile/defult.png" class="user-image" alt="User Image">
+								
+								<span class="hidden-xs">Ms. Saumya</span>
+							</a>
+							<ul class="dropdown-menu">
+
+								<li class="user-header">
+																			<img src="https://diac.ind.in/public/upload/profile/defult.png" class="img-circle" alt="User Image" />
+									
+									<p>
+										Ms. Saumya										<small>Deputy Counsel</small>
+									</p>
+								</li>
+								<li class="user-footer">
+									<div class="pull-left">
+										<a href="https://diac.ind.in/my-account" class="btn btn-warning"><i class="fa fa-user-o"></i> My Account</a>
+									</div>
+									<div class="pull-right">
+										<a href="https://diac.ind.in/user/logout" class="btn btn-danger"><i class="fa fa-power-off"></i> Log out</a>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header><!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<!-- Sidebar user panel -->
+		<div class="user-panel">
+			<div class="pull-left image">
+									<img src="https://diac.ind.in/public/upload/profile/defult.png" class="img-circle" alt="User Image">
+				
+			</div>
+			<div class="pull-left info sm-online-box">
+				<p class="sm-online-dn">
+					Ms. Saumya				</p>
+
+				<a href="#" class="sm-online-icon">
+					<i class="fa fa-circle text-success"></i> 						(DC13)
+									</a>
+			</div>
+		</div>
+
+		<ul class="sidebar-menu" data-widget="tree">
+			<li class="">
+								<a href='https://diac.ind.in/diac-admin-dashboard'>
+									<i class="fa fa-dashboard"></i>&nbsp;&nbsp;<span>Dashboard</span>
+								</a>
+								
+						</li><li class="treeview ">			
+							<a href='#'>
+								<i class="fa fa-book"></i>&nbsp;&nbsp;<span>Case Management</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/allotted-case'>
+								<i class="fa fa-check"></i>&nbsp;&nbsp;Alloted Case
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/status-of-pleadings'>
+								<i class="fa fa-pencil"></i>&nbsp;&nbsp;Status of Pleadings
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/tag-cases'>
+								<i class="fa fa-random"></i>&nbsp;&nbsp;Tag Cases
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/response-format'>
+								<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Draft Letters
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/claimant-respondant-details'>
+								<i class="fa fa-users"></i>&nbsp;&nbsp;Claimant & Respondant
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/counsels'>
+								<i class="fa fa-retweet"></i>&nbsp;&nbsp;Counsels
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/arbitral-tribunal'>
+								<i class="fa fa-sticky-note-o"></i>&nbsp;&nbsp;Arbitral Tribunal
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/fee-pending-allotted-cases'>
+								<i class="fa fa-money"></i>&nbsp;&nbsp;Fee Pending Cases
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/case-order'>
+								<i class="fa fa-book"></i>&nbsp;&nbsp;Case Order
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/case-fees-details'>
+								<i class="fa fa-money"></i>&nbsp;&nbsp;Case Fee
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/termination'>
+								<i class="fa fa-trophy"></i>&nbsp;&nbsp;Termination
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/cause-list'>
+								<i class="fa fa-bars"></i>&nbsp;&nbsp;Cause List
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/noting'>
+								<i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;Noting
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/all-cases'>
+								<i class="fa fa-bookmark-o"></i>&nbsp;&nbsp;All Cases
+							</a>
+						</li>
+					</ul>
+					</li><li class="treeview ">			
+							<a href='#'>
+								<i class="fa fa-address-book-o"></i>&nbsp;&nbsp;<span>Rooms Availability</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/hearings-today'>
+								<i class="fa fa-map-o"></i>&nbsp;&nbsp;Hearings Today
+							</a>
+						</li>
+					</ul>
+					</li><li class="treeview ">			
+							<a href='#'>
+								<i class="fa fa-sticky-note-o"></i>&nbsp;&nbsp;<span>Work Status</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/work-status/pending'>
+								<i class="fa fa-circle-o"></i>&nbsp;&nbsp;Pending
+							</a>
+						</li><li class="">
+							<a href='https://diac.ind.in/work-status/completed'>
+								<i class="fa fa-circle-o"></i>&nbsp;&nbsp;Completed
+							</a>
+						</li>
+					</ul>
+					</li><li class="treeview groupactive active">			
+							<a href='#'>
+								<i class="fa fa-list"></i>&nbsp;&nbsp;<span>Master Setup</span>
+								<span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span>
+							</a>
+							<ul class="treeview-menu"><li class="">
+							<a href='https://diac.ind.in/arbitrator-setup'>
+								<i class="fa fa-circle"></i>&nbsp;&nbsp;Arbitrator Setup
+							</a>
+						</li><li class="active bold">
+							<a href='https://diac.ind.in/counsel-setup'>
+								<i class="fa fa-circle"></i>&nbsp;&nbsp;Counsel Setup
+							</a>
+						</li>
+					</ul>
+					</li><li class="">
+								<a href='https://diac.ind.in/efiling-users'>
+									<i class="fa fa-user-circle"></i>&nbsp;&nbsp;<span>eFiling Users</span>
+								</a>
+								
+						</li><li class="">
+								<a href='https://diac.ind.in/reports'>
+									<i class="fa fa-file"></i>&nbsp;&nbsp;<span>Reports</span>
+								</a>
+								
+						</li>		</ul>
+	</section>
+</aside><link rel="stylesheet" href="https://diac.ind.in/public/bower_components/bootstrap-excelexport/css/buttons.dataTables.min.css" />
+<style>
+    .pdf_button {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>Counsel Setup</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="box wrapper-box">
+                    <div class="box-body">
+                        <fieldset class="fieldset">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Counsel Name:</label>
+                                        <input type="text" name="f_counsel_name" id="f_counsel_name" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <button type="button" class="btn btn-default" id="f_cl_btn_reset" name="f_cl_btn_reset" style="margin-top: 24px;"><i class='fa fa-refresh'></i> Reset</button>
+
+                                        <button type="submit" class="btn btn-info" id="f_cl_btn_submit" name="f_cl_btn_submit" style="margin-top: 24px;"><i class='fa fa-filter'></i> Filter</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="table-responsive">
+                            <table id="counsel_setup_datatable_appr" class="table table-condensed table-striped table-bordered dt-responsive" data-page-size="10">
+                                <input type="hidden" name="csrf_trans_token" id="arb_form_token" value="4c10592cf5f5aba6f6e0ee61b5709130b05d7509">
+                                <thead>
+                                    <tr>
+                                        <th style="width:8%;">S. No.</th>
+                                        <th width="10%">Name</th>
+                                        <th width="10%">Email</th>
+                                        <th width="10%">Contact</th>
+                                        <th width="10%">Enrollment No.</th>
+                                        <th>Permanent Address</th>
+                                        <th>Correspondance Address</th>
+                                        <th style="width:15%;">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<script src="https://diac.ind.in/public/bower_components/bootstrap-excelexport/js/dataTables.buttons.min.js"></script>
+<script src="https://diac.ind.in/public/bower_components/bootstrap-excelexport/js/buttons.flash.min.js"></script>
+<script src="https://diac.ind.in/public/bower_components/bootstrap-excelexport/js/jszip.min.js"></script>
+<script src="https://diac.ind.in/public/bower_components/bootstrap-excelexport/js/pdfmake.min.js"></script>
+<script src="https://diac.ind.in/public/bower_components/bootstrap-excelexport/js/vfs_fonts.js"></script>
+<script src="https://diac.ind.in/public/bower_components/bootstrap-excelexport/js/buttons.html5.min.js"></script>
+<script src="https://diac.ind.in/public/custom/js/admin/counsel_master.js?v=1728027533"></script><footer class="main-footer text-center">
+	<strong>Copyright &copy; DIAC 2025 <a href="#" target="_blank"></a> <span>All rights reserved; Delhi International Arbitration Center.</span></strong>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+	<!-- Create the tabs -->
+	<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+		<li><a href="#put-on-tab" data-toggle="tab"><i class="fa fa-clock-o"></i> Todays Reminders</a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<!-- Home tab content -->
+		<div class="tab-pane active" id="put-on-tab">
+			<div class="text-center">
+				<button class="btn btn-custom btn-sm" id="reminderModalBtn"><i class="fa fa-plus"></i> Add Reminder</button>
+			</div>
+			<hr>
+			<ul class="control-sidebar-menu">
+													<li>
+						<a href="javascript:void(0)">
+							<h4 class="control-sidebar-subheading">
+								No reminder found
+							</h4>
+						</a>
+					</li>
+				
+			</ul>
+			<!-- /.control-sidebar-menu -->
+		</div>
+		<!-- /.tab-pane -->
+
+	</div>
+</aside>
+
+		<div id="pending_work_status_calender_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title cause-list-modal-title" style="text-align: 	center;">Pending Work Status</h4>
+				</div>
+				<div class="modal-body">
+					<!-- THE CALENDAR -->
+					<div id="pending_work_calendar"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Csrf token -->
+<input type="hidden" name="csrf_token_universal" id="csrf_token_universal" value="cfea2dfb36900821f817e6059cb66602ceb41e75">
+</div>
+
+<!-- Common Modal Start -->
+<!-- Common Modal to show the same structered data -->
+<div id="common-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title common-modal-title" style="text-align: center;"></h4>
+			</div>
+			<div class="modal-body common-modal-body"></div>
+		</div>
+	</div>
+</div>
+<!-- Common Modal End -->
+
+<!-- =============================================================================== -->
+<!-- Reminder Modal to show the same structered data -->
+<div id="reminder-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title common-modal-title" style="text-align: center;"> Add Reminder</h4>
+            </div>
+            <div class="modal-body common-modal-body">
+                <form action="https://diac.ind.in/counsel-setup" class="wfst" id="reminder_form" method="post" accept-charset="utf-8">
+                    <input type="hidden" name="reminder_op_type" id="reminder_op_type" value="ADD_REMINDER">
+                    <input type="hidden" name="csrf_reminder_form_token" value="de2213052a782ce46a8eb507113892193989d978">
+
+                    <div class="row">
+
+                        <div class="form-group col-xs-12 required">
+                            <label class="control-label">Date:</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input type="text" class="form-control custom-all-date" id="reminder_date" name="reminder_date" autocomplete="off" readonly="true" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 required">
+                            <label class="control-label">Note:</label>
+                            <textarea type="text" class="form-control" id="reminder_note" name="reminder_note"  autocomplete="off"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="row text-center mt-25">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-custom" id="add_reminder_btn"><i class='fa fa-paper-plane'></i> Save</button>
+                        </div>
+                    </div>
+                </form>            </div>
+        </div>
+    </div>
+</div>
+<!-- Reminder Modal End -->
+<script type="text/javascript">
+	var base_url = 'https://diac.ind.in/';
+</script>
+
+	<script>
+		$(function() {
+			//var pending_work_status = '[{"id":"115093","case_no_slug":"3b8540d1d3128ce7cf68e0f6a8fc5036","next_date":"2025-12-27","marked_to":"40835434","noting_date":"2025-12-27 14:10:42","marked_by_display_name":"Mr. Rajesh Gautam","marked_by_job_title":"Judicial Assistant","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10487","case_no_prefix":"DIAC","case_no_year":"03-25","noting_text":null},{"id":"94400","case_no_slug":"933b823ef859a2e4d71187c14cdec3e6","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:54:46","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10090","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null},{"id":"94395","case_no_slug":"af341a2e0d61babba257833a55e28fe7","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:53:00","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10091","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null}]';
+			//pending_work_status = JSON.parse(pending_work_status);
+
+			// Generate the JSON string in PHP and safely output it into JavaScript
+			var pending_work_status = [{"id":"115093","case_no_slug":"3b8540d1d3128ce7cf68e0f6a8fc5036","next_date":"2025-12-27","marked_to":"40835434","noting_date":"2025-12-27 14:10:42","marked_by_display_name":"Mr. Rajesh Gautam","marked_by_job_title":"Judicial Assistant","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10487","case_no_prefix":"DIAC","case_no_year":"03-25","noting_text":null},{"id":"94400","case_no_slug":"933b823ef859a2e4d71187c14cdec3e6","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:54:46","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10090","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null},{"id":"94395","case_no_slug":"af341a2e0d61babba257833a55e28fe7","next_date":"2025-09-25","marked_to":"40835434","noting_date":"2025-09-25 10:53:00","marked_by_display_name":"Mr. Milan Goel","marked_by_job_title":"Additional Coordinator","marked_to_display_name":"Ms. Saumya","marked_to_job_title":"Deputy Counsel","case_no":"10091","case_no_prefix":"DIAC","case_no_year":"01-25","noting_text":null}];
+
+			// Parse the JSON string into a JavaScript object
+			pending_work_status = JSON.parse(JSON.stringify(pending_work_status));
+			//console.log(pending_work_status);
+			var pending_work_events = [];
+
+			if (pending_work_status.length > 0) {
+				pending_work_status.forEach((pws) => {
+					pending_work_events.push({
+						title: (pws.case_no) ? pws.case_no_prefix + '/' + pws.case_no + '/' + pws.case_no_year : 'N/A',
+						start: new Date(pws.noting_date),
+						end: (pws.next_date) ? new Date(pws.next_date) : '',
+						backgroundColor: "#3c8dbc", //yellow
+						borderColor: "#3c8dbc", //yellow
+						allDay: true // This ensures the event is shown as an all-day event
+
+					});
+				})
+			}
+
+			/* initialize the external events
+     -----------------------------------------------------------------*/
+			function init_events(ele) {
+				ele.each(function() {
+					// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+					// it doesn't need to have a start or end
+					var eventObject = {
+						title: $.trim($(this).text()), // use the element's text as the event title
+					};
+
+					// store the Event Object in the DOM element so we can get to it later
+					$(this).data("eventObject", eventObject);
+
+					// make the event draggable using jQuery UI
+					$(this).draggable({
+						zIndex: 1070,
+						revert: true, // will cause the event to go back to its
+						revertDuration: 0, //  original position after the drag
+					});
+				});
+			}
+
+			init_events($("#external-events div.external-event"));
+
+			/* initialize the calendar
+     -----------------------------------------------------------------*/
+			//Date for the calendar events (dummy data)
+			var date = new Date();
+			var d = date.getDate(),
+				m = date.getMonth(),
+				y = date.getFullYear();
+			$("#pending_work_calendar").fullCalendar({
+				header: {
+					left: "prev,next today",
+					center: "title",
+					right: "month,agendaWeek,agendaDay",
+				},
+				buttonText: {
+					today: "today",
+					month: "month",
+					week: "week",
+					day: "day",
+				},
+				//Random default events
+				events: pending_work_events,
+				editable: true,
+				droppable: true, // this allows things to be dropped onto the calendar !!!
+				drop: function(date, allDay) {
+					// this function is called when something is dropped
+
+					// retrieve the dropped element's stored Event Object
+					var originalEventObject = $(this).data("eventObject");
+
+					// we need to copy it, so that multiple events don't have a reference to the same object
+					var copiedEventObject = $.extend({}, originalEventObject);
+
+					// assign it the date that was reported
+					copiedEventObject.start = date;
+					copiedEventObject.allDay = allDay;
+					copiedEventObject.backgroundColor = $(this).css("background-color");
+					copiedEventObject.borderColor = $(this).css("border-color");
+
+					// render the event on the calendar
+					// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+					$("#calendar").fullCalendar("renderEvent", copiedEventObject, true);
+
+					// is the "remove after drop" checkbox checked?
+					if ($("#drop-remove").is(":checked")) {
+						// if so, remove the element from the "Draggable Events" list
+						$(this).remove();
+					}
+				},
+			});
+
+			/* ADDING EVENTS */
+			var currColor = "#3c8dbc"; //Red by default
+			//Color chooser button
+			var colorChooser = $("#color-chooser-btn");
+			$("#color-chooser > li > a").click(function(e) {
+				e.preventDefault();
+				//Save color
+				currColor = $(this).css("color");
+				//Add color effect to button
+				$("#add-new-event").css({
+					"background-color": currColor,
+					"border-color": currColor,
+				});
+			});
+			$("#add-new-event").click(function(e) {
+				e.preventDefault();
+				//Get value and make sure it is not null
+				var val = $("#new-event").val();
+				if (val.length == 0) {
+					return;
+				}
+
+				//Create events
+				var event = $("<div />");
+				event
+					.css({
+						"background-color": currColor,
+						"border-color": currColor,
+						color: "#fff",
+					})
+					.addClass("external-event");
+				event.html(val);
+				$("#external-events").prepend(event);
+
+				//Add draggable funtionality
+				init_events(event);
+
+				//Remove event from text input
+				$("#new-event").val("");
+			});
+		});
+	</script>
+
+<script type="text/javascript" src="https://diac.ind.in/public/custom/js/diac_dashboard/diac-common-js.js?v=1728027533"></script>
+<script type="text/javascript" src="https://diac.ind.in/public/custom/js/file_tag_configuration.js?v=1728027533"></script>
+
+</body>
+
+</html>

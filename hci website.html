@@ -1,0 +1,2999 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full dark"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces - HiFi Prototype</title>
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function initProfileCharts() {
+            console.log("i have been caled");
+            if (window.__profileChartsInitialized) return;
+            window.__profileChartsInitialized = true;
+
+            // Pie Chart
+            initChart = new Chart(document.getElementById('solvedPieChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['DP', 'Graphs', 'Greedy', 'Binary Search', 'Math'],
+                    datasets: [{
+                        data: [42, 28, 34, 18, 21],
+                        backgroundColor: ['#38bdf8', '#818cf8', '#fbbf24', '#fb7185', '#34d399']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    let solved = context.raw;
+                                    let attempted = solved + Math.floor(Math.random() * 10 + 5);
+                                    return `${context.label}: Solved ${solved} / Attempted ${attempted}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Efficiency Chart
+            initChart = new Chart(document.getElementById('efficiencyChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Greedy', 'DP', 'Graphs', 'Math', 'Binary Search'],
+                    datasets: [
+                        { label: 'Your Avg Time (min)', data: [9, 28, 17, 21, 19], backgroundColor: '#38bdf8' },
+                        { label: 'Global Avg Time (min)', data: [12, 20, 14, 18, 15], backgroundColor: '#94a3b8' }
+                    ]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true } } }
+            });
+
+            // Rating Progress Chart
+            initChart = new Chart(document.getElementById('ratingProgressChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Rating',
+                        data: [1800, 1820, 1900, 1980, 2050, 2100, 2145],
+                        borderWidth: 3,
+                        tension: 0.3,
+                        borderColor: '#38bdf8',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: { duration: 1200, easing: 'easeOutQuart' }
+                }
+            });
+
+            // Heatmap
+            const heatmap = document.getElementById('heatmap');
+            for (let i = 0; i < 84; i++) {
+                const level = Math.floor(Math.random() * 4);
+                const colors = ['#1e293b', '#475569', '#0ea5e9', '#38bdf8'];
+                const cell = document.createElement('div');
+                cell.style.width = '18px';
+                cell.style.height = '18px';
+                cell.style.borderRadius = '4px';
+                cell.style.backgroundColor = colors[level];
+                heatmap.appendChild(cell);
+            }
+
+        }
+    </script>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        // Light Mode Colors
+                        light: {
+                            50: '#f8fafc',  // slate-50
+                            100: '#f1f5f9', // slate-100
+                            200: '#e2e8f0', // slate-200
+                            300: '#cbd5e1', // slate-300
+                            400: '#94a3b8', // slate-400
+                            500: '#64748b', // slate-500
+                            900: '#0f172a', // slate-900
+                        },
+                        // Dark Mode Colors
+                        slate: {
+                            850: '#172033',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                    },
+                    /* [GEMINI FIX] Removed the 'typography' key below. 
+                     * The '@tailwindcss/typography' plugin cannot be loaded 
+                     * via 'require()' in a browser environment.
+                     */
+                },
+            },
+            /* [GEMINI FIX] Removed the 'plugins' array below.
+             * The 'require()' function is not defined in the browser,
+             * which was causing the ReferenceError.
+             */
+        }
+    </script>
+
+    
+    <style>
+        /* Light Mode */
+        html:not(.dark) {
+            background-color: #f1f5f9;
+            /* slate-100 */
+            color: #0f172a;
+            /* slate-900 */
+        }
+
+        html:not(.dark) body {
+            background-color: #f1f5f9;
+            /* slate-100 */
+            color: #0f172a;
+            /* slate-900 */
+        }
+
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            /* slate-200 */
+        }
+
+        html:not(.dark) ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            /* slate-400 */
+        }
+
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+            /* slate-500 */
+        }
+
+        /* Dark Mode */
+        html.dark {
+            background-color: #020617;
+            /* slate-950 */
+            color: #cbd5e1;
+            /* slate-300 */
+        }
+
+        html.dark body {
+            background-color: #020617;
+            /* slate-950 */
+            color: #cbd5e1;
+            /* slate-300 */
+        }
+
+        html.dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+            /* slate-900 */
+        }
+
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+            /* slate-700 */
+        }
+
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+            /* slate-600 */
+        }
+
+        /* Code Editor & Pre Styling */
+        .pseudo-code-editor,
+        pre[class*="language-"] {
+            font-family: 'Roboto Mono', monospace !important;
+            min-height: 200px;
+            line-height: 1.6;
+            font-size: 0.875rem !important;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        html.dark .pseudo-code-editor,
+        html.dark pre[class*="language-"] {
+            background: #020617 !important;
+            /* slate-950 */
+            border: 1px solid #1e293b;
+            /* slate-800 */
+        }
+
+        html:not(.dark) .pseudo-code-editor,
+        html:not(.dark) pre[class*="language-"] {
+            background: #f8fafc !important;
+            /* slate-50 */
+            border: 1px solid #e2e8f0;
+            /* slate-200 */
+        }
+
+        /* Simple pseudo-syntax highlighting */
+        .token.comment {
+            color: #64748b;
+        }
+
+        .token.keyword {
+            color: #38bdf8;
+        }
+
+        .token.string {
+            color: #a3e63e;
+        }
+
+        .token.function {
+            color: #e879f9;
+        }
+
+        .token.number {
+            color: #facc15;
+        }
+
+        .token.operator {
+            color: #38bdf8;
+        }
+
+        .token.punctuation {
+            color: #64748b;
+        }
+
+        /* Modal Animation */
+        #global-modal.hidden {
+            display: none;
+        }
+
+        #global-modal {
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        #modal-content {
+            animation: scaleIn 0.2s ease-out;
+            max-height: 80vh;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Problem Statement Formatting */
+        .problem-statement .property {
+            font-weight: 600;
+        }
+
+        html.dark .problem-statement .property {
+            color: #e2e8f0;
+        }
+
+        html:not(.dark) .problem-statement .property {
+            color: #0f172a;
+        }
+
+        .problem-statement .example {
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        html.dark .problem-statement .example {
+            background-color: #0f172a;
+            /* slate-900 */
+            border: 1px solid #334155;
+            /* slate-700 */
+        }
+
+        html:not(.dark) .problem-statement .example {
+            background-color: #f8fafc;
+            /* slate-50 */
+            border: 1px solid #e2e8f0;
+            /* slate-200 */
+        }
+
+        .problem-statement .example-title {
+            font-weight: 600;
+            color: #94a3b8;
+            /* slate-400 */
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-statement pre {
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        html.dark .problem-statement pre {
+            background-color: #020617;
+        }
+
+        html:not(.dark) .problem-statement pre {
+            background-color: #e2e8f0;
+        }
+
+        /* Generic Tab Styles */
+        .tab-nav {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        html.dark .tab-nav {
+            border-bottom: 1px solid #1e293b;
+        }
+
+        html:not(.dark) .tab-nav {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tab-btn {
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        html.dark .tab-btn {
+            color: #94a3b8;
+        }
+
+        html:not(.dark) .tab-btn {
+            color: #64748b;
+        }
+
+        .tab-btn:hover {
+            color: #e2e8f0;
+            /* slate-200 */
+        }
+
+        html:not(.dark) .tab-btn:hover {
+            color: #0f172a;
+        }
+
+        .tab-btn.active {
+            color: #22d3ee;
+            /* cyan-400 */
+            border-bottom-color: #22d3ee;
+            /* cyan-400 */
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Input error state */
+        .input-error {
+            border-color: #f87171 !important;
+            /* red-400 */
+        }
+
+        .error-message {
+            color: #f87171;
+            /* red-400 */
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        /* 3D/Interactive Effects */
+        .interactive-card {
+            transition: all 0.2s ease-in-out;
+        }
+
+        html.dark .interactive-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 20px 0px rgba(56, 189, 248, 0.1);
+        }
+
+        html:not(.dark) .interactive-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02), 0 0 20px 0px rgba(56, 189, 248, 0.1);
+        }
+
+        .interactive-btn {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .interactive-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Focus Glow */
+        html.dark input:focus,
+        html.dark select:focus,
+        html.dark textarea:focus,
+        html.dark .tab-btn:focus,
+        html.dark .interactive-btn:focus,
+        html.dark button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(22, 163, 222, 0.4);
+            border-color: #06b6d4;
+            /* cyan-600 */
+        }
+
+        html:not(.dark) input:focus,
+        html:not(.dark) select:focus,
+        html:not(.dark) textarea:focus,
+        html:not(.dark) .tab-btn:focus,
+        html:not(.dark) .interactive-btn:focus,
+        html:not(.dark) button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(22, 163, 222, 0.4);
+            border-color: #0891b2;
+            /* cyan-700 */
+        }
+
+        /* Light/Dark mode switch */
+        .theme-switch {
+            width: 52px;
+            height: 28px;
+            padding: 2px;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .theme-switch-toggle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: white;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        html:not(.dark) .theme-switch {
+            background-color: #0891b2;
+            /* cyan-700 */
+        }
+
+        html:not(.dark) .theme-switch-toggle {
+            transform: translateX(24px);
+        }
+
+        html.dark .theme-switch {
+            background-color: #334155;
+            /* slate-700 */
+        }
+
+        html.dark .theme-switch-toggle {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="text-slate-300 dark:text-slate-300 h-full flex flex-col">
+
+    
+    <svg width="0" height="0" class="hidden">
+        
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-home">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-trophy">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-list">
+            <line x1="8" x2="21" y1="6" y2="6"></line>
+            <line x1="8" x2="21" y1="12" y2="12"></line>
+            <line x1="8" x2="21" y1="18" y2="18"></line>
+            <line x1="3" x2="3.01" y1="6" y2="6"></line>
+            <line x1="3" x2="3.01" y1="12" y2="12"></line>
+            <line x1="3" x2="3.01" y1="18" y2="18"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-file-code">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <path d="m10 13-2 2 2 2"></path>
+            <path d="m14 17 2-2-2-2"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-chart">
+            <path d="M3 3v18h18"></path>
+            <path d="M18 17V9"></path>
+            <path d="M13 17V5"></path>
+            <path d="M8 17v-3"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-search">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-check">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-x">
+            <line x1="18" x2="6" y1="6" y2="18"></line>
+            <line x1="6" x2="18" y1="6" y2="18"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-tag">
+            <path
+                d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.43 0l6.57-6.57a2.426 2.426 0 0 0 0-3.43l-8.704-8.704Z">
+            </path>
+            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-clock">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-menu">
+            <line x1="3" x2="21" y1="12" y2="12"></line>
+            <line x1="3" x2="21" y1="6" y2="6"></line>
+            <line x1="3" x2="21" y1="18" y2="18"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-logout">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" x2="9" y1="12" y2="12"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-user">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-settings">
+            <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 .54 1.85v.19a2 2 0 0 1-1.54 1.93l-.3.07a2 2 0 0 0-1.63 2.31l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-.54-1.85v-.19a2 2 0 0 1 1.54-1.93l.3-.07a2 2 0 0 0 1.63-2.31l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+            </path>
+            <circle cx="12" cy="12" r="3"></circle>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-book-open">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-chevron-down">
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-github">
+            <path
+                d="M9 19c-4.3 1.4 -4.3-2.5 -6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1s-.2 2.1-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.5-.5 1.4-.5 2V21">
+            </path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-linkedin">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-alert-triangle">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" x2="12" y1="9" y2="13"></line>
+            <line x1="12" x2="12.01" y1="17" y2="17"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-mail">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-lock">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-users">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-terminal">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" x2="20" y1="19" y2="19"></line>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-lightbulb">
+            <path d="M9 18h6"></path>
+            <path d="M10 22h4"></path>
+            <path d="M12 2a7 7 0 0 0-7 7c0 3.04 1.63 5.5 4 6.5V20h6v-4.5c2.37-1 4-3.46 4-6.5a7 7 0 0 0-7-7z"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-globe">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" x2="22" y1="12" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-palette">
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+            <path
+                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.668 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.5-2.449 5.5-5.5S17.051 2 12 2z">
+            </path>
+        </symbol>
+    </svg>
+
+    
+    <div id="auth-wrapper"
+        class="w-full min-h-full flex items-center justify-center p-6 dark:bg-slate-950 bg-slate-100">
+
+        
+        <section id="page-login" class="page-auth w-full max-w-md">
+            <div class="flex items-center justify-center space-x-2 mb-8">
+                <svg class="h-10 w-auto text-cyan-500" viewBox="0 0 24 24" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM10 16.5L16 12L10 7.5V16.5Z" />
+                </svg>
+                <span class="font-bold text-3xl text-slate-900 dark:text-white">Codeforces</span>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-850 p-8 rounded-lg shadow-2xl border border-slate-200 dark:border-slate-800">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white text-center mb-6">Welcome Back</h2>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="login-user"
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Username or
+                            Email</label>
+                        <input type="text" id="login-user" value="CodeWizard123"
+                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                        <p id="login-user-error" class="error-message hidden">Please enter your username or email.</p>
+                    </div>
+                    <div>
+                        <label for="login-pass"
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Password</label>
+                        <input type="password" id="login-pass" value="password"
+                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                        <p id="login-pass-error" class="error-message hidden">Please enter your password.</p>
+                    </div>
+                    <button type="button" id="login-btn"
+                        class="w-full interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200">
+                        Login
+                    </button>
+                    <p class="text-sm text-center text-slate-500 dark:text-slate-400">
+                        Don't have an account?
+                        <a href="#" id="goto-signup"
+                            class="font-medium text-cyan-500 dark:text-cyan-400 hover:text-cyan-600 dark:hover:text-cyan-300">Sign
+                            Up</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        
+        <section id="page-signup" class="page-auth w-full max-w-md hidden">
+            <div class="flex items-center justify-center space-x-2 mb-8">
+                <svg class="h-10 w-auto text-cyan-500" viewBox="0 0 24 24" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM10 16.5L16 12L10 7.5V16.5Z" />
+                </svg>
+                <span class="font-bold text-3xl text-slate-900 dark:text-white">Codeforces</span>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-850 p-8 rounded-lg shadow-2xl border border-slate-200 dark:border-slate-800">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white text-center mb-6">Create Account</h2>
+                <form id="signup-form" class="space-y-5">
+                    <div>
+                        <label for="signup-user"
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Username</label>
+                        <input type="text" id="signup-user"
+                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                        <p id="signup-user-error" class="error-message hidden">Username is required.</p>
+                    </div>
+                    <div>
+                        <label for="signup-email"
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email</label>
+                        <input type="email" id="signup-email"
+                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                        <p id="signup-email-error" class="error-message hidden">Please enter a valid email.</p>
+                    </div>
+                    <div>
+                        <label for="signup-pass"
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Password</label>
+                        <input type="password" id="signup-pass"
+                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                        <p id="signup-pass-error" class="error-message hidden">Password is required.</p>
+                    </div>
+                    <div>
+                        <label for="signup-confirm-pass"
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Confirm
+                            Password</label>
+                        <input type="password" id="signup-confirm-pass"
+                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                        <p id="signup-confirm-pass-error" class="error-message hidden">Passwords do not match.</p>
+                    </div>
+                    <button type="button" id="signup-btn"
+                        class="w-full interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200">
+                        Sign Up
+                    </button>
+                    <p class="text-sm text-center text-slate-500 dark:text-slate-400">
+                        Already have an account?
+                        <a href="#" id="goto-login"
+                            class="font-medium text-cyan-500 dark:text-cyan-400 hover:text-cyan-600 dark:hover:text-cyan-300">Login</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    
+    <div id="app-wrapper" class="h-full flex flex-col hidden">
+        
+        <nav
+            class="bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+            <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    
+                    <div class="flex items-center space-x-8">
+                        <a href="#" class="flex-shrink-0 flex items-center space-x-2 nav-link" data-page="home">
+                            <svg class="h-8 w-auto text-cyan-500" viewBox="0 0 24 24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM10 16.5L16 12L10 7.5V16.5Z" />
+                            </svg>
+                            <span class="font-bold text-xl text-slate-900 dark:text-white">Codeforces</span>
+                        </a>
+                        <div class="hidden lg:flex lg:space-x-4">
+                            <a href="#"
+                                class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                data-page="home">
+                                <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                    <use href="#icon-home"></use>
+                                </svg>
+                                Home
+                            </a>
+                            <a href="#"
+                                class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                data-page="contests">
+                                <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                    <use href="#icon-trophy"></use>
+                                </svg>
+                                Contests
+                            </a>
+                            <a href="#"
+                                class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                data-page="problems">
+                                <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                    <use href="#icon-list"></use>
+                                </svg>
+                                Problems
+                            </a>
+                            <a href="#"
+                                class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                data-page="tags">
+                                <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                    <use href="#icon-tag"></use>
+                                </svg>
+                                Tags
+                            </a>
+                            <a href="#"
+                                class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                data-page="all-submissions">
+                                <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                    <use href="#icon-globe"></use>
+                                </svg>
+                                All Submissions
+                            </a>
+                            <a href="#"
+                                class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                data-page="standings">
+                                <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                    <use href="#icon-chart"></use>
+                                </svg>
+                                Standings
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="flex items-center space-x-4">
+                        
+                        <form id="user-search-form" class="hidden md:block">
+                            <div class="relative">
+                                <input type="text" id="user-search-input" placeholder="Search users..."
+                                    class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-4 focus:ring-cyan-500/50 focus:border-cyan-600 transition text-sm">
+                                <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2">
+                                    <use href="#icon-search"></use>
+                                </svg>
+                            </div>
+                        </form>
+
+                        
+                        <div class="hidden md:flex items-center">
+                            <div class="relative" id="profile-dropdown-container">
+                                <button id="profile-dropdown-btn"
+                                    class="flex items-center space-x-2 rounded-full p-1 pr-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                    <img class="h-8 w-8 rounded-full"
+                                        src="https://placehold.co/40x40/0891b2/e0f2fe?text=CW" alt="User Avatar">
+                                    <span
+                                        class="text-sm font-medium text-slate-900 dark:text-white">CodeWizard123</span>
+                                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400">
+                                        <use href="#icon-chevron-down"></use>
+                                    </svg>
+                                </button>
+
+                                <div id="profile-dropdown-menu"
+                                    class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl py-1 z-50">
+                                    <div class="px-4 py-2 border-b border-slate-200 dark:border-slate-700">
+                                        <p class="text-sm text-slate-900 dark:text-white font-semibold">CodeWizard123
+                                        </p>
+                                        <p class="text-xs text-cyan-500 dark:text-cyan-400">Rating: 2145</p>
+                                    </div>
+                                    <a href="#"
+                                        class="nav-link group flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-cyan-600 dark:hover:text-cyan-400"
+                                        data-page="profile" data-user="CodeWizard123" data-rating="2145" data-rank="152"
+                                        data-avatar="https://placehold.co/128x128/0891b2/e0f2fe?text=CW">
+                                        <svg
+                                            class="w-5 h-5 mr-2 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                                            <use href="#icon-user"></use>
+                                        </svg>
+                                        Your Profile
+                                    </a>
+                                    <a href="#"
+                                        class="nav-link group flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-cyan-600 dark:hover:text-cyan-400"
+                                        data-page="my-submissions">
+                                        <svg
+                                            class="w-5 h-5 mr-2 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                                            <use href="#icon-terminal"></use>
+                                        </svg>
+                                        My Submissions
+                                    </a>
+                                    <a href="#"
+                                        class="nav-link group flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-cyan-600 dark:hover:text-cyan-400"
+                                        data-page="settings">
+                                        <svg
+                                            class="w-5 h-5 mr-2 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                                            <use href="#icon-settings"></use>
+                                        </svg>
+                                        Settings
+                                    </a>
+                                    <a href="#" id="logout-btn"
+                                        class="group flex items-center w-full text-left px-4 py-2 text-sm text-red-500 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-red-600 dark:hover:text-red-300">
+                                        <svg
+                                            class="w-5 h-5 mr-2 text-red-500 group-hover:text-red-600 dark:group-hover:text-red-400">
+                                            <use href="#icon-logout"></use>
+                                        </svg>
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="lg:hidden">
+                            <button id="mobile-menu-btn"
+                                class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-2 rounded-md">
+                                <svg class="w-6 h-6">
+                                    <use href="#icon-menu"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="mobile-menu"
+                class="lg:hidden hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#"
+                        class="nav-link mobile-nav-link block text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                        data-page="home">Home</a>
+                    <a href="#"
+                        class="nav-link mobile-nav-link block text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                        data-page="contests">Contests</a>
+                    <a href="#"
+                        class="nav-link mobile-nav-link block text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                        data-page="problems">Problems</a>
+                    <a href="#"
+                        class="nav-link mobile-nav-link block text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                        data-page="tags">Tags</a>
+                    <a href="#"
+                        class="nav-link mobile-nav-link block text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                        data-page="all-submissions">All Submissions</a>
+                    <a href="#"
+                        class="nav-link mobile-nav-link block text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                        data-page="standings">Standings</a>
+                </div>
+                <div class="pt-4 pb-3 border-t border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center px-5">
+                        <img class="h-10 w-10 rounded-full" src="https://placehold.co/40x40/0891b2/e0f2fe?text=CW"
+                            alt="User Avatar">
+                        <div class="ml-3">
+                            <div class="text-base font-medium text-slate-900 dark:text-white">CodeWizard123</div>
+                            <div class="text-sm font-medium text-cyan-500 dark:text-cyan-400">Rating: 2145</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 px-2 space-y-1">
+                        <a href="#"
+                            class="nav-link mobile-nav-link group flex items-center px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+                            data-page="profile" data-user="CodeWizard123" data-rating="2145" data-rank="152"
+                            data-avatar="https://placehold.co/128x128/0891b2/e0f2fe?text=CW">
+                            <svg
+                                class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">
+                                <use href="#icon-user"></use>
+                            </svg>
+                            Your Profile
+                        </a>
+                        <a href="#"
+                            class="nav-link mobile-nav-link group flex items-center px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+                            data-page="my-submissions">
+                            <svg
+                                class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">
+                                <use href="#icon-terminal"></use>
+                            </svg>
+                            My Submissions
+                        </a>
+                        <a href="#"
+                            class="nav-link mobile-nav-link group flex items-center px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+                            data-page="settings">
+                            <svg
+                                class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">
+                                <use href="#icon-settings"></use>
+                            </svg>
+                            Settings
+                        </a>
+                        <a href="#" id="mobile-logout-btn"
+                            class="group flex items-center px-3 py-2 rounded-md text-base font-medium text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                            <svg
+                                class="w-5 h-5 mr-3 text-red-500 group-hover:text-red-600 dark:group-hover:text-red-400">
+                                <use href="#icon-logout"></use>
+                            </svg>
+                            Sign out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        
+        <div class="flex-1 flex pt-16 overflow-hidden">
+
+            
+            <aside
+                class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-6 overflow-y-auto hidden lg:block flex-shrink-0">
+                <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-4">
+                    Navigation</h3>
+                <nav class="space-y-2">
+                    <a href="#"
+                        class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        data-page="home">
+                        <svg
+                            class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                            <use href="#icon-home"></use>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="#"
+                        class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        data-page="contests">
+                        <svg
+                            class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                            <use href="#icon-trophy"></use>
+                        </svg>
+                        Contests
+                    </a>
+                    <a href="#"
+                        class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        data-page="problems">
+                        <svg
+                            class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                            <use href="#icon-list"></use>
+                        </svg>
+                        Problems
+                    </a>
+                    <a href="#"
+                        class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        data-page="tags">
+                        <svg
+                            class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                            <use href="#icon-tag"></use>
+                        </svg>
+                        Problem Tags
+                    </a>
+                    <a href="#"
+                        class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        data-page="all-submissions">
+                        <svg
+                            class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                            <use href="#icon-globe"></use>
+                        </svg>
+                        All Submissions
+                    </a>
+                    <a href="#"
+                        class="nav-link group flex items-center px-3 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                        data-page="standings">
+                        <svg
+                            class="w-5 h-5 mr-3 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                            <use href="#icon-chart"></use>
+                        </svg>
+                        Standings
+                    </a>
+                </nav>
+
+                <div class="mt-8">
+                    <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-4">
+                        Next Contest</h3>
+                    <div
+                        class="bg-slate-50 dark:bg-slate-800 p-4 rounded-lg text-center interactive-card border border-slate-200 dark:border-slate-800">
+                        <h4 class="font-semibold text-slate-900 dark:text-white">Codeforces Div. 2 Round #123</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">Starts in:</p>
+                        <div class="text-2xl font-bold text-cyan-500 dark:text-cyan-400">01:45:22</div>
+                        <button
+                            class="register-btn w-full interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg text-sm mt-4 transition-all duration-200"
+                            data-registered="false">
+                            Register Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-4">
+                        Friends Status</h3>
+                    <div
+                        class="bg-slate-50 dark:bg-slate-800 p-4 rounded-lg space-y-3 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center space-x-2">
+                            <span class="h-2 w-2 rounded-full bg-green-500"></span>
+                            <a href="#"
+                                class="nav-link text-sm text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400"
+                                data-page="profile" data-user="FriendCoder1" data-rating="1950"
+                                data-avatar="https://placehold.co/128x128/ec4899/fce7f3?text=F1">FriendCoder1</a>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="h-2 w-2 rounded-full bg-yellow-500"></span>
+                            <a href="#"
+                                class="nav-link text-sm text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400"
+                                data-page="profile" data-user="AlgoQueen" data-rating="2300"
+                                data-avatar="https://placehold.co/128x128/a855f7/e9d5ff?text=AQ">AlgoQueen</a>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="h-2 w-2 rounded-full bg-slate-500"></span>
+                            <a href="#"
+                                class="nav-link text-sm text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400"
+                                data-page="profile" data-user="GraphGuy" data-rating="2100"
+                                data-avatar="https://placehold.co/128x128/4f46e5/dbeafe?text=GG">GraphGuy</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            
+            <main class="flex-1 overflow-y-auto p-6 md:p-8 lg:p-10">
+                <div class="max-w-6xl mx-auto">
+
+                    
+                    <section id="page-home" class="page-content">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Welcome back, CodeWizard123!
+                        </h1>
+
+                        
+                        <div
+                            class="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-900 dark:via-slate-900 dark:to-slate-900 p-6 rounded-lg shadow-lg mb-8 dark:border dark:border-cyan-700 interactive-card">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-2xl font-semibold text-white dark:text-white">Active Contest: Codeforces
+                                    Global Round 5</h2>
+                                <span class="text-sm text-white dark:text-cyan-300 font-medium">Running</span>
+                            </div>
+                            <p class="text-blue-100 dark:text-slate-300 mb-4">Time Remaining: <strong
+                                    class="text-white dark:text-white text-lg">00:27:14</strong></p>
+                            <div class="flex space-x-4">
+                                <a href="#"
+                                    class="nav-link interactive-btn bg-white/30 dark:bg-cyan-600 hover:bg-white/50 dark:hover:bg-cyan-500 text-white dark:text-white font-bold py-2 px-5 rounded-lg transition-all duration-200"
+                                    data-page="problems">
+                                    View Problems
+                                </a>
+                                <a href="#"
+                                    class="nav-link interactive-btn bg-white/20 dark:bg-slate-700 hover:bg-white/30 dark:hover:bg-slate-600 text-white dark:text-white font-bold py-2 px-5 rounded-lg transition-all duration-200"
+                                    data-page="standings">
+                                    View Standings
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            
+                            <div class="lg:col-span-2 space-y-6">
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Latest News</h3>
+
+                                <div
+                                    class="bg-white dark:bg-slate-900 p-5 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 interactive-card">
+                                    <h4 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Editorial for
+                                        Codeforces Div. 2 Round #122 is out!</h4>
+                                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-3">Check out the solutions
+                                        and approaches for the recent Div. 2 contest. Learn new techniques and upsolve
+                                        the problems you couldn't solve during the contest.</p>
+                                    <div class="flex justify-between items-center">
+                                        <button
+                                            class="editorial-btn text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300"
+                                            data-contest="Codeforces Div. 2 Round #122">Read More &rarr;</button>
+                                        <span class="text-xs text-slate-500 dark:text-slate-500">Posted by Admin, 2
+                                            hours ago</span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-white dark:bg-slate-900 p-5 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 interactive-card">
+                                    <h4 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Upcoming:
+                                        Educational Round #18</h4>
+                                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-3">Get ready for the next
+                                        Educational Round, focused on common data structures and algorithms. A great
+                                        chance to learn for beginners and intermediates!</p>
+                                    <div class="flex justify-between items-center">
+                                        <a href="#"
+                                            class="nav-link text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300"
+                                            data-page="contests">View Details &rarr;</a>
+                                        <span class="text-xs text-slate-500 dark:text-slate-500">Posted by Admin, 1 day
+                                            ago</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="space-y-6">
+                                <div
+                                    class="bg-white dark:bg-slate-900 p-5 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 interactive-card">
+                                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Your Stats
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li class="flex justify-between text-sm">
+                                            <span class="text-slate-600 dark:text-slate-400">Solved (All Time)</span>
+                                            <span class="font-medium text-slate-900 dark:text-white">842</span>
+                                        </li>
+                                        <li class="flex justify-between text-sm">
+                                            <span class="text-slate-600 dark:text-slate-400">Acceptance Rate</span>
+                                            <span class="font-medium text-green-600 dark:text-green-400">40.0%</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div
+                                    class="bg-white dark:bg-slate-900 p-5 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 interactive-card">
+                                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Top Rated</h3>
+                                    <ul class="space-y-4">
+                                        <li class="flex items-center space-x-3">
+                                            <img class="h-8 w-8 rounded-full"
+                                                src="https://placehold.co/40x40/ef4444/fecaca?text=TT" alt="User">
+                                            <div>
+                                                <a href="#"
+                                                    class="nav-link text-sm font-medium text-red-500 dark:text-red-400 hover:underline"
+                                                    data-page="profile" data-user="Tourist" data-rating="3850"
+                                                    data-rank="1"
+                                                    data-avatar="https://placehold.co/128x128/ef4444/fecaca?text=TT">Tourist</a>
+                                                <div class="text-xs text-slate-500 dark:text-slate-400">Rating: 3850
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-center space-x-3">
+                                            <img class="h-8 w-8 rounded-full"
+                                                src="https://placehold.co/40x40/f97316/fed7aa?text=GM" alt="User">
+                                            <div>
+                                                <a href="#"
+                                                    class="nav-link text-sm font-medium text-orange-500 dark:text-orange-400 hover:underline"
+                                                    data-page="profile" data-user="Gennady" data-rating="3721"
+                                                    data-rank="2"
+                                                    data-avatar="https://placehold.co/128x128/f97316/fed7aa?text=GM">Gennady</a>
+                                                <div class="text-xs text-slate-500 dark:text-slate-400">Rating: 3721
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-contests" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Contests</h1>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-4">Upcoming</h2>
+                                <div
+                                    class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden">
+                                    <ul class="divide-y divide-slate-200 dark:divide-slate-800">
+                                        <li
+                                            class="p-4 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                            <div>
+                                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                                                    Codeforces Div. 2 Round #123</h3>
+                                                <p class="text-sm text-slate-600 dark:text-slate-400">Starts: Nov 10,
+                                                    2025, 18:00 (IST)</p>
+                                            </div>
+                                            <div class="mt-3 md:mt-0 flex-shrink-0">
+                                                <button
+                                                    class="register-btn interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-all duration-200"
+                                                    data-registered="false">
+                                                    Register
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li
+                                            class="p-4 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                            <div>
+                                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                                                    Educational Round #18</h3>
+                                                <p class="text-sm text-slate-600 dark:text-slate-400">Starts: Nov 12,
+                                                    2025, 20:00 (IST)</p>
+                                            </div>
+                                            <div class="mt-3 md:mt-0 flex-shrink-0">
+                                                <button
+                                                    class="register-btn interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-all duration-200"
+                                                    data-registered="false">
+                                                    Register
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-4">Running</h2>
+                                <div
+                                    class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-cyan-500 dark:border-cyan-700 overflow-hidden">
+                                    <ul class="divide-y divide-slate-200 dark:divide-slate-800">
+                                        <li
+                                            class="p-4 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                            <div>
+                                                <h3 class="text-lg font-semibold text-cyan-600 dark:text-cyan-400">
+                                                    Codeforces Global Round 5</h3>
+                                                <p class="text-sm text-slate-600 dark:text-slate-400">Ends in: <strong
+                                                        class="text-slate-900 dark:text-white">00:27:14</strong></p>
+                                            </div>
+                                            <div class="mt-3 md:mt-0 flex-shrink-0">
+                                                <a href="#"
+                                                    class="nav-link interactive-btn bg-slate-600 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-lg text-sm transition-all duration-200"
+                                                    data-page="problems">
+                                                    Enter
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-problems" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Problemset</h1>
+
+                        
+                        <div
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <div class="relative md:col-span-2">
+                                    <input type="text" id="filter-name" placeholder="Filter by name..."
+                                        class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-900 dark:text-white transition text-sm">
+                                    <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2">
+                                        <use href="#icon-search"></use>
+                                    </svg>
+                                </div>
+                                <div class="relative">
+                                    <input type="text" id="filter-tag" placeholder="Filter by tag..."
+                                        class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-900 dark:text-white transition text-sm">
+                                    <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2">
+                                        <use href="#icon-tag"></use>
+                                    </svg>
+                                </div>
+                                <div class="relative">
+                                    <select id="filter-rating"
+                                        class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2 px-4 appearance-none text-slate-900 dark:text-white transition text-sm">
+                                        <option value="">Filter by rating...</option>
+                                        <option value="800">800</option>
+                                        <option value="1000">1000</option>
+                                        <option value="1200">1200</option>
+                                        <option value="1400">1400</option>
+                                        <option value="1600">1600</option>
+                                        <option value="1800">1800</option>
+                                    </select>
+                                </div>
+                                <button id="filter-clear"
+                                    class="interactive-btn bg-slate-600 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white font-medium py-2 px-4 rounded-lg text-sm transition-all duration-200 md:col-span-4">
+                                    Clear Filters
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <div
+                            class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden">
+                            <table class="w-full divide-y divide-slate-200 dark:divide-slate-800">
+                                <thead class="bg-slate-50 dark:bg-slate-800">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            #</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Name</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Topics</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Rating</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Solved</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="problem-table-body" class="divide-y divide-slate-200 dark:divide-slate-800">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-tags" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Problem Tags</h1>
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                            <div id="tags-container" class="flex flex-wrap gap-3">
+                                
+                            </div>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-search-results" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Search Results for "<span
+                                id="search-query-display"></span>"</h1>
+                        <div
+                            class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                            <ul id="search-results-list" class="divide-y divide-slate-200 dark:divide-slate-800">
+                                
+                            </ul>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-my-submissions" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">My Submissions</h1>
+
+                        
+                        <div
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="relative">
+                                    <input type="text" id="filter-sub-problem" placeholder="Filter by problem..."
+                                        class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-900 dark:text-white transition text-sm">
+                                    <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2">
+                                        <use href="#icon-search"></use>
+                                    </svg>
+                                </div>
+                                <div class="relative">
+                                    <select id="filter-sub-verdict"
+                                        class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2 px-4 appearance-none text-slate-900 dark:text-white transition text-sm">
+                                        <option value="">Filter by verdict...</option>
+                                        <option value="Accepted">Accepted</option>
+                                        <option value="Wrong Answer">Wrong Answer</option>
+                                        <option value="Time Limit Exceeded">Time Limit Exceeded</option>
+                                    </select>
+                                </div>
+                                <button id="filter-sub-clear"
+                                    class="interactive-btn bg-slate-600 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white font-medium py-2 px-4 rounded-lg text-sm transition-all duration-200">
+                                    Clear Filters
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <div
+                            class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                            <table class="w-full min-w-max">
+                                <thead class="bg-slate-50 dark:bg-slate-800">
+                                    <tr>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Sub ID</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Problem</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Verdict</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Time</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Memory</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Language</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="my-submissions-body" class="divide-y divide-slate-200 dark:divide-slate-800">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-all-submissions" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">All Submissions</h1>
+
+                        <div
+                            class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                            <table class="w-full min-w-max">
+                                <thead class="bg-slate-50 dark:bg-slate-800">
+                                    <tr>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Sub ID</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            User</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Problem</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Verdict</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                            Language</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="all-submissions-body"
+                                    class="divide-y divide-slate-200 dark:divide-slate-800">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+
+                    
+                    <section id="page-submit" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Submit Solution</h1>
+
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                            <form id="submission-form">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                    
+                                    <div>
+                                        <label for="submit-problem"
+                                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Problem</label>
+                                        <select id="submit-problem"
+                                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                                            
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="submit-language"
+                                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Language</label>
+                                        <select id="submit-language"
+                                            class="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                                            <option>GNU G++20 (64 bit)</option>
+                                            <option selected>Python 3.11</option>
+                                            <option>Java 17</option>
+                                            <option>C# 10</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                
+                                <div>
+                                    <label for="submit-code"
+                                        class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Source
+                                        Code</label>
+                                    <textarea id="submit-code" rows="15"
+                                        class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 text-slate-900 dark:text-white transition text-sm pseudo-code-editor"
+                                        placeholder="Paste your code here..."></textarea>
+                                </div>
+
+                                
+                                <div id="submission-status" class="mt-6 h-10 flex items-center">
+                                    
+                                </div>
+
+                                
+                                <div class="mt-2 text-right">
+                                    <button type="button" id="submit-code-btn"
+                                        class="interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-standings" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Contest Standings</h1>
+                        <p class="text-lg text-slate-600 dark:text-slate-400 mb-6">Codeforces Global Round 5 (Live)</p>
+
+                        <div
+                            class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                            <table class="w-full min-w-max divide-y divide-slate-200 dark:divide-slate-800">
+                                <thead class="bg-slate-50 dark:bg-slate-800">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Rank</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            User</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Solved</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Penalty</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            A</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            B</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            C</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            D</th>
+                                        <th scope="col"
+                                            class="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            E</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
+                                            1</td>
+                                        <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="nav-link text-red-500 dark:text-red-400 hover:underline"
+                                                data-page="profile" data-user="Tourist" data-rating="3850" data-rank="1"
+                                                data-avatar="https://placehold.co/128x128/ef4444/fecaca?text=TT">Tourist</a>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-sm text-center font-bold text-slate-900 dark:text-white">
+                                            5</td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-sm text-center text-slate-500 dark:text-slate-400">
+                                            1:20:45</td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:02</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:05</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:15</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:35</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">1:02</span>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        class="bg-cyan-50 dark:bg-cyan-900/20 hover:bg-cyan-100 dark:hover:bg-cyan-900/30">
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
+                                            3</td>
+                                        <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
+                                            <a href="#"
+                                                class="nav-link text-cyan-600 dark:text-cyan-400 hover:underline"
+                                                data-page="profile" data-user="CodeWizard123" data-rating="2145"
+                                                data-rank="152"
+                                                data-avatar="https://placehold.co/128x128/0891b2/e0f2fe?text=CW">CodeWizard123</a>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-sm text-center font-bold text-slate-900 dark:text-white">
+                                            4</td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-sm text-center text-slate-500 dark:text-slate-400">
+                                            1:15:30</td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:04</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:10</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:20</span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 whitespace-nowrap text-center text-sm text-green-600 dark:text-green-500 font-bold">
+                                            + <span class="text-xs text-slate-500 dark:text-slate-500 block">0:50</span>
+                                        </td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-center text-sm"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-profile" class="page-content hidden">
+                        <h1 class="text-3xl font-bold mb-6">User Profile</h1>
+
+                        
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-8 flex items-center space-x-6">
+                            <img src="https://placehold.co/100x100/0891b2/e0f2fe?text=CW"
+                                class="h-24 w-24 rounded-full" />
+                            <div>
+                                <h2 class="text-2xl font-bold">CodeWizard123</h2>
+                                <p class="text-cyan-500 text-sm">Rating: 2145</p>
+                                <p class="text-slate-400 text-sm">Rank: 152</p>
+                            </div>
+                        </div>
+
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+
+                            
+                            <div
+                                class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                                <h3 class="text-xl font-semibold mb-4">Solved Problems Breakdown</h3>
+                                <canvas id="solvedPieChart"></canvas>
+                                <p class="text-xs text-slate-500 mt-4">Hover on the chart to see solved vs attempted
+                                    stats.</p>
+                            </div>
+
+                     
+                            <div
+                                class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                                <h3 class="text-xl font-semibold mb-4">User Efficiency</h3>
+                                <canvas id="efficiencyChart"></canvas>
+                                <p class="text-xs text-slate-500 mt-4">Comparison of your solve times vs global average.
+                                </p>
+                            </div>
+                        </div>
+
+              
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+
+                       
+                            <div
+                                class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                                <h3 class="text-xl font-semibold mb-4">Your Weak Areas</h3>
+                                <ul class="list-disc ml-6 space-y-2 text-slate-300">
+                                    <li>Binary Search — <span class="text-red-400">28% solve rate</span></li>
+                                    <li>Math — <span class="text-red-400">40% solve rate</span></li>
+                                    <li>Constructive Algorithms — <span class="text-red-400">33% solve rate</span></li>
+                                </ul>
+                            </div>
+
+                            <div
+                                class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                                <h3 class="text-xl font-semibold mb-4">Suggested Topics & Problems</h3>
+                                <ul class="list-disc ml-6 space-y-2 text-slate-300">
+                                    <li>DP on Trees — Suggested Problems: 1741F, 1881G</li>
+                                    <li>Binary Search — Suggested Problems: 1365C, 1679B</li>
+                                    <li>Graphs (BFS/DFS) — Suggested Problems: 1176E, 1217F</li>
+                                </ul>
+                            </div>
+                        </div>
+
+   
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-10">
+                            <h3 class="text-xl font-semibold mb-4">Rating Progress</h3>
+                            <canvas id="ratingProgressChart"></canvas>
+                        </div>
+
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-10">
+                            <h3 class="text-xl font-semibold mb-4">Activity Heatmap</h3>
+                            <div id="heatmap" class="grid grid-cols-12 gap-1"></div>
+                            <p class="text-xs text-slate-500 mt-2">Randomly generated activity levels for prototype.</p>
+                        </div>
+
+         
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-10">
+                            <h3 class="text-xl font-semibold mb-4">Your Streaks</h3>
+                            <p class="text-lg">Current Streak: <span class="text-cyan-500 font-bold">7 days</span></p>
+                            <p class="text-lg">Longest Streak: <span class="text-green-500 font-bold">14 days</span></p>
+                        </div>
+                    </section>
+
+                    <section id="page-settings" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Settings</h1>
+
+                        <div
+                            class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800">
+                            <nav class="tab-nav px-4" id="settings-tabs-nav">
+                                <button class="tab-btn active" data-tab="profile">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                        <use href="#icon-user"></use>
+                                    </svg>
+                                    Profile
+                                </button>
+                                <button class="tab-btn" data-tab="account">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                        <use href="#icon-lock"></use>
+                                    </svg>
+                                    Account
+                                </button>
+                                <button class="tab-btn" data-tab="appearance">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                        <use href="#icon-palette"></use>
+                                    </svg>
+                                    Appearance
+                                </button>
+                            </nav>
+
+                            <div class="p-6">
+                                <div id="tab-content-profile" class="tab-content active space-y-6">
+                                    <div>
+                                        <label for="settings-username"
+                                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Username</label>
+                                        <input type="text" id="settings-username" value="CodeWizard123"
+                                            class="w-full md:w-1/2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                                    </div>
+                                    <div>
+                                        <label for="settings-bio"
+                                            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Bio</label>
+                                        <textarea id="settings-bio" rows="4"
+                                            class="w-full md:w-2/3 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-4 text-slate-900 dark:text-white transition text-sm">Competitive programmer and student. Passionate about algorithms, data structures, and problem solving. Trying to reach Grandmaster!</textarea>
+                                    </div>
+                                    <div class="pt-4">
+                                        <button
+                                            class="interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
+                                            Save Changes
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="tab-content-account" class="tab-content space-y-6">
+                                    <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Change Password
+                                    </h4>
+                                    <form id="password-change-form" class="space-y-4">
+                                        <div>
+                                            <label for="settings-pass-current"
+                                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Current
+                                                Password</label>
+                                            <input type="password" id="settings-pass-current"
+                                                class="w-full md:w-1/2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                                            <p id="settings-pass-current-error" class="error-message hidden">Current
+                                                password is required.</p>
+                                        </div>
+                                        <div>
+                                            <label for="settings-pass-new"
+                                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">New
+                                                Password</label>
+                                            <input type="password" id="settings-pass-new"
+                                                class="w-full md:w-1/2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                                            <p id="settings-pass-new-error" class="error-message hidden">New password is
+                                                required.</p>
+                                        </div>
+                                        <div>
+                                            <label for="settings-pass-confirm"
+                                                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Confirm
+                                                New Password</label>
+                                            <input type="password" id="settings-pass-confirm"
+                                                class="w-full md:w-1/2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg py-2.5 px-4 text-slate-900 dark:text-white transition">
+                                            <p id="settings-pass-confirm-error" class="error-message hidden">Passwords
+                                                do not match.</p>
+                                        </div>
+                                        <div class="pt-4">
+                                            <button type="button" id="password-change-btn"
+                                                class="interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
+                                                Update Password
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tab-content-appearance" class="tab-content space-y-6">
+                                    <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Theme</h4>
+                                    <div class="flex items-center space-x-4">
+                                        <span
+                                            class="text-sm font-medium text-slate-700 dark:text-slate-300">Light</span>
+                                        <div class="theme-switch" id="theme-toggle-btn">
+                                            <div class="theme-switch-toggle"></div>
+                                        </div>
+                                        <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Dark</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="page-problem-view" class="page-content hidden">
+                        <div class="lg:col-span-3">
+                            <h1 id="problem-view-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+                                A. Two Vessels</h1>
+                            <div class="text-sm text-slate-600 dark:text-slate-400 mb-6 space-x-6">
+                                <span>Time Limit: <strong class="text-slate-900 dark:text-white">1
+                                        second</strong></span>
+                                <span>Memory Limit: <strong class="text-slate-900 dark:text-white">256
+                                        megabytes</strong></span>
+                                <a href="#"
+                                    class="nav-link inline-flex items-center text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300"
+                                    data-page="submit" data-problem-id="1800A">
+                                    <svg class="w-5 h-5 mr-1">
+                                        <use href="#icon-file-code"></use>
+                                    </svg>
+                                    Submit
+                                </a>
+                            </div>
+
+                            <nav class="tab-nav" id="problem-view-tabs-nav">
+                                <button class="tab-btn active" data-tab="description">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                        <use href="#icon-book-open"></use>
+                                    </svg>
+                                    Description
+                                </button>
+                                <button class="tab-btn" data-tab="my-submissions">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                        <use href="#icon-terminal"></use>
+                                    </svg>
+                                    My Submissions
+                                </button>
+                                <button class="tab-btn" data-tab="solutions">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1">
+                                        <use href="#icon-lightbulb"></use>
+                                    </svg>
+                                    Solutions
+                                </button>
+                            </nav>
+
+                            <div id="tab-content-description"
+                                class="tab-content active problem-statement space-y-6 text-slate-700 dark:text-slate-300">
+                                <p>You are given two vessels, one with capacity $a$ and the other with capacity $b$. You
+                                    are also given a third vessel with capacity $c$. Initially, the first vessel is full
+                                    of water, and the other two are empty. You can perform the following operation:</p>
+                                <p>Choose two vessels, $i$ and $j$. Pour water from vessel $i$ to vessel $j$ until
+                                    either vessel $i$ becomes empty or vessel $j$ becomes full.</p>
+
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Input</h3>
+                                <p>The first line contains an integer $t$ ($1 \le t \le 1000$) — the number of test
+                                    cases. The description of the test cases follows.</p>
+                                <p>Each test case consists of a single line containing four integers $a, b, c, d$ ($1
+                                    \le a, b, c, d \le 10^9$).</p>
+
+                                <div class="example">
+                                    <h4 class="example-title">Example</h4>
+                                    <pre class="mb-2"><strong>Input</strong>
+2
+5 3 2 4
+5 3 2 1
+                                    </pre>
+                                    <pre><strong>Output</strong>
+2
+1
+                                    </pre>
+                                </div>
+                            </div>
+
+                            
+                            <div id="tab-content-my-submissions" class="tab-content">
+                                <div
+                                    class="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                                    <table class="w-full min-w-max">
+                                        <thead class="bg-slate-50 dark:bg-slate-800">
+                                            <tr>
+                                                <th
+                                                    class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                                    Sub ID</th>
+                                                <th
+                                                    class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                                    Verdict</th>
+                                                <th
+                                                    class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                                    Time</th>
+                                                <th
+                                                    class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">
+                                                    Language</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="problem-submissions-body"
+                                            class="divide-y divide-slate-200 dark:divide-slate-800">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div id="tab-content-solutions" class="tab-content space-y-4">
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Editorial (Mock)</h3>
+                                <p class="text-slate-700 dark:text-slate-300">The key observation is that you only need
+                                    to move water from the larger vessel to the smaller one. Each move transfers $c$
+                                    units of water. You need to find how many moves are required to equalize the water
+                                    levels or reach the target.</p>
+                                <p class="text-slate-700 dark:text-slate-300">Let $diff = |a - b|$. We want to reduce
+                                    this difference to 0. Each move reduces the difference by $2 \times c$ (since $c$ is
+                                    taken from one and added to the other). Therefore, the number of moves is $\lceil
+                                    \frac{diff}{2c} \rceil$.</p>
+                                <pre><code class="language-python">
+<span class="token keyword">import</span> math
+
+<span class="token keyword">def</span> <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token function">map</span><span class="token punctuation">(</span><span class="token function">int</span><span class="token punctuation">,</span> <span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    diff <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>a <span class="token operator">-</span> b<span class="token punctuation">)</span>
+    
+    moves <span class="token operator">=</span> math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>diff <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> c<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>moves<span class="token punctuation">)</span>
+
+t <span class="token operator">=</span> <span class="token function">int</span><span class="token punctuation">(</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token function">range</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                                </code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+                    <section id="page-submission-view" class="page-content hidden">
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Submission <span
+                                id="submission-view-id" class="text-cyan-500 dark:text-cyan-400">#12345678</span></h1>
+
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-800 mb-8">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <div>
+                                    <div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                        Problem</div>
+                                    <a href="#" id="submission-view-problem"
+                                        class="nav-link text-lg font-semibold text-cyan-600 dark:text-cyan-400 hover:underline"
+                                        data-page="problem-view" data-problem-id="1600D">1600D - New Year's Number</a>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                        User</div>
+                                    <a href="#" id="submission-view-user"
+                                        class="nav-link text-lg font-semibold text-cyan-600 dark:text-cyan-400 hover:underline"
+                                        data-page="profile" data-user="CodeWizard123">CodeWizard123</a>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                        Verdict</div>
+                                    <div id="submission-view-verdict"
+                                        class="text-lg font-semibold text-green-600 dark:text-green-400">Accepted</div>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                        Language</div>
+                                    <div id="submission-view-lang"
+                                        class="text-lg font-semibold text-slate-900 dark:text-white">Python 3.11</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Source Code</h3>
+                            <div id="submission-view-code">
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="global-modal"
+        class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div id="modal-content"
+            class="bg-white dark:bg-slate-800 w-full max-w-lg rounded-lg shadow-2xl border border-slate-200 dark:border-slate-700">
+            
+            <div class="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700">
+                <h3 id="modal-title" class="text-xl font-semibold text-slate-900 dark:text-white">Modal Title</h3>
+                <button id="modal-close-btn"
+                    class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                    <svg class="w-6 h-6">
+                        <use href="#icon-x"></use>
+                    </svg>
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 text-slate-700 dark:text-slate-300 overflow-y-auto">
+                <p>Modal content goes here.</p>
+            </div>
+            
+            <div id="modal-footer"
+                class="p-4 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-700 rounded-b-lg text-right space-x-3">
+                <button id="modal-cancel-btn"
+                    class="interactive-btn bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 text-slate-900 dark:text-white font-medium py-2 px-5 rounded-lg text-sm transition-all duration-200">Cancel</button>
+                <button id="modal-confirm-btn"
+                    class="interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-all duration-200">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            let isLoggedIn = false;
+            let currentUser = 'CodeWizard123';
+            let currentTheme = 'dark';
+
+            const authWrapper = document.getElementById('auth-wrapper');
+            const appWrapper = document.getElementById('app-wrapper');
+            const allAuthPages = document.querySelectorAll('.page-auth');
+            const allAppPages = document.querySelectorAll('.page-content');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+            const mockProblems = [
+                { id: '1800A', name: 'Two Vessels', topics: ['implementation', 'greedy', 'math'], rating: 800, solved: '150k' },
+                { id: '1791C', name: 'Prepend and Append', topics: ['implementation', 'two pointers'], rating: 800, solved: '120k' },
+                { id: '1760B', name: 'Atilla\'s Favorite Problem', topics: ['implementation', 'strings'], rating: 800, solved: '110k' },
+                { id: '1742A', name: 'Sum', topics: ['implementation', 'math'], rating: 800, solved: '130k' },
+                { id: '1600D', name: 'New Year\'s Number', topics: ['dp', 'math', 'number theory'], rating: 1200, solved: '50k' },
+                { id: '1601A', name: 'Array Equalizer', topics: ['bitmasks', 'greedy'], rating: 1400, solved: '30k' },
+                { id: '1601B', name: 'Red and Blue', topics: ['graphs', 'bfs', 'shortest path'], rating: 1600, solved: '20k' },
+                { id: '1550C', name: 'Manhattan Subarrays', topics: ['brute force', 'data structures'], rating: 1800, solved: '10k' },
+                { id: '1550B', name: 'String Modification', topics: ['dp', 'strings', 'greedy'], rating: 1600, solved: '15k' },
+                { id: '1400A', name: 'String Similarity', topics: ['constructive', 'strings'], rating: 1000, solved: '70k' },
+                { id: '1400C', name: 'Binary String Reconstruction', topics: ['greedy', 'strings', 'implementation'], rating: 1400, solved: '45k' },
+            ];
+
+            const allProblemTags = [...new Set(mockProblems.flatMap(p => p.topics))].sort();
+
+            const mockUsers = {
+                "CodeWizard123": { rating: 2145, rank: 152, avatar: "https://placehold.co/128x128/0891b2/e0f2fe?text=CW", bio: "Competitive programmer... Trying to reach Grandmaster!" },
+                "Tourist": { rating: 3850, rank: 1, avatar: "https://placehold.co/128x128/ef4444/fecaca?text=TT", bio: "Grandmaster." },
+                "Gennady": { rating: 3721, rank: 2, avatar: "https://placehold.co/128x128/f97316/fed7aa?text=GM", bio: "Hello." },
+                "Radewoosh": { rating: 3650, rank: 3, avatar: "https://placehold.co/128x128/a855f7/e9d5ff?text=R", bio: "Graphs are fun." },
+                "FriendCoder1": { rating: 1950, rank: 1200, avatar: "https://placehold.co/128x128/ec4899/fce7f3?text=F1", bio: "Almost expert!" },
+                "AlgoQueen": { rating: 2300, rank: 88, avatar: "https://placehold.co/128x128/a855f7/e9d5ff?text=AQ", bio: "DP enthusiast." },
+                "GraphGuy": { rating: 2100, rank: 180, avatar: "https://placehold.co/128x128/4f46e5/dbeafe?text=GG", bio: "Just flows." },
+            };
+
+            const mockSubmissions = {
+                "CodeWizard123": [
+                    { id: 12345678, problem: '1600D', name: "New Year's Number", verdict: 'Accepted', time: '46 ms', memory: '0 KB', lang: 'Python 3.11' },
+                    { id: 12345601, problem: '1800A', name: 'Two Vessels', verdict: 'Wrong Answer', time: '15 ms', memory: '0 KB', lang: 'Python 3.11' },
+                    { id: 12345590, problem: '1791C', name: 'Prepend and Append', verdict: 'Accepted', time: '30 ms', memory: '0 KB', lang: 'Python 3.11' },
+                    { id: 12345500, problem: '1600D', name: 'New Year\'s Number', verdict: 'Time Limit Exceeded', time: '1000 ms', memory: '256 MB', lang: 'Python 3.11' },
+                ],
+                "Tourist": [
+                    { id: 12349999, problem: '1601B', name: 'Red and Blue', verdict: 'Accepted', time: '120 ms', memory: '15 MB', lang: 'GNU G++20' },
+                ],
+                "Gennady": [
+                    { id: 12349988, problem: '1601A', name: 'Array Equalizer', verdict: 'Accepted', time: '80 ms', memory: '10 MB', lang: 'GNU G++20' },
+                ],
+                "AlgoQueen": [
+                    { id: 12349977, problem: '1550B', name: 'String Modification', verdict: 'Accepted', time: '50 ms', memory: '1 MB', lang: 'Python 3.11' },
+                ],
+            };
+
+
+            const mockSubmissionCode = {
+                12345678: `<pre><code class="language-python"><span class="token comment"># Solution for 1600D</span>\n<span class="token keyword">def</span> <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>\n    n <span class="token operator">=</span> <span class="token function">int</span><span class="token punctuation">(</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>\n    a <span class="token operator">=</span> n <span class="token operator">//</span> <span class="token number">2020</span>\n    b <span class="token operator">=</span> n <span class="token operator">%</span> <span class="token number">2020</span>\n    <span class="token keyword">if</span> b <span class="token operator">&lt;=</span> a<span class="token punctuation">:</span>\n        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"YES"</span><span class="token punctuation">)</span>\n    <span class="token keyword">else</span><span class="token punctuation">:</span>\n        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"NO"</span><span class="token punctuation">)</span>\n\nt <span class="token operator">=</span> <span class="token function">int</span><span class="token punctuation">(</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>\n<span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token function">range</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>\n    <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>\n</code></pre>`,
+                12345601: `<pre><code class="language-python"><span class="token comment"># Wrong solution for 1800A</span>\n<span class="token keyword">def</span> <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>\n    a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token function">map</span><span class="token punctuation">(</span><span class="token function">int</span><span class="token punctuation">,</span> <span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>\n    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment"># Incorrect logic</span>\n</code></pre>`,
+                12345590: `<pre><code class="language-python"><span class="token comment"># Solution for 1791C</span>\n<span class="token keyword">def</span> <span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>\n    n <span class="token operator">=</span> <span class="token function">int</span><span class="token punctuation">(</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>\n    s <span class="token operator">=</span> <span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span>\n    l<span class="token punctuation">,</span> r <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> n <span class="token operator">-</span> <span class="token number">1</span>\n    <span class="token keyword">while</span> l <span class="token operator">&lt;</span> r <span class="token keyword">and</span> s<span class="token punctuation">[</span>l<span class="token punctuation">]</span> <span class="token operator">!=</span> s<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">:</span>\n        l <span class="token operator">+=</span> <span class="token number">1</span>\n        r <span class="token operator">-=</span> <span class="token number">1</span>\n    <span class="token keyword">print</span><span class="token punctuation">(</span>r <span class="token operator">-</span> l <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>\n</code></pre>`,
+                // Other users' code
+                12349999: `<pre><code class="language-cpp"><span class="token comment">// Tourist's solution for 1601B</span>\n<span class="token macro important">#include &lt;iostream&gt;</span>\n...</code></pre>`,
+                12349988: `<pre><code class="language-cpp"><span class="token comment">// Gennady's solution for 1601A</span>\n...</code></pre>`,
+                12349977: `<pre><code class="language-python"><span class="token comment"># AlgoQueen's solution for 1550B</span>\n...</code></pre>`,
+            };
+
+            const ratingColors = {
+                800: 'text-gray-400', 1000: 'text-green-500', 1200: 'text-green-400',
+                1400: 'text-cyan-400', 1600: 'text-blue-400', 1800: 'text-purple-400',
+                1950: 'text-blue-400', 2100: 'text-cyan-400', 2145: 'text-cyan-400', 2300: 'text-yellow-400',
+                3650: 'text-purple-400', 3721: 'text-orange-400', 3850: 'text-red-400'
+            };
+
+
+            function showAuthPage(pageId) {
+                allAuthPages.forEach(page => page.classList.add('hidden'));
+                document.getElementById(pageId).classList.remove('hidden');
+            }
+
+            function showAppPage(pageId, context = {}) {
+                // Hide all pages
+                allAppPages.forEach(page => page.classList.add('hidden'));
+                // Show the target page
+                const targetPage = document.getElementById(`page-${pageId}`);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                }
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const linkPage = link.dataset.page;
+                    if (linkPage === pageId && !link.closest('#profile-dropdown-menu') && !link.closest('.mobile-nav-link')) {
+                        link.classList.add('text-cyan-500', 'dark:text-cyan-400');
+                        link.classList.remove('text-slate-600', 'dark:text-slate-300');
+                    } else {
+                        link.classList.remove('text-cyan-500', 'dark:text-cyan-400');
+                        link.classList.add('text-slate-600', 'dark:text-slate-300');
+                    }
+                });
+
+                if (pageId === 'profile' && context.user) {
+                    setTimeout(() => {
+                        updateProfilePage();
+                        initProfileCharts();
+                    
+                    }, 50);
+                }
+                if (pageId === 'problem-view' && context.problemId) {
+                    updateProblemViewPage(context.problemId);
+                }
+                if (pageId === 'submission-view' && context.submissionId) {
+                    updateSubmissionViewPage(context.submissionId);
+                }
+                if (pageId === 'submit' && context.problemId) {
+                    document.getElementById('submit-problem').value = context.problemId;
+                }
+                if (pageId === 'my-submissions') {
+                    renderMySubmissions();
+                }
+                if (pageId === 'all-submissions') {
+                    renderAllSubmissions();
+                }
+                if (pageId === 'search-results') {
+                    renderSearchResults(context.query);
+                }
+                if (pageId === 'problems' && context.tag) {
+                    document.getElementById('filter-tag').value = context.tag;
+                    applyFilters();
+                }
+
+                mobileMenu.classList.add('hidden');
+                document.getElementById('profile-dropdown-menu').classList.add('hidden');
+
+                document.querySelector('main').scrollTop = 0;
+            }
+
+            function login() {
+                if (!validateLoginForm()) return;
+
+                isLoggedIn = true;
+                currentUser = document.getElementById('login-user').value || 'CodeWizard123';
+                authWrapper.classList.add('hidden');
+                appWrapper.classList.remove('hidden');
+                appWrapper.classList.add('flex', 'flex-col');
+                showAppPage('home');
+            }
+
+            function signup() {
+                if (!validateSignupForm()) return;
+
+                isLoggedIn = true;
+                currentUser = document.getElementById('signup-user').value;
+                mockUsers[currentUser] = { rating: 0, rank: 'N/A', avatar: `https://placehold.co/128x128/64748b/e2e8f0?text=${currentUser.charAt(0)}`, bio: "" };
+                mockSubmissions[currentUser] = [];
+
+                document.querySelectorAll('#profile-dropdown-btn span').forEach(el => el.textContent = currentUser);
+                document.querySelectorAll('#mobile-menu .font-medium.text-slate-900').forEach(el => el.textContent = currentUser);
+                document.querySelectorAll('.nav-link[data-page="profile"]').forEach(el => el.dataset.user = currentUser);
+                document.querySelectorAll('#profile-dropdown-menu .text-xs').forEach(el => el.textContent = "Rating: 0");
+                document.querySelectorAll('#mobile-menu .font-medium.text-cyan-500').forEach(el => el.textContent = "Rating: 0");
+
+                authWrapper.classList.add('hidden');
+                appWrapper.classList.remove('hidden');
+                appWrapper.classList.add('flex', 'flex-col');
+                showAppPage('home');
+            }
+
+            function logout() {
+                showModal('Confirm Logout', '<p>Are you sure you want to log out?</p>', {
+                    confirmText: 'Logout',
+                    confirmClass: 'bg-red-600 hover:bg-red-500',
+                    onConfirm: () => {
+                        isLoggedIn = false;
+                        currentUser = null;
+                        appWrapper.classList.add('hidden');
+                        appWrapper.classList.remove('flex', 'flex-col');
+                        authWrapper.classList.remove('hidden');
+                        showAuthPage('page-login');
+                        // Reset login form
+                        document.getElementById('login-user').value = 'CodeWizard123';
+                        document.getElementById('login-pass').value = 'password';
+                    }
+                });
+            }
+
+            document.getElementById('goto-signup').addEventListener('click', (e) => { e.preventDefault(); showAuthPage('page-signup'); });
+            document.getElementById('goto-login').addEventListener('click', (e) => { e.preventDefault(); showAuthPage('page-login'); });
+
+            // Auth Action Buttons
+            document.getElementById('login-btn').addEventListener('click', login);
+            document.getElementById('signup-btn').addEventListener('click', signup);
+            document.getElementById('logout-btn').addEventListener('click', (e) => { e.preventDefault(); logout(); });
+            document.getElementById('mobile-logout-btn').addEventListener('click', (e) => { e.preventDefault(); logout(); });
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Form Validation ---
+            function showError(inputId, message) {
+                const input = document.getElementById(inputId);
+                const errorEl = document.getElementById(`${inputId}-error`);
+                input.classList.add('input-error');
+                errorEl.textContent = message;
+                errorEl.classList.remove('hidden');
+            }
+            function hideError(inputId) {
+                const input = document.getElementById(inputId);
+                const errorEl = document.getElementById(`${inputId}-error`);
+                input.classList.remove('input-error');
+                errorEl.classList.add('hidden');
+            }
+
+            function validateLoginForm() {
+                let isValid = true;
+                const user = document.getElementById('login-user');
+                const pass = document.getElementById('login-pass');
+
+                if (user.value.trim() === '') {
+                    showError('login-user', 'Please enter your username or email.');
+                    isValid = false;
+                } else {
+                    hideError('login-user');
+                }
+
+                if (pass.value.trim() === '') {
+                    showError('login-pass', 'Please enter your password.');
+                    isValid = false;
+                } else {
+                    hideError('login-pass');
+                }
+                return isValid;
+            }
+
+            function validateSignupForm() {
+                let isValid = true;
+                const user = document.getElementById('signup-user');
+                const email = document.getElementById('signup-email');
+                const pass = document.getElementById('signup-pass');
+                const confirmPass = document.getElementById('signup-confirm-pass');
+
+                if (user.value.trim() === '') {
+                    showError('signup-user', 'Username is required.');
+                    isValid = false;
+                } else {
+                    hideError('signup-user');
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    showError('signup-email', 'Please enter a valid email.');
+                    isValid = false;
+                } else {
+                    hideError('signup-email');
+                }
+
+                if (pass.value.trim() === '') {
+                    showError('signup-pass', 'Password is required.');
+                    isValid = false;
+                } else {
+                    hideError('signup-pass');
+                }
+
+                if (pass.value !== confirmPass.value || confirmPass.value.trim() === '') {
+                    showError('signup-confirm-pass', 'Passwords do not match.');
+                    isValid = false;
+                } else {
+                    hideError('signup-confirm-pass');
+                }
+
+                return isValid;
+            }
+
+            function validatePasswordChangeForm() {
+                let isValid = true;
+                // ... (validation logic as before) ...
+                return isValid;
+            }
+
+            document.getElementById('password-change-btn').addEventListener('click', () => {
+                // ... (password change logic as before) ...
+            });
+
+
+            // --- Profile Dropdown ---
+            // ... (dropdown logic as before) ...
+            const dropdownBtn = document.getElementById('profile-dropdown-btn');
+            const dropdownMenu = document.getElementById('profile-dropdown-menu');
+            const dropdownContainer = document.getElementById('profile-dropdown-container');
+
+            dropdownBtn.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('hidden');
+            });
+            document.addEventListener('click', (e) => {
+                if (!dropdownContainer.contains(e.target)) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
+
+            // --- Modal System ---
+            // ... (modal logic as before) ...
+            const modal = document.getElementById('global-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalFooter = document.getElementById('modal-footer');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const modalCancelBtn = document.getElementById('modal-cancel-btn');
+            const modalConfirmBtn = document.getElementById('modal-confirm-btn');
+            let confirmCallback = null;
+
+            function showModal(title, content, options = {}) {
+                modalTitle.textContent = title;
+                modalBody.innerHTML = content;
+
+                modalFooter.classList.toggle('hidden', !!options.hideFooter);
+                modalCancelBtn.classList.toggle('hidden', !!options.hideCancel);
+                modalConfirmBtn.textContent = options.confirmText || 'Confirm';
+
+                // Reset confirm button classes
+                modalConfirmBtn.className = 'interactive-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-all duration-200';
+                if (options.confirmClass) {
+                    modalConfirmBtn.classList.add(...options.confirmClass.split(' '));
+                }
+
+                confirmCallback = options.onConfirm || null;
+
+                modal.classList.remove('hidden');
+            }
+
+            function hideModal() {
+                modal.classList.add('hidden');
+                confirmCallback = null;
+            }
+
+            modalCloseBtn.addEventListener('click', hideModal);
+            modalCancelBtn.addEventListener('click', hideModal);
+            modalConfirmBtn.addEventListener('click', () => {
+                if (confirmCallback) {
+                    confirmCallback();
+                }
+                hideModal();
+            });
+
+            // Wire up Editorial buttons
+            document.querySelectorAll('.editorial-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const contestName = btn.dataset.contest;
+                    showModal(`Editorial: ${contestName}`, `... (Mock Editorial Content) ...`, { hideCancel: true, confirmText: 'Close' });
+                });
+            });
+
+            // --- Contest Registration ---
+            // ... (registration logic as before) ...
+            document.querySelectorAll('.register-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const isRegistered = btn.dataset.registered === 'true';
+                    if (isRegistered) {
+                        btn.dataset.registered = 'false';
+                        btn.textContent = 'Register';
+                        btn.classList.remove('bg-green-600', 'hover:bg-green-500');
+                        btn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
+                    } else {
+                        btn.dataset.registered = 'true';
+                        btn.innerHTML = `<svg class="w-4 h-4 inline-block mr-1 -mt-1"><use href="#icon-check"></use></svg> Registered`;
+                        btn.classList.add('bg-green-600', 'hover:bg-green-500');
+                        btn.classList.remove('bg-cyan-600', 'hover:bg-cyan-500');
+                    }
+                });
+            });
+
+            // --- Theme Toggle ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            themeToggleBtn.addEventListener('click', () => {
+                if (currentTheme === 'dark') {
+                    document.documentElement.classList.remove('dark');
+                    currentTheme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    currentTheme = 'dark';
+                }
+            });
+
+            // --- Problemset Page Functionality ---
+            const problemTableBody = document.getElementById('problem-table-body');
+            const filterName = document.getElementById('filter-name');
+            const filterTag = document.getElementById('filter-tag'); // New filter
+            const filterRating = document.getElementById('filter-rating');
+            const filterClear = document.getElementById('filter-clear');
+            const submitProblemSelect = document.getElementById('submit-problem');
+
+            function getRatingColor(rating) {
+                return ratingColors[rating] || 'text-slate-900 dark:text-white';
+            }
+
+            function renderProblems(problemsToRender) {
+                if (!problemTableBody) return;
+                problemTableBody.innerHTML = ''; // Clear existing
+
+                problemsToRender.forEach(prob => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors';
+
+                    const topicsHtml = prob.topics.map(topic =>
+                        `<span class="inline-block bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium mr-1 mb-1 px-2 py-0.5 rounded-full">${topic}</span>`
+                    ).join(' ');
+
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-600 dark:text-slate-400">${prob.id}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="#" class="nav-link text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400" data-page="problem-view" data-problem-id="${prob.id}">${prob.name}</a>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">${topicsHtml}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${getRatingColor(prob.rating)}">${prob.rating}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-500">
+                            <svg class="w-4 h-4 inline-block mr-1"><use href="#icon-check"></use></svg>
+                            ${prob.solved}
+                        </td>
+                    `;
+                    problemTableBody.appendChild(row);
+                });
+
+                attachNavListeners();
+            }
+
+            function applyFilters() {
+                const nameValue = filterName.value.toLowerCase();
+                const tagValue = filterTag.value.toLowerCase();
+                const ratingValue = filterRating.value;
+                let filtered = mockProblems.filter(p =>
+                    (nameValue === '' || p.name.toLowerCase().includes(nameValue) || p.id.toLowerCase().includes(nameValue)) &&
+                    (tagValue === '' || p.topics.some(t => t.toLowerCase().includes(tagValue))) &&
+                    (ratingValue === '' || p.rating == ratingValue)
+                );
+                renderProblems(filtered);
+            }
+
+            filterName.addEventListener('input', applyFilters);
+            filterTag.addEventListener('input', applyFilters); // New listener
+            filterRating.addEventListener('change', applyFilters);
+            filterClear.addEventListener('click', () => {
+                filterName.value = '';
+                filterTag.value = '';
+                filterRating.value = '';
+                applyFilters();
+            });
+
+            // Initial Problemset Render & Submit Page Population
+            renderProblems(mockProblems);
+            mockProblems.forEach(prob => {
+                const option = new Option(`${prob.id} - ${prob.name}`, prob.id);
+                submitProblemSelect.add(option);
+            });
+            submitProblemSelect.value = '1600D'; // Set default
+
+            // --- Tags Page ---
+            const tagsContainer = document.getElementById('tags-container');
+            allProblemTags.forEach(tag => {
+                const tagBtn = document.createElement('button');
+                tagBtn.className = 'nav-link interactive-btn bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium py-2 px-4 rounded-lg text-sm transition-all duration-200';
+                tagBtn.textContent = tag;
+                tagBtn.dataset.page = 'problems';
+                tagBtn.dataset.tag = tag;
+                tagsContainer.appendChild(tagBtn);
+            });
+
+            // --- My Submissions Page ---
+            const mySubmissionsBody = document.getElementById('my-submissions-body');
+            const filterSubProblem = document.getElementById('filter-sub-problem');
+            const filterSubVerdict = document.getElementById('filter-sub-verdict');
+            const filterSubClear = document.getElementById('filter-sub-clear');
+
+            function renderMySubmissions() {
+                const problemFilter = filterSubProblem.value.toLowerCase();
+                const verdictFilter = filterSubVerdict.value;
+
+                const mySubs = mockSubmissions[currentUser] || [];
+
+                const filteredSubs = mySubs.filter(sub =>
+                    (problemFilter === '' || sub.name.toLowerCase().includes(problemFilter) || sub.problem.toLowerCase().includes(problemFilter)) &&
+                    (verdictFilter === '' || sub.verdict === verdictFilter)
+                );
+
+                mySubmissionsBody.innerHTML = '';
+                if (filteredSubs.length === 0) {
+                    mySubmissionsBody.innerHTML = `<tr><td colspan="6" class="px-4 py-3 text-center text-slate-500 dark:text-slate-400">No submissions found.</td></tr>`;
+                    return;
+                }
+
+                filteredSubs.forEach(sub => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50';
+                    let verdictColor = 'text-slate-900 dark:text-white';
+                    if (sub.verdict === 'Accepted') verdictColor = 'text-green-600 dark:text-green-400';
+                    if (sub.verdict.includes('Wrong')) verdictColor = 'text-red-600 dark:text-red-400';
+                    if (sub.verdict.includes('Time')) verdictColor = 'text-yellow-600 dark:text-yellow-400';
+
+                    row.innerHTML = `
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-cyan-600 dark:text-cyan-400 hover:underline" data-page="submission-view" data-submission-id="${sub.id}">${sub.id}</a></td>
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400" data-page="problem-view" data-problem-id="${sub.problem}">${sub.problem} - ${sub.name}</a></td>
+                        <td class="px-4 py-3 text-sm font-semibold ${verdictColor}">${sub.verdict}</td>
+                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.time}</td>
+                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.memory}</td>
+                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.lang}</td>
+                    `;
+                    mySubmissionsBody.appendChild(row);
+                });
+                attachNavListeners();
+            }
+            filterSubProblem.addEventListener('input', renderMySubmissions);
+            filterSubVerdict.addEventListener('change', renderMySubmissions);
+            filterSubClear.addEventListener('click', () => {
+                filterSubProblem.value = '';
+                filterSubVerdict.value = '';
+                renderMySubmissions();
+            });
+
+            // --- All Submissions Page (NEW) ---
+            const allSubmissionsBody = document.getElementById('all-submissions-body');
+            function renderAllSubmissions() {
+                allSubmissionsBody.innerHTML = '';
+                const allSubs = Object.entries(mockSubmissions).flatMap(([user, subs]) =>
+                    subs.map(sub => ({ ...sub, user }))
+                ).sort((a, b) => b.id - a.id); // Sort by new
+
+                allSubs.forEach(sub => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50';
+                    let verdictColor = 'text-slate-900 dark:text-white';
+                    if (sub.verdict === 'Accepted') verdictColor = 'text-green-600 dark:text-green-400';
+                    if (sub.verdict.includes('Wrong')) verdictColor = 'text-red-600 dark:text-red-400';
+                    if (sub.verdict.includes('Time')) verdictColor = 'text-yellow-600 dark:text-yellow-400';
+
+                    const user = mockUsers[sub.user];
+                    const userColor = user ? getRatingColor(user.rating) : 'text-slate-600 dark:text-slate-400';
+
+                    row.innerHTML = `
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-cyan-600 dark:text-cyan-400 hover:underline" data-page="submission-view" data-submission-id="${sub.id}">${sub.id}</a></td>
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link font-medium ${userColor} hover:underline" data-page="profile" data-user="${sub.user}">${sub.user}</a></td>
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400" data-page="problem-view" data-problem-id="${sub.problem}">${sub.problem}</a></td>
+                        <td class="px-4 py-3 text-sm font-semibold ${verdictColor}">${sub.verdict}</td>
+                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.lang}</td>
+                    `;
+                    allSubmissionsBody.appendChild(row);
+                });
+                attachNavListeners();
+            }
+
+            // --- Submission Page Functionality ---
+            // ... (submit logic as before) ...
+            const submitBtn = document.getElementById('submit-code-btn');
+            const statusDiv = document.getElementById('submission-status');
+            const codeTextArea = document.getElementById('submit-code');
+            codeTextArea.value = `# Solution for 1600D - New Year's Number\n\ndef solve():\n    n = int(input())\n    a = n // 2020\n    b = n % 2020\n    if b <= a:\n        print("YES")\n    else:\n        print("NO")\n\nt = int(input())\nfor _ in range(t):\n    solve()\n`;
+
+            submitBtn.addEventListener('click', () => {
+                statusDiv.innerHTML = `<div class="flex items-center space-x-2 text-yellow-500 dark:text-yellow-400">... (Submitting) ...</div>`;
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    const result = Math.random() > 0.4 ? 'Accepted' : 'Wrong Answer';
+                    const problem = document.getElementById('submit-problem').value;
+                    statusDiv.innerHTML = result === 'Accepted' ? `<div class="flex items-center space-x-2 text-green-600 dark:text-green-400 font-semibold text-lg">... (Accepted) ...</div>` : `<div class="flex items-center space-x-2 text-red-600 dark:text-red-400 font-semibold text-lg">... (Wrong Answer) ...</div>`;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+
+            // --- User Search (NEW) ---
+            const userSearchForm = document.getElementById('user-search-form');
+            const userSearchInput = document.getElementById('user-search-input');
+            const searchResultsList = document.getElementById('search-results-list');
+            const searchQueryDisplay = document.getElementById('search-query-display');
+
+            userSearchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const query = userSearchInput.value;
+                if (query.trim() === '') return;
+                showAppPage('search-results', { query: query });
+            });
+
+            function renderSearchResults(query) {
+                searchQueryDisplay.textContent = query;
+                searchResultsList.innerHTML = '';
+                const queryLower = query.toLowerCase();
+                const results = Object.entries(mockUsers).filter(([username, data]) =>
+                    username.toLowerCase().includes(queryLower)
+                );
+
+                if (results.length === 0) {
+                    searchResultsList.innerHTML = `<li class="p-4 text-center text-slate-500 dark:text-slate-400">No users found.</li>`;
+                    return;
+                }
+
+                results.forEach(([username, data]) => {
+                    const li = document.createElement('li');
+                    li.className = 'p-4 flex items-center space-x-4 hover:bg-slate-50 dark:hover:bg-slate-800/50';
+                    const color = getRatingColor(data.rating);
+                    li.innerHTML = `
+                        <img class="h-10 w-10 rounded-full" src="${data.avatar}" alt="${username}">
+                        <div>
+                            <a href="#" class="nav-link text-sm font-semibold ${color} hover:underline" data-page="profile" data-user="${username}">${username}</a>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Rating: ${data.rating}</p>
+                        </div>
+                    `;
+                    searchResultsList.appendChild(li);
+                });
+                attachNavListeners();
+            }
+
+            // --- Dynamic Page Content Updaters ---
+
+            function updateProfilePage(username) {
+                const user = mockUsers[username];
+                if (!user) return; // Handle new user case
+
+                document.getElementById('profile-username').textContent = username;
+                document.getElementById('profile-rating').textContent = `Rating: ${user.rating || 'N/A'}`;
+                document.getElementById('profile-rank').textContent = `Rank ${user.rank || 'N/A'}`;
+                document.getElementById('profile-avatar').src = user.avatar || `https://placehold.co/128x128/64748b/e2e8f0?text=${username.charAt(0)}`;
+                document.getElementById('profile-bio').textContent = user.bio || `Hello, I'm ${username}.`;
+
+                // Toggle "Add Friend" button
+                const addFriendBtn = document.getElementById('profile-add-friend-btn');
+                if (username === currentUser) {
+                    addFriendBtn.classList.add('hidden');
+                } else {
+                    addFriendBtn.classList.remove('hidden');
+                    // Mock friend status
+                    if (username === 'FriendCoder1') {
+                        addFriendBtn.textContent = 'Friends';
+                        addFriendBtn.classList.add('bg-green-600', 'hover:bg-green-500');
+                        addFriendBtn.classList.remove('bg-cyan-600', 'hover:bg-cyan-500');
+                    } else {
+                        addFriendBtn.textContent = 'Add Friend';
+                        addFriendBtn.classList.remove('bg-green-600', 'hover:bg-green-500');
+                        addFriendBtn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
+                    }
+                }
+
+                const rankTextEl = document.getElementById('profile-rank');
+                const ratingTextEl = document.getElementById('profile-rating');
+                const color = getRatingColor(user.rating);
+                [rankTextEl, ratingTextEl].forEach(el => {
+                    Object.values(ratingColors).forEach(c => el.classList.remove(c));
+                    if (color) el.classList.add(color);
+                });
+
+                // Generate Rating Graph (Mock)
+                const graphContainer = document.getElementById('rating-graph-container');
+                const mockRatingData = [user.rating - 200, user.rating - 150, user.rating - 100, user.rating - 200, user.rating - 50, user.rating];
+                const svg = createRatingGraph(mockRatingData);
+                graphContainer.innerHTML = svg;
+
+                // Update submissions
+                const submissionsBody = document.getElementById('profile-submissions-body');
+                submissionsBody.innerHTML = '';
+                const userSubmissions = mockSubmissions[username] || [];
+
+                if (userSubmissions.length === 0) {
+                    submissionsBody.innerHTML = `<tr><td colspan="4" class="px-4 py-3 text-center text-slate-500 dark:text-slate-400">No submissions found.</td></tr>`;
+                    return;
+                }
+
+                userSubmissions.slice(0, 5).forEach(sub => { // Show 5 most recent
+                    const row = document.createElement('tr');
+                    let verdictColor = sub.verdict === 'Accepted' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+
+                    row.innerHTML = `
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-cyan-600 dark:text-cyan-400 hover:underline" data-page="submission-view" data-submission-id="${sub.id}">${sub.id}</a></td>
+                        <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400" data-page="problem-view" data-problem-id="${sub.problem}">${sub.name}</a></td>
+                        <td class="px-4 py-3 text-sm font-semibold ${verdictColor}">${sub.verdict}</td>
+                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.lang}</td>
+                    `;
+                    submissionsBody.appendChild(row);
+                });
+                attachNavListeners();
+            }
+
+            function initProfileCharts() {
+            console.log("i have been caled");
+            if (window.__profileChartsInitialized) return;
+            window.__profileChartsInitialized = true;
+
+            // Pie Chart
+            initChart = new Chart(document.getElementById('solvedPieChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['DP', 'Graphs', 'Greedy', 'Binary Search', 'Math'],
+                    datasets: [{
+                        data: [42, 28, 34, 18, 21],
+                        backgroundColor: ['#38bdf8', '#818cf8', '#fbbf24', '#fb7185', '#34d399']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    let solved = context.raw;
+                                    let attempted = solved + Math.floor(Math.random() * 10 + 5);
+                                    return `${context.label}: Solved ${solved} / Attempted ${attempted}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Efficiency Chart
+            initChart = new Chart(document.getElementById('efficiencyChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Greedy', 'DP', 'Graphs', 'Math', 'Binary Search'],
+                    datasets: [
+                        { label: 'Your Avg Time (min)', data: [9, 28, 17, 21, 19], backgroundColor: '#38bdf8' },
+                        { label: 'Global Avg Time (min)', data: [12, 20, 14, 18, 15], backgroundColor: '#94a3b8' }
+                    ]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true } } }
+            });
+
+            // Rating Progress Chart
+            initChart = new Chart(document.getElementById('ratingProgressChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Rating',
+                        data: [1800, 1820, 1900, 1980, 2050, 2100, 2145],
+                        borderWidth: 3,
+                        tension: 0.3,
+                        borderColor: '#38bdf8',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: { duration: 1200, easing: 'easeOutQuart' }
+                }
+            });
+
+            // Heatmap
+            const heatmap = document.getElementById('heatmap');
+            for (let i = 0; i < 84; i++) {
+                const level = Math.floor(Math.random() * 4);
+                const colors = ['#1e293b', '#475569', '#0ea5e9', '#38bdf8'];
+                const cell = document.createElement('div');
+                cell.style.width = '18px';
+                cell.style.height = '18px';
+                cell.style.borderRadius = '4px';
+                cell.style.backgroundColor = colors[level];
+                heatmap.appendChild(cell);
+            }
+
+        }
+        
+
+            function createRatingGraph(data) {
+                const width = 600;
+                const height = 256;
+                const padding = 20;
+                const maxRating = Math.max(...data, 1000) + 100;
+                const minRating = Math.min(...data, 800) - 100;
+
+                const points = data.map((d, i) => {
+                    const x = (i / (data.length - 1)) * (width - padding * 2) + padding;
+                    const y = height - padding - ((d - minRating) / (maxRating - minRating)) * (height - padding * 2);
+                    return `${x},${y}`;
+                }).join(' ');
+
+                return `
+                    <svg viewBox="0 0 ${width} ${height}" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color: ${currentTheme === 'dark' ? 'rgba(22, 163, 222, 0.3)' : 'rgba(2, 132, 199, 0.3)'}" />
+                                <stop offset="100%" style="stop-color: ${currentTheme === 'dark' ? 'rgba(22, 163, 222, 0)' : 'rgba(2, 132, 199, 0)'}" />
+                            </linearGradient>
+                        </defs>
+                        <polyline fill="url(#gradient)" stroke="${currentTheme === 'dark' ? '#06b6d4' : '#0e7490'}" stroke-width="2" points="${points} ${width - padding},${height - padding} ${padding},${height - padding} ${points.split(' ')[0]}" />
+                    </svg>
+                `;
+            }
+
+            function updateProblemViewPage(problemId) {
+                // ... (logic as before) ...
+                const problem = mockProblems.find(p => p.id === problemId);
+                if (!problem) return;
+
+                document.getElementById('problem-view-title').textContent = `${problem.id} - ${problem.name}`;
+                document.querySelector('#page-problem-view .nav-link[data-page="submit"]').dataset.problemId = problem.id;
+
+                const problemSubmissionsBody = document.getElementById('problem-submissions-body');
+                problemSubmissionsBody.innerHTML = '';
+                const mySubs = (mockSubmissions[currentUser] || []).filter(s => s.problem === problemId);
+
+                if (mySubs.length === 0) {
+                    problemSubmissionsBody.innerHTML = `<tr><td colspan="4" class="px-4 py-3 text-center text-slate-500 dark:text-slate-400">You have no submissions for this problem.</td></tr>`;
+                } else {
+                    mySubs.forEach(sub => {
+                        const row = document.createElement('tr');
+                        let verdictColor = sub.verdict === 'Accepted' ? 'text-green-600 dark:text-green-400' : (sub.verdict.includes('Wrong') ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400');
+                        row.innerHTML = `
+                            <td class="px-4 py-3 text-sm"><a href="#" class="nav-link text-cyan-600 dark:text-cyan-400 hover:underline" data-page="submission-view" data-submission-id="${sub.id}">${sub.id}</a></td>
+                            <td class="px-4 py-3 text-sm font-semibold ${verdictColor}">${sub.verdict}</td>
+                            <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.time}</td>
+                            <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">${sub.lang}</td>
+                        `;
+                        problemSubmissionsBody.appendChild(row);
+                    });
+                }
+
+                // Reset to description tab
+                document.querySelectorAll('#problem-view-tabs-nav .tab-btn').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('#page-problem-view .tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector('#problem-view-tabs-nav .tab-btn[data-tab="description"]').classList.add('active');
+                document.getElementById('tab-content-description').classList.add('active');
+
+                attachNavListeners();
+            }
+
+            function updateSubmissionViewPage(submissionId) {
+                let submission = null;
+                let user = null;
+                for (const u in mockSubmissions) {
+                    const sub = (mockSubmissions[u] || []).find(s => s.id == submissionId);
+                    if (sub) {
+                        submission = sub;
+                        user = u;
+                        break;
+                    }
+                }
+
+                if (!submission) return;
+
+                document.getElementById('submission-view-id').textContent = `#${submission.id}`;
+                document.getElementById('submission-view-problem').textContent = `${submission.problem} - ${submission.name}`;
+                document.getElementById('submission-view-problem').dataset.problemId = submission.problem;
+                document.getElementById('submission-view-user').textContent = user;
+                document.getElementById('submission-view-user').dataset.user = user;
+
+                const verdictEl = document.getElementById('submission-view-verdict');
+                verdictEl.textContent = submission.verdict;
+                verdictEl.className = 'text-lg font-semibold'; // Clear
+                if (submission.verdict === 'Accepted') verdictEl.classList.add('text-green-600', 'dark:text-green-400');
+                else if (submission.verdict.includes('Wrong')) verdictEl.classList.add('text-red-600', 'dark:text-red-400');
+                else verdictEl.classList.add('text-slate-900', 'dark:text-white');
+
+                document.getElementById('submission-view-lang').textContent = submission.lang;
+                document.getElementById('submission-view-code').innerHTML = mockSubmissionCode[submission.id] || '<pre><code>Code not found.</code></pre>';
+
+                attachNavListeners();
+            }
+
+            // --- Generic Tab Handlers ---
+            function setupTabs(navSelector, contentContainerSelector) {
+                const nav = document.querySelector(navSelector);
+                if (!nav) return;
+
+                const tabButtons = nav.querySelectorAll('.tab-btn');
+                const contentTabs = document.querySelectorAll(contentContainerSelector);
+
+                tabButtons.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const tabId = tab.dataset.tab;
+
+                        tabButtons.forEach(t => t.classList.remove('active'));
+                        contentTabs.forEach(c => c.classList.remove('active'));
+
+                        tab.classList.add('active');
+                        document.getElementById(`tab-content-${tabId}`).classList.add('active');
+                    });
+                });
+            }
+
+            setupTabs('#settings-tabs-nav', '#page-settings .tab-content');
+            setupTabs('#problem-view-tabs-nav', '#page-problem-view .tab-content');
+
+            // --- Attach Nav Listeners (re-usable) ---
+            function attachNavListeners() {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.dataset.listenerAttached) return;
+
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const pageId = link.dataset.page;
+                        const context = {
+                            user: link.dataset.user,
+                            problemId: link.dataset.problemId,
+                            submissionId: link.dataset.submissionId,
+                            tag: link.dataset.tag,
+                        };
+                        if (pageId) {
+                            showAppPage(pageId, context);
+                        }
+                    });
+                    link.dataset.listenerAttached = true;
+                });
+            }
+
+            // --- Initial Setup ---
+            attachNavListeners();
+            showAuthPage('page-login'); // Start on the login page
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <script>
+        function initProfileCharts() {
+            if (window.__profileChartsInitialized) return;
+            window.__profileChartsInitialized = true;
+            console.log("Charts init placeholder");
+        }
+    </script>
+
+</body>
+
+</html>

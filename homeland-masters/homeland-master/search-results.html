@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results</title>
+
+  <!-- Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      query,
+      where,
+      orderBy
+    } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCYVrQQtwuKZ4EpbyokBR3OmgWoNtnsAtc",
+      authDomain: "mayfairproperties-00.firebaseapp.com",
+      projectId: "mayfairproperties-00",
+      storageBucket: "mayfairproperties-00.appspot.com",
+      messagingSenderId: "288069767491",
+      appId: "1:288069767491:web:40bbb396d0d4a93a391ff6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const params = new URLSearchParams(window.location.search);
+    const listing = params.get("listing")?.toLowerCase();
+    const offer = params.get("offer")?.toLowerCase();
+    const city = params.get("city")?.toLowerCase();
+
+    let filters = [];
+    if (listing) filters.push(where("type", "==", listing));
+    if (offer) filters.push(where("offer", "==", offer));
+    if (city) filters.push(where("city", "==", city));
+
+    let q = query(collection(db, "properties"), ...filters);
+
+    const snapshot = await getDocs(q);
+    const resultsDiv = document.getElementById("results");
+
+    if (snapshot.empty) {
+      resultsDiv.innerHTML = "<p style='color:white'>No matching properties found.</p>";
+    }
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      const card = document.createElement("div");
+      card.className = "property-card";
+      card.innerHTML = `
+        <img src="${data.imageUrl}" alt="${data.title}" />
+        <h4>${data.title}</h4>
+        <p><strong>Type:</strong> ${data.type}</p>
+        <p><strong>Offer:</strong> ${data.offer}</p>
+        <p><strong>City:</strong> ${data.city}</p>
+        <p><strong>Price:</strong> ${data.price}</p>
+        <a class="view-btn" href="#">View Details</a>
+      `;
+      resultsDiv.appendChild(card);
+    });
+  </script>
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700">
+  <link rel="stylesheet" href="css/style.css"> <!-- Your main site styling -->
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/result-style.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="site-navbar mt-4 glass">
+        <div class="container py-1">
+          <div class="row align-items-center">
+            <div class="col-8 col-md-8 col-lg-4">
+              <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0"><strong>Mayfair<span class="btn-2">Accomodation</span><span class="btn-2">.</span></strong></a></h1>
+            </div>
+            <div class="col-4 col-md-4 col-lg-8">
+              <nav class="site-navigation text-right text-md-right" role="navigation">
+
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li class="active">
+                    <a href="index.html">Home</a>
+                  </li>
+                  <li><a href="buy.html">Buy</a></li>
+                  <li><a href="rent.html">Rent</a></li>
+                  <li class="has-children">
+                    <a href="properties.html">Properties</a>
+                    <ul class="dropdown arrow-top">
+                      <li><a href="#">Condo</a></li>
+                      <li><a href="#">Property Land</a></li>
+                      <li><a href="#">Commercial Building</a></li>
+                      <li class="has-children">
+                        <a href="#">Sub Menu</a>
+                        <ul class="dropdown">
+                          <li><a href="#">Menu One</a></li>
+                          <li><a href="#">Menu Two</a></li>
+                          <li><a href="#">Menu Three</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+           
+
+          </div>
+        </div>
+      </div>
+
+
+
+  <div class="results-wrapper">
+    <div id="results"></div>
+  </div>
+
+
+  <!-- Required Scripts for Navbar Interactions -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+</html>
