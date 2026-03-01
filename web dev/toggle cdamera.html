@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camera Toggle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        #toggleButton {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #videoElement {
+            max-width: 100%;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Camera Toggle</h1>
+    <video id="videoElement" width="640" height="480" autoplay></video>
+    <button id="toggleButton">Toggle Camera</button>
+
+    <script>
+        const video = document.getElementById('videoElement');
+        const toggleButton = document.getElementById('toggleButton');
+        let mediaStream = null;
+
+        async function toggleCamera() {
+            if (mediaStream) {
+                // Turn off camera
+                mediaStream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                mediaStream = null;
+                toggleButton.textContent = 'Turn On Camera';
+            } else {
+                try {
+                    // Turn on camera
+                    mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    video.srcObject = mediaStream;
+                    toggleButton.textContent = 'Turn Off Camera';
+                } catch (error) {
+                    console.error('Error accessing camera:', error);
+                    alert('Unable to access camera. Please check permissions.');
+                }
+            }
+        }
+
+        toggleButton.addEventListener('click', toggleCamera);
+    </script>
+</body>
+</html>

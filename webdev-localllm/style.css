@@ -1,0 +1,48 @@
+/* style.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e; /* Dark background for glassmorphic effect */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2c2c2c; /* Slightly lighter container */
+}
+
+.login-form {
+    background-color: #3a3a3a; /* Darker form background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    background-color: #4d4d4d; /* Darker input background */
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+}
+
+#login-button {
+    background-color: #64b5f6; /* Primary button color */
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+#login-button:hover {
+    background-color: #4d93e2;
+}

@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-white">
+<head>
+    <meta charset="UTF-M">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mid-Fi Codeforces IDE</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        /* A simple style for the mock code editor */
+        .mock-editor {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.5;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* cool-gray-300 */
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* cool-gray-100 */
+        }
+        
+        /* Simple CSS Loader */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #8b5cf6; /* Purple */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Chart container responsiveness */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="h-full font-sans antialiased text-gray-900">
+    <div class="flex flex-col h-screen">
+        
+        
+        <nav id="main-header" class="flex-shrink-0 w-full bg-white border-b border-gray-200 hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            
+                            <span class="font-bold text-xl text-blue-600">Codeforces</span>
+                        </div>
+                        <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+                            <a href="#" data-target="page-dashboard" class="header-nav-link border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium" aria-current="page">
+                                Dashboard
+                            </a>
+                            
+                            <a href="#" data-target="page-problemlist" class="header-nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                                Problemset
+                            </a>
+                            <a href="#" data-target="page-contests" class="header-nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                                Contests
+                            </a>
+                            <a href="#" data-target="page-ratings" class="header-nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                                Ratings
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                        
+                        <div class="ml-3 relative">
+                            <div>
+                                <button type="button" class="max-w-xs bg-blue-600 rounded-full flex items-center justify-center text-sm text-white font-bold h-8 w-8 ring-2 ring-offset-2 ring-blue-500 focus:outline-none focus:ring-white" id="btn-user-menu" aria-expanded="false" aria-haspopup="true">
+                                    <span class="sr-only">Open user menu</span>
+                                    CU
+                                </button>
+                            </div>
+                            <div id="user-menu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="btn-user-menu" tabindex="-1">
+                                <span class="block px-4 py-2 text-sm text-gray-700 font-medium">coder_user_99</span>
+                                <a href="#" id="btn-profile-link" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">
+                                    Your Profile
+                                </a>
+                                <a href="#" id="btn-logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">
+                                    Sign out
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        
+        <main class="flex-1 min-h-0 overflow-y-auto bg-gray-50">
+            
+            
+            <div id="page-login" class="main-page-content min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-md w-full space-y-8">
+                    <div>
+                        <span class="font-bold text-3xl text-blue-600 mx-auto w-auto text-center block">Codeforces</span>
+                        <h2 class="mt-6 text-center text-2xl font-extrabold text-gray-900">
+                            Sign in to your account
+                        </h2>
+                    </div>
+                    <form class="mt-8 space-y-6" action="#" method="POST">
+                        <input type="hidden" name="remember" value="true">
+                        <div class="rounded-md shadow-sm -space-y-px">
+                            <div>
+                                <label for="email-address" class="sr-only">Email address</label>
+                                <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Email address" value="coder_user_99@cf.com">
+                            </div>
+                            <div>
+                                <label for="password" class="sr-only">Password</label>
+                                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Password" value="password123">
+                            </div>
+                        </div>
+                        <div>
+                            <button id="btn-login" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+                    <p class="mt-5 text-center text-sm text-gray-500">
+                        © 2025 Codeforces. All rights reserved.
+                    </p>
+                </div>
+            </div>
+            
+            
+            <div id="page-dashboard" class="main-page-content hidden p-6 md:p-10 max-w-7xl mx-auto">
+                <h1 class="text-3xl font-bold mb-6 text-gray-900">Welcome, coder_user_99!</h1>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <div class="lg:col-span-2 bg-white shadow-sm border border-gray-200 rounded-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Rating Trend</h2>
+                        <div class="chart-container">
+                            <canvas id="rating-chart"></canvas>
+                        </div>
+                    </div>
+
+                    
+                    <div class="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Solved by Difficulty</h2>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="difficulty-chart"></canvas>
+                        </div>
+                    </div>
+
+                    
+                    <div class="lg:col-span-3 bg-white shadow-sm border border-gray-200 rounded-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Language Proficiency</h2>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="language-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="page-problemlist" class="main-page-content hidden p-6 md:p-10 max-w-7xl mx-auto">
+                <h1 class="text-3xl font-bold mb-6 text-gray-900">Problem Set</h1>
+                
+                <div class="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Difficulty</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tags</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1800A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1800A. Is It a Cat?">
+                                        Is It a Cat?
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">implementation, strings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1791C</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1791C. Prepend and Append">
+                                        Prepend and Append
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">implementation, two pointers</td>
+                            </tr>
+                             <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1760B</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1760B. Atilla's Favorite Problem">
+                                        Atilla's Favorite Problem
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">greedy, strings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1742A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1742A. Sum of Two Numbers">
+                                        Sum of Two Numbers
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">math, implementation</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1722A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1722A. Spell Check">
+                                        Spell Check
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">sorting, strings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1703A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1703A. YES or YES?">
+                                        YES or YES?
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">implementation, strings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1692A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1692A. Marathon">
+                                        Marathon
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">implementation</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1676A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1676A. Lucky?">
+                                        Lucky?
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">implementation, math</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1791G1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1791G1. Teleporters (Easy)">
+                                        Teleporters (Easy)
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-cyan-600">1100</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">greedy, sorting</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1729C</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1729C. Jumping on Tiles">
+                                        Jumping on Tiles
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-cyan-600">1200</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">greedy, shortest path, sorting</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1702D</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1702D. Not a Cheap String">
+                                        Not a Cheap String
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600">1300</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">greedy, sorting, strings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1690D</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1690D. Black and White Stripe">
+                                        Black and White Stripe
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600">1300</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">dp, implementation, sliding window</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1790D</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1790D. Matryoshkas">
+                                        Matryoshkas
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600">1400</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">data structures, greedy, sorting</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1743C</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1743C. Save the Magazines">
+                                        Save the Magazines
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600">1400</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">dp, greedy</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1675D</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1675D. Vertical Paths">
+                                        Vertical Paths
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600">1500</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">dfs, graphs, trees</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1800E</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1800E. Remove k Digits">
+                                        Remove k Digits
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600">1600</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">graphs, sorting, strings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1709C</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1709C. OK-String">
+                                        OK-String
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-orange-500">1700</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">constructive, greedy</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1701D</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1701D. Points on Plane">
+                                        Points on Plane
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-orange-500">1800</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">binary search, data structures, greedy</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1620C</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1620C. Add One">
+                                        Add One
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-500">1900</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">dp, math</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">1783D</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <a href="#" class="problem-select-link text-blue-600 hover:text-blue-800" data-target="page-problem-ide" data-problem-title="1783D. Different Arrays">
+                                        Different Arrays
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-500">2000</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">dp</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            
+            <div id="page-problem-ide" class="main-page-content h-full grid-cols-1 lg:grid-cols-2 hidden">
+                
+                <div class="flex flex-col h-full bg-white border-r border-gray-200 overflow-y-auto">
+                    <div class="p-5 flex justify-between items-center">
+                        <div>
+                            <h1 id="problem-title" class="text-2xl font-bold">A. Sum of Two Numbers</h1>
+                            <div class="flex space-x-4 text-sm text-gray-500 mt-2">
+                                <span>Time Limit: 1s</span>
+                                <span>Memory Limit: 256MB</span>
+                            </div>
+                        </div>
+                        
+                        <button id="btn-generate-hint" class="flex-shrink-0 ml-4 px-3 py-2 text-sm font-medium text-white bg-purple-600 rounded-md shadow-sm hover:bg-purple-700">
+                            ✨ Generate Hint
+                        </button>
+                    </div>
+
+                    
+                    <div class="border-b border-gray-200 px-5">
+                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                            <a href="#" data-target="content-statement" class="problem-tab-link border-blue-600 text-blue-600 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">Statement</a>
+                            <a href="#" data-target="content-examples" class="problem-tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">Examples</a>
+                            <a href="#" data-target="content-submissions" class="problem-tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">My Submissions</a>
+                        </nav>
+                    </div>
+
+                    
+                    <div class="p-5 space-y-4 text-gray-700 text-sm leading-relaxed overflow-y-auto">
+                        
+                        <div id="content-statement" class="problem-tab-content space-y-4">
+                            <p>You are given two integers, 'a' and 'b'. Your task is to compute their sum.</p>
+                            
+                            <h2 class="font-semibold text-md mt-4">Input</h2>
+                            <p>The first line contains an integer 't' (1 &lt;= t &lt;= 1000) — the number of test cases. Each of the next 't' lines contains two integers 'a' and 'b' (1 &lt;= a, b &lt;= 10^9).</p>
+                            
+                            <h2 class="font-semibold text-md mt-4">Output</h2>
+                            <p>For each test case, print a single integer — the sum of 'a' and 'b' on a new line.</p>
+                        </div>
+                        
+                        
+                        <div id="content-examples" class="problem-tab-content space-y-3 hidden">
+                            <h2 class="font-semibold text-md">Example 1</h2>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                                    <h3 class="font-medium text-gray-500 text-xs uppercase tracking-wider mb-2">Input</h3>
+                                    <pre id="example-1-input" class="font-mono text-sm">2
+1 5
+10 12</pre>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                                    <h3 class="font-medium text-gray-500 text-xs uppercase tracking-wider mb-2">Output</h3>
+                                    <pre id="example-1-output" class="font-mono text-sm">6
+22</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div id="content-submissions" class="problem-tab-content space-y-3 hidden">
+                            <p>You have not made any submissions for this problem yet.</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="flex flex-col h-full bg-gray-50 overflow-hidden">
+                    
+                    
+                    <div class="flex-grow flex flex-col min-h-0">
+                        
+                        <div class="flex justify-between items-center p-3 border-b border-gray-200 bg-white">
+                            <div>
+                                <select class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm">
+                                    <option>C++ (GCC 11.2)</option>
+                                    <option>Python 3.10</option>
+                                    <option>Java 17</option>
+                                </select>
+                            </div>
+                            <div class="flex space-x-2">
+                                
+                                <button id="btn-explain-code" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">✨ Explain Code</button>
+                                <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">Run Tests</button>
+                                <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700">Submit</button>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="flex-grow bg-white p-4 overflow-y-auto mock-editor text-sm">
+                            <pre id="ide-code-content" class="text-gray-400">1  #include &lt;iostream&gt;
+2
+3  int main() {
+4      int t;
+5      std::cin &gt;&gt; t;
+6      while (t--) {
+7          int a, b;
+8          std::cin &gt;&gt; a &gt;&gt; b;
+9          std::cout &lt;&lt; a + b &lt;&lt; std::endl;
+10     }
+11     return 0;
+12 }
+13 
+14 
+15 
+16 
+17 
+18 
+19 </pre>
+                        </div>
+                    </div>
+
+                    
+                    <div class="flex-shrink-0 bg-white border-t border-gray-200 h-1/3 max-h-64 overflow-y-auto">
+                        
+                        <div class="border-b border-gray-200 px-4">
+                            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                <a href="#" data-target="content-test-results" class="insight-tab-link border-blue-600 text-blue-600 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">Test Results</a>
+                                <a href="#" data-target="content-performance" class="insight-tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">Performance Insights</a>
+                            </nav>
+                        </div>
+
+                        
+                        <div class="p-4">
+                            
+                            <div id="content-test-results" class="insight-tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
+                                
+                                <div class="space-y-2">
+                                    <div class="flex items-center p-3 bg-green-50 border border-green-200 rounded-md">
+                                        <span class="text-green-600 font-bold mr-3">✔</span>
+                                        <div class="text-sm">
+                                            <span class="font-medium">Test Case 1:</span> Passed
+                                            <span class="text-gray-500 ml-2">(0.02s, 1.2MB)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-red-50 border border-red-200 rounded-md">
+                                        <span class="text-red-600 font-bold mr-3">✘</span>
+                                        <div class="text-sm">
+                                            <span class="font-medium">Test Case 2:</span> Wrong Answer
+                                            <span class="text-gray-500 ml-2">(0.01s, 1.1MB)</span>
+                                        </div>
+                                        
+                                        <button id="btn-debug-code" class="ml-auto text-xs font-medium text-purple-600 hover:text-purple-800 flex-shrink-0">
+                                            ✨ Debug
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-gray-100 border border-gray-200 rounded-md">
+                                        <span class="text-gray-500 font-bold mr-3">?</span>
+                                        <div class="text-sm">
+                                            <span class="font-medium">Test Case 3:</span> Pending
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-24 h-24" viewBox="0 0 36 36">
+                                            <circle cx="18" cy="18" r="15.915494309189533" fill="transparent" stroke="#ef4444" stroke-width="3.8"></circle> 
+                                            <circle cx="18" cy="18" r="15.915494309189533" fill="transparent" stroke="#22c55e" stroke-width="3.8" stroke-dasharray="25 75" stroke-dashoffset="25"></circle> 
+                                            <circle cx="18" cy="18" r="15.915494309189533" fill="transparent" stroke="#e5e7eb" stroke-width="3.8" stroke-dasharray="50 50" stroke-dashoffset="0"></circle> 
+                                        </svg>
+                                    </div>
+                                    <div class="text-sm space-y-1">
+                                        <h4 class="font-semibold mb-2">Session Submissions</h4>
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                                            <span>Accepted (1)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                                            <span>Wrong Answer (2)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 rounded-full bg-gray-200 mr-2"></span>
+                                            <span>Time Limit (1)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div id="content-performance" class="insight-tab-content hidden space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <span class="text-sm font-medium text-gray-700">Your Runtime vs. Average</span>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Your time: 0.02s (45% faster than average)</span>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <span class="text-sm font-medium text-gray-700">Your Memory vs. Average</span>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 20%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Your memory: 1.2MB (80% less than average)</span>
+                                    </div>
+                                </div>
+                                <hr class="border-gray-200"/>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-semibold mb-3 text-sm text-gray-800">Popular Languages</h4>
+                                        <div class="space-y-2">
+                                            <div class="space-y-1">
+                                                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                                    <span>C++ 17</span>
+                                                    <span>65%</span>
+                                                </div>
+                                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 65%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                                    <span>Python 3</span>
+                                                    <span>20%</span>
+                                                </div>
+                                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 20%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                                    <span>Java 11</span>
+                                                    <span>10%</span>
+                                                </div>
+                                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                                    <div class="bg-red-500 h-2 rounded-full" style="width: 10%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                                    <span>Other</span>
+                                                    <span>5%</span>
+                                                </div>
+                                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                                    <div class="bg-gray-400 h-2 rounded-full" style="width: 5%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <svg class="w-24 h-24" viewBox="0 0 36 36">
+                                                <circle cx="18" cy="18" r="15.915494309189533" fill="transparent" stroke="#ef4444" stroke-width="3.8"></circle> 
+                                                <circle cx="18" cy="18" r="15.915494309189533" fill="transparent" stroke="#f59e0b" stroke-width="3.8" stroke-dasharray="30 70" stroke-dashoffset="25"></circle> 
+                                                <circle cx="18" cy="18" r="15.915494309189533" fill="transparent" stroke="#22c55e" stroke-width="3.8" stroke-dasharray="40 60" stroke-dashoffset="-5"></circle> 
+                                            </svg>
+                                        </div>
+                                        <div class="text-sm space-y-1">
+                                            <h4 class="font-semibold mb-2 text-gray-800">Global Submissions</h4>
+                                            <div class="flex items-center">
+                                                <span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                                                <span>Accepted (40%)</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                                                <span>Wrong Answer (30%)</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <span class="w-3 h-3 rounded-full bg-amber-500 mr-2"></span>
+                                                <span>Time Limit (30%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="border-gray-200"/>
+                                <div>
+                                    <h4 class="font-semibold mb-3 text-sm text-gray-800">Related Problems</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <a href="#" class="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200">math</a>
+                                        <a href="#" class="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">implementation</a>
+                                        <a href="#" class="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">adhoc</a>
+                                        <a href="#" class="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">800-900</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="page-contests" class="main-page-content hidden p-6 md:p-10 max-w-5xl mx-auto">
+                <h1 class="text-3xl font-bold mb-6 text-gray-900">Contests</h1>
+                
+                <h2 class="text-xl font-semibold mb-4 text-blue-700">Upcoming Contests</h2>
+                <div class="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contest Name</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Time</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Codeforces Round #999 (Div. 2)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Div. 2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nov 10, 2025, 18:00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-blue-600 hover:text-blue-900">Register</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Educational Codeforces Round #150</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Educational</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nov 12, 2025, 20:00</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-blue-600 hover:text-blue-900">Register</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Codeforces Round #998 (Div. 1 + Div. 2)</td>
+                                <td class="px-6 py-4 whitespace-nowJap text-sm text-gray-500">Combined</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nov 15, 2025, 17:30</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-blue-600 hover:text-blue-900">Register</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            
+            <div id="page-ratings" class="main-page-content hidden p-6 md:p-10 max-w-5xl mx-auto">
+                <h1 class="text-3xl font-bold mb-6 text-gray-900">Ratings</h1>
+                
+                <h2 class="text-xl font-semibold mb-4 text-purple-700">Top Rated Users</h2>
+                <div class="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User ID</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Change</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600">code_master_123</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">3200</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+50</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600">algo_queen</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">3150</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+20</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-orange-500">py_wizard</td>
+                                <td class="px-6 py-4 whitespace-nowAm text-sm text-gray-900 font-bold">2900</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+75</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-purple-600">cpp_ninja</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">2500</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">-25</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">...</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">...</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">42</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">coder_user_99</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">2150</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            
+            <div id="page-profile" class="main-page-content hidden p-6 md:p-10 max-w-5xl mx-auto">
+                <h1 class="text-3xl font-bold mb-6 text-gray-900">Your Profile</h1>
+                
+                <div class="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center space-x-4">
+                             <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-3xl font-bold ring-4 ring-blue-200">
+                                CU
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-blue-600">coder_user_99</h2>
+                                <p class="text-sm text-gray-500">Joined: Jan 1, 2024</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <span class="text-xs font-medium text-gray-500 uppercase">Rating</span>
+                                <p class="text-2xl font-bold text-gray-900">2150</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <span class="text-xs font-medium text-gray-500 uppercase">Rank</span>
+                                <p class="text-2xl font-bold text-gray-900">Specialist</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <span class="text-xs font-medium text-gray-500 uppercase">Problems Solved</span>
+                                <p class="text-2xl font-bold text-gray-900">342</p>
+                            </div>
+                             <div class="bg-gray-50 p-4 rounded-lg">
+                                <span class="text-xs font-medium text-gray-500 uppercase">Contests</span>
+                                <p class="text-2xl font-bold text-gray-900">58</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        
+        <footer id="main-footer" class="flex-shrink-0 w-full bg-white border-t border-gray-200 py-4 hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-sm text-gray-500">
+                    © 2025 Codeforces. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    
+    <div id="ai-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-lg font-medium text-purple-700">✨ AI Assistant</h3>
+                <button id="btn-close-modal" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto space-y-4">
+                
+                <div id="modal-loader" class="hidden">
+                    <div class="loader"></div>
+                    <p class="text-center text-gray-500">Generating insights...</p>
+                </div>
+                
+                <div id="modal-response" class="prose prose-sm max-w-none"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /**
+             * Generalized Tab System (for problem/insight tabs)
+             */
+            function initializeTabs(tabSelector, contentSelector) {
+                const tabs = document.querySelectorAll(tabSelector);
+                const contents = document.querySelectorAll(contentSelector);
+
+                if (tabs.length === 0) return;
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = tab.dataset.target;
+                        const targetContent = document.getElementById(targetId);
+
+                        tabs.forEach(t => {
+                            t.classList.remove('border-blue-600', 'text-blue-600');
+                            t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                        });
+                        tab.classList.add('border-blue-600', 'text-blue-600');
+                        tab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                        contents.forEach(c => c.classList.add('hidden'));
+                        if (targetContent) {
+                            targetContent.classList.remove('hidden');
+                        }
+                    });
+                });
+                
+                if (tabs.length > 0) {
+                    tabs[0].click();
+                }
+            }
+
+            const headerLinks = document.querySelectorAll('.header-nav-link');
+            const mainPages = document.querySelectorAll('.main-page-content');
+
+            /**
+             * Main Page Navigation (for Problem, Contests, Ratings)
+             */
+            function initializePageNavigation() {
+                headerLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = link.dataset.target;
+                        showMainPage(targetId);
+                    });
+                });
+            }
+
+            /**
+             * NEW: Problem Selection from List
+             */
+            function initializeProblemSelection() {
+                const problemLinks = document.querySelectorAll('.problem-select-link');
+                problemLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = link.dataset.target; // 'page-problem-ide'
+                        const problemTitle = link.dataset.problemTitle;
+                        
+                        // Update the problem IDE page's title
+                        const titleElement = document.getElementById('problem-title');
+                        if (titleElement) {
+                            titleElement.innerText = problemTitle;
+                        }
+                        
+                        // TODO: In a real app, you'd fetch and update the problem statement,
+                        // examples, and reset the solution/submissions.
+                        
+                        // For the mockup, just reset the tabs to the first one
+                        initializeTabs('.problem-tab-link', '.problem-tab-content');
+                        initializeTabs('.insight-tab-link', '.insight-tab-content');
+
+                        // Show the IDE page
+                        showMainPage(targetId);
+                    });
+                });
+            }
+            
+            // Call the new function
+            initializeProblemSelection();
+
+
+            /**
+             * Helper to show a main page and update header
+             * @param {string} targetId - The ID of the page to show.
+             */
+            function showMainPage(targetId) {
+                const targetPage = document.getElementById(targetId);
+
+                // Hide all pages
+                mainPages.forEach(p => {
+                    p.classList.add('hidden');
+                    // Fix for problem page, it needs grid
+                    if (p.id === 'page-problem-ide') { // UPDATED ID
+                        p.classList.remove('grid');
+                    }
+                });
+
+                // Show target page
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                    if (targetPage.id === 'page-problem-ide') { // UPDATED ID
+                        targetPage.classList.add('grid'); // Re-apply grid for problem page
+                    }
+                }
+
+                // Update active link style
+                headerLinks.forEach(l => {
+                    if (l.dataset.target === targetId) {
+                        l.classList.add('border-blue-500', 'text-gray-900');
+                        l.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    } else {
+                        l.classList.remove('border-blue-500', 'text-gray-900');
+                        l.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    }
+                });
+
+                // Hide user menu
+                userMenu.classList.add('hidden');
+            }
+
+            // Initialize all navigation systems
+            initializePageNavigation();
+            initializeTabs('.problem-tab-link', '.problem-tab-content');
+            initializeTabs('.insight-tab-link', '.insight-tab-content');
+
+
+            // --- LOGIN/LOGOUT LOGIC ---
+            const btnLogin = document.getElementById('btn-login');
+            const pageLogin = document.getElementById('page-login');
+            const mainHeader = document.getElementById('main-header');
+            const mainFooter = document.getElementById('main-footer');
+            const btnLogout = document.getElementById('btn-logout');
+
+            if (btnLogin) {
+                btnLogin.addEventListener('click', (e) => {
+                    e.preventDefault(); // Stop form from submitting
+                    pageLogin.classList.add('hidden');
+                    mainHeader.classList.remove('hidden');
+                    mainFooter.classList.remove('hidden');
+                    showMainPage('page-dashboard'); // Show dashboard on login
+                    
+                    // Initialize charts
+                    initCharts();
+                });
+            }
+
+            if (btnLogout) {
+                btnLogout.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Hide all main pages
+                    mainPages.forEach(p => {
+                        p.classList.add('hidden');
+                        if (p.id === 'page-problem-ide') { // UPDATED ID
+                            p.classList.remove('grid');
+                        }
+                    });
+
+                    // Hide header/footer
+                    mainHeader.classList.add('hidden');
+                    mainFooter.classList.add('hidden');
+                    userMenu.classList.add('hidden'); // Hide menu
+
+                    // Show login page
+                    pageLogin.classList.remove('hidden');
+                });
+            }
+
+
+            // --- USER MENU LOGIC ---
+            const btnUserMenu = document.getElementById('btn-user-menu');
+            const userMenu = document.getElementById('user-menu');
+            const btnProfileLink = document.getElementById('btn-profile-link');
+
+            if (btnUserMenu) {
+                btnUserMenu.addEventListener('click', () => {
+                    userMenu.classList.toggle('hidden');
+                });
+
+                // Hide menu if clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!btnUserMenu.contains(e.target) && !userMenu.contains(e.target)) {
+                        userMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (btnProfileLink) {
+                btnProfileLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showMainPage('page-profile');
+                    // De-activate all header links
+                    headerLinks.forEach(l => {
+                        l.classList.remove('border-blue-500', 'text-gray-900');
+                        l.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    });
+                });
+            }
+
+
+            // --- MODAL CONTROLS ---
+            const modal = document.getElementById('ai-modal');
+            const btnCloseModal = document.getElementById('btn-close-modal');
+            const modalLoader = document.getElementById('modal-loader');
+            const modalResponse = document.getElementById('modal-response');
+
+            if (modal) {
+                const showModal = () => modal.classList.remove('hidden');
+                const hideModal = () => modal.classList.add('hidden');
+                const showLoader = () => {
+                    modalLoader.classList.remove('hidden');
+                    modalResponse.innerHTML = '';
+                };
+                const hideLoader = () => modalLoader.classList.add('hidden');
+                
+                btnCloseModal.addEventListener('click', hideModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        hideModal();
+                    }
+                });
+
+                // --- Gemini API Function ---
+                const API_KEY = ""; // API key is handled by the environment
+                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+
+                async function callGeminiAPI(payload, maxRetries = 3) {
+                    let attempt = 0;
+                    let delay = 1000;
+                    while (attempt < maxRetries) {
+                        try {
+                            const response = await fetch(API_URL, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+                            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                            const result = await response.json();
+                            if (result.candidates && result.candidates.length > 0) {
+                                const part = result.candidates[0].content?.parts?.[0];
+                                if (part && part.text) return part.text;
+                            }
+                            throw new Error("Invalid API response structure.");
+                        } catch (error) {
+                            console.warn(`Attempt ${attempt + 1} failed. Retrying in ${delay}ms...`, error);
+                            attempt++;
+                            if (attempt < maxRetries) {
+                                await new Promise(resolve => setTimeout(resolve, delay));
+                                delay *= 2;
+                            } else {
+                                throw new Error(`Failed to call Gemini API after ${maxRetries} attempts: ${error.message}`);
+                            }
+                        }
+                    }
+                    return "Failed to get a response from the AI.";
+                }
+
+                function getProblemText() {
+                    const title = document.getElementById('problem-title')?.innerText || 'N/A';
+                    const statement = document.getElementById('content-statement')?.innerText || 'N/A';
+                    const exampleInput = document.getElementById('example-1-input')?.innerText || 'N/A';
+                    const exampleOutput = document.getElementById('example-1-output')?.innerText || 'N/A';
+                    return `Problem Title: ${title}\n\nStatement:\n${statement}\n\nExample Input:\n${exampleInput}\n\nExample Output:\n${exampleOutput}`;
+                }
+
+                function getCodeText() {
+                    return document.getElementById('ide-code-content')?.innerText || 'No code written.';
+                }
+
+                // --- Feature 1: Generate Hint ---
+                document.getElementById('btn-generate-hint').addEventListener('click', async () => {
+                    showModal();
+                    showLoader();
+                    const problemText = getProblemText();
+                    const systemPrompt = "You are a world-class competitive programming coach. A student is stuck on a problem. Provide a single, concise hint to guide them in the right direction. Do NOT provide the full solution or write any code. Focus on the core logic or algorithm they should be thinking about.";
+                    const userQuery = `Here is the problem:\n\n${problemText}\n\nPlease provide a hint.`;
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    };
+                    try {
+                        const responseText = await callGeminiAPI(payload);
+                        modalResponse.innerHTML = responseText.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    } catch (error) {
+                        modalResponse.innerHTML = `<p class="text-red-600"><strong>Error:</strong> ${error.message}</p>`;
+                    } finally {
+                        hideLoader();
+                    }
+                });
+
+                // --- Feature 2: Explain Code ---
+                document.getElementById('btn-explain-code').addEventListener('click', async () => {
+                    showModal();
+                    showLoader();
+                    const codeText = getCodeText();
+                    const systemPrompt = "You are a senior software engineer acting as a code reviewer. A junior developer has submitted the following code. Explain what the code does, step-by-step, in a clear and concise manner. Use bullet points for clarity.";
+                    const userQuery = `Please explain this code:\n\n\`\`\`cpp\n${codeText}\n\`\`\``;
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    };
+                    try {
+                        const responseText = await callGeminiAPI(payload);
+                        modalResponse.innerHTML = responseText.replace(/\n/g, '<br>').replace(/```(\w+)?/g, '<pre class="bg-gray-100 p-2 rounded-md">').replace(/```/g, '</pre>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`([^`]+)`/g, '<code class="bg-gray-200 px-1 rounded">$1</code>').replace(/(\* |-|• )/g, '<br>• ');
+                    } catch (error) {
+                        modalResponse.innerHTML = `<p class="text-red-600"><strong>Error:</strong> ${error.message}</p>`;
+                    } finally {
+                        hideLoader();
+                    }
+                });
+
+                // --- Feature 3: Debug Code ---
+                const btnDebug = document.getElementById('btn-debug-code');
+                if (btnDebug) {
+                    btnDebug.addEventListener('click', async () => {
+                        showModal();
+                        showLoader();
+                        const problemText = getProblemText();
+                        const codeText = getCodeText();
+                        const failedTestCase = `Test Case 2: Wrong Answer\nInput: (Mock Input)\n5\n-10 5\nExpected Output: (Mock Output)\n-5\nActual Output: (Mock Actual)\n15`;
+                        const systemPrompt = "You are an expert competitive programming debugger. A user's submission failed a test case. Given the problem, their code, and the failed test case, identify the likely bug. Provide a clear explanation of the bug and suggest how to fix it. Be concise.";
+                        const userQuery = `Here is the problem:\n${problemText}\n\nHere is my code:\n\`\`\`cpp\n${codeText}\n\`\`\`\n\nIt failed this test case:\n${failedTestCase}\n\nWhat is the bug and how can I fix it?`;
+                        const payload = {
+                            contents: [{ parts: [{ text: userQuery }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        };
+                        try {
+                            const responseText = await callGeminiAPI(payload);
+                            modalResponse.innerHTML = responseText.replace(/\n/g, '<br>').replace(/```(\w+)?/g, '<pre class="bg-gray-100 p-2 rounded-md">').replace(/```/g, '</pre>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`([^`]+)`/g, '<code class="bg-gray-200 px-1 rounded">$1</code>');
+                        } catch (error) {
+                            modalResponse.innerHTML = `<p class="text-red-600"><strong>Error:</strong> ${error.message}</p>`;
+                        } finally {
+                            hideLoader();
+                        }
+                    });
+                }
+            } // End of modal-related-code block
+
+
+            // --- CHART.JS MOCKUP ---
+            let chartsInitialized = false;
+            function initCharts() {
+                if (chartsInitialized) return;
+                
+                // Rating Chart (Line)
+                const ratingCtx = document.getElementById('rating-chart')?.getContext('2d');
+                if (ratingCtx) {
+                    new Chart(ratingCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                            datasets: [{
+                                label: 'Rating',
+                                data: [1500, 1580, 1620, 1750, 1800, 1950, 2000, 2010, 2100, 2150],
+                                borderColor: 'rgb(37, 99, 235)', // blue-600
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                fill: true,
+                                tension: 0.1
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false }
+                    });
+                }
+
+                // Difficulty Chart (Pie)
+                const difficultyCtx = document.getElementById('difficulty-chart')?.getContext('2d');
+                if (difficultyCtx) {
+                    new Chart(difficultyCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['800-1200', '1200-1600', '1600-2000', '2000+'],
+                            datasets: [{
+                                label: 'Solved Problems',
+                                data: [150, 120, 60, 12],
+                                backgroundColor: [
+                                    'rgb(34, 197, 94)', // green-500
+                                    'rgb(59, 130, 246)', // blue-500
+                                    'rgb(168, 85, 247)', // purple-500
+                                    'rgb(245, 158, 11)'  // amber-500
+                                ],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false }
+                    });
+                }
+
+                // Language Chart (Bar)
+                const languageCtx = document.getElementById('language-chart')?.getContext('2d');
+                if (languageCtx) {
+                    new Chart(languageCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['C++ 17', 'Python 3', 'Java 11', 'C++ 20'],
+                            datasets: [{
+                                label: 'Problems Solved',
+                                data: [280, 45, 15, 2],
+                                backgroundColor: [
+                                    'rgb(59, 130, 246)',  // blue-500
+                                    'rgb(245, 158, 11)', // amber-500
+                                    'rgb(239, 68, 68)',  // red-500
+                                    'rgb(107, 114, 128)' // gray-500
+                                ],
+                                barPercentage: 0.5
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y', // Horizontal bar chart
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            }
+                        }
+                    });
+                }
+                
+                chartsInitialized = true;
+            }
+        });
+    </script>
+</body>
+</html>
