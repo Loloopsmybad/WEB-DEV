@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STEP File Viewer (Optimized)</title>
+  <style>
+    /* ... (Keeping your existing CSS, it's great) ... */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #0f0f11; color: #e0e0e0; height: 100vh; display: flex; flex-direction: column; }
+    #toolbar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #1a1a1e; border-bottom: 1px solid #2e2e36; flex-shrink: 0; }
+    #toolbar h1 { font-size: 15px; font-weight: 500; color: #ccc; flex: 1; }
+    #upload-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; background: #3a3aff; color: #fff; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; transition: background 0.15s; }
+    #upload-btn:hover { background: #5252ff; }
+    #file-input { display: none; }
+    #status { font-size: 12px; color: #888; }
+    #controls { display: flex; gap: 8px; align-items: center; }
+    .ctrl-btn { padding: 5px 10px; background: #26262c; border: 1px solid #3e3e48; border-radius: 5px; color: #ccc; font-size: 12px; cursor: pointer; transition: background 0.1s; }
+    .ctrl-btn:hover { background: #32323a; }
+    .ctrl-btn.active { background: #3a3aff; border-color: #3a3aff; color: #fff; }
+    #viewport { flex: 1; position: relative; overflow: hidden; }
+    #canvas { display: block; width: 100%; height: 100%; }
+    #drop-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #0f0f11; pointer-events: none; }
+    #drop-overlay.hidden { display: none; }
+    .drop-icon { width: 64px; height: 64px; border: 2px dashed #444; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    #drop-overlay p { color: #666; font-size: 14px; }
+    #loader { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: rgba(15,15,17,0.85); font-size: 14px; color: #aaa; z-index: 10; }
+    #loader.visible { display: flex; }
+    .spinner { width: 32px; height: 32px; border: 3px solid #333; border-top-color: #3a3aff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #info { position: absolute; bottom: 16px; left: 16px; background: rgba(26,26,30,0.85); border: 1px solid #2e2e36; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #999; line-height: 1.7; display: none; }
+    #info.visible { display: block; }
+    #help { position: absolute; bottom: 16px; right: 16px; background: rgba(26,26,30,0.85); border: 1px solid #2e2e36; border-radius: 8px; padding: 8px 12px; font-size: 11px; color: #666; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<div id="toolbar">
+  <h1>STEP Viewer</h1>
+  <div id="controls" style="display:none">
+    <button class="ctrl-btn active" id="btn-solid">Solid</button>
+    <button class="ctrl-btn" id="btn-wire">Wireframe</button>
+    <button class="ctrl-btn" id="btn-reset">Reset view</button>
+  </div>
+  <span id="status">No file loaded</span>
+  <button id="upload-btn" onclick="document.getElementById('file-input').click()">&#8679; Open STEP file</button>
+  <input type="file" id="file-input" accept=".step,.stp,.STEP,.STP" />
+</div>
+
+<div id="viewport">
+  <canvas id="canvas"></canvas>
+  <div id="drop-overlay">
+    <div class="drop-icon">&#128247;</div>
+    <p>Open a <strong>.step</strong> or <strong>.stp</strong> file</p>
+  </div>
+  <div id="loader">
+    <div class="spinner"></div>
+    <span id="loader-msg">Initializing...</span>
+  </div>
+  <div id="info"></div>
+  <div id="help">Orbit: left drag | Pan: right drag | Zoom: scroll</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+// 1. Worker Script (The Engine)
+const workerCode = `
+  importScripts('https://cdn.jsdelivr.net/npm/occt-import-js@0.0.22/dist/occt-import-js.js');
+
+  onmessage = async (e) => {
+    const { buffer, fileName } = e.data;
+    try {
+      // 1. Initialize the engine
+      const occt = await occtimportjs({
+        locateFile: (path) => 'https://cdn.jsdelivr.net/npm/occt-import-js@0.0.22/dist/' + path
+      });
+
+      // 2. Prepare the data
+      const fileData = new Uint8Array(buffer);
+
+      // 3. Parse directly
+      // Most versions of occt-import-js accept the Uint8Array directly
+      // without needing to manually use occt.FS.writeFile
+      const result = occt.ReadStepFile(fileData, null);
+      
+      if (!result || !result.success) {
+        throw new Error("The engine failed to process the geometry. The file might be corrupt or unsupported.");
+      }
+
+      postMessage({ result });
+    } catch (err) {
+      postMessage({ error: "Worker Error: " + err.message });
+    }
+  };
+`;
+// 2. Three.js Scene Setup
+const canvas = document.getElementById('canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setClearColor(0x0f0f11);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
+camera.position.set(5, 5, 5);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+const sun = new THREE.DirectionalLight(0xffffff, 0.8);
+sun.position.set(5, 10, 7);
+scene.add(sun);
+
+const grid = new THREE.GridHelper(20, 20, 0x333333, 0x222222);
+scene.add(grid);
+
+// Basic Orbit Logic
+let theta = 0, phi = Math.PI / 4, radius = 10, panX = 0, panY = 0;
+function updateCamera() {
+  camera.position.x = panX + radius * Math.sin(phi) * Math.sin(theta);
+  camera.position.y = panY + radius * Math.cos(phi);
+  camera.position.z = radius * Math.sin(phi) * Math.cos(theta);
+  camera.lookAt(panX, panY, 0);
+}
+
+// Mouse controls
+let isOrbit = false, isPan = false, lx = 0, ly = 0;
+canvas.addEventListener('mousedown', e => {
+  if (e.button === 0) isOrbit = true;
+  if (e.button === 2) isPan   = true;
+  lx = e.clientX; ly = e.clientY;
+});
+window.addEventListener('mouseup', () => { isOrbit = false; isPan = false; });
+window.addEventListener('mousemove', e => {
+  const dx = e.clientX - lx, dy = e.clientY - ly;
+  lx = e.clientX; ly = e.clientY;
+  if (isOrbit) {
+    theta -= dx * 0.008;
+    phi = Math.max(0.05, Math.min(Math.PI - 0.05, phi - dy * 0.008));
+    updateCamera();
+  }
+  if (isPan) {
+    panX -= dx * radius * 0.001;
+    panY += dy * radius * 0.001;
+    updateCamera();
+  }
+});
+canvas.addEventListener('wheel', e => {
+  radius = Math.max(0.01, radius * (1 + e.deltaY * 0.001));
+  updateCamera();
+}, { passive: true });
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+// 3. File Handling & Worker Execution
+let currentMeshes = [];
+
+async function readFile(file) {
+  const buf = await file.arrayBuffer();
+  showLoader('Loading OCCT & Parsing (Background)...');
+  
+  // Create worker from blob
+  const blob = new Blob([workerCode], { type: 'application/javascript' });
+  const worker = new Worker(URL.createObjectURL(blob));
+
+  // Transfer the buffer to the worker (zero-copy performance)
+  worker.postMessage({ buffer: buf, fileName: file.name }, [buf]);
+
+  worker.onmessage = (e) => {
+    const { result, error } = e.data;
+    if (error || !result || !result.success) {
+      setStatus("Error: " + (error || "Parsing failed"));
+      hideLoader();
+    } else {
+      renderResult(result, file.name);
+    }
+    worker.terminate();
+  };
+}
+
+function renderResult(result, fileName) {
+  currentMeshes.forEach(m => scene.remove(m));
+  currentMeshes = [];
+
+  let totalVerts = 0;
+  const mat = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide });
+
+  result.meshes.forEach(meshData => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(meshData.attributes.position.array), 3));
+    if (meshData.attributes.normal) {
+      geo.setAttribute('normal', new THREE.BufferAttribute(new Float32Array(meshData.attributes.normal.array), 3));
+    } else {
+      geo.computeVertexNormals();
+    }
+    if (meshData.index) {
+      geo.setIndex(new THREE.BufferAttribute(new Uint32Array(meshData.index.array), 1));
+    }
+
+    const color = meshData.color ? new THREE.Color(meshData.color[0], meshData.color[1], meshData.color[2]) : new THREE.Color(0x4488cc);
+    const mesh = new THREE.Mesh(geo, mat.clone());
+    mesh.material.color = color;
+    scene.add(mesh);
+    currentMeshes.push(mesh);
+    totalVerts += meshData.attributes.position.array.length / 3;
+  });
+
+  // Fit Camera
+  const box = new THREE.Box3().setFromObject(scene);
+  const center = box.getCenter(new THREE.Vector3());
+  panX = center.x; panY = center.y;
+  radius = box.getSize(new THREE.Vector3()).length() * 1.5;
+  updateCamera();
+
+  document.getElementById('controls').style.display = 'flex';
+  document.getElementById('drop-overlay').classList.add('hidden');
+  showInfo(fileName, result.meshes.length, totalVerts);
+  setStatus(fileName);
+  hideLoader();
+}
+
+// 4. Utilities & Event Listeners
+function showLoader(msg) { document.getElementById('loader-msg').textContent = msg; document.getElementById('loader').classList.add('visible'); }
+function hideLoader() { document.getElementById('loader').classList.remove('visible'); }
+function setStatus(t) { document.getElementById('status').textContent = t; }
+function showInfo(n, m, v) { 
+  const el = document.getElementById('info');
+  el.innerHTML = `<strong>${n}</strong><br>Meshes: ${m}<br>Vertices: ${v.toLocaleString()}`;
+  el.classList.add('visible');
+}
+
+document.getElementById('file-input').addEventListener('change', e => { if(e.target.files[0]) readFile(e.target.files[0]); });
+
+// Drag-drop
+const vp = document.getElementById('viewport');
+vp.addEventListener('dragover', e => e.preventDefault());
+vp.addEventListener('drop', e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) readFile(f); });
+
+// Toolbar buttons
+document.getElementById('btn-solid').addEventListener('click', function () {
+  currentMeshes.forEach(m => { m.material.wireframe = false; });
+  this.classList.add('active');
+  document.getElementById('btn-wire').classList.remove('active');
+});
+document.getElementById('btn-wire').addEventListener('click', function () {
+  currentMeshes.forEach(m => { m.material.wireframe = true; });
+  this.classList.add('active');
+  document.getElementById('btn-solid').classList.remove('active');
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  if (!currentMeshes.length) return;
+  const box = new THREE.Box3();
+  currentMeshes.forEach(m => box.expandByObject(m));
+  const size = box.getSize(new THREE.Vector3());
+  const c = box.getCenter(new THREE.Vector3());
+  panX = c.x; panY = c.y; theta = 0; phi = Math.PI / 4;
+  radius = Math.max(size.x, size.y, size.z) * 1.8;
+  updateCamera();
+});
+
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});
+renderer.setSize(window.innerWidth, window.innerHeight);
+updateCamera();
+(function anim() { requestAnimationFrame(anim); renderer.render(scene, camera); })();
+</script>
+</body>
+</html>
