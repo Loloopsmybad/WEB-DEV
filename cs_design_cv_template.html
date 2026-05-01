@@ -1,0 +1,433 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .cv-page {
+    font-family: 'DM Mono', monospace;
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .header-block {
+    border-top: 3px solid var(--color-text-primary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding: 1.5rem 0 1.2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .name {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    color: var(--color-text-primary);
+  }
+
+  .name span {
+    display: block;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-top: 8px;
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .contact-grid a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .tag-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 0.5px solid var(--color-border-secondary);
+    color: var(--color-text-secondary);
+    background: var(--color-background-secondary);
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .section-line {
+    height: 0.5px;
+    background: var(--color-border-tertiary);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .entry-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+    padding-top: 2px;
+  }
+
+  .entry-date {
+    display: block;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+  }
+
+  .entry-place {
+    font-style: italic;
+  }
+
+  .entry-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+  }
+
+  .entry-sub {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  .entry-desc {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  .entry-desc li {
+    list-style: none;
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+
+  .entry-desc li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .skill-group {
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 12px 14px;
+    background: var(--color-background-secondary);
+  }
+
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .skill-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-secondary);
+    color: var(--color-text-secondary);
+  }
+
+  .summary-text {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    border-left: 2px solid var(--color-text-primary);
+    padding-left: 16px;
+  }
+
+  .footer-row {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 560px) {
+    .name { font-size: 30px; }
+    .header-block { grid-template-columns: 1fr; }
+    .contact-grid { align-items: flex-start; }
+    .entry { grid-template-columns: 1fr; }
+    .entry-meta { text-align: left; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="cv-page">
+  <h2 class="sr-only" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">CV Template for CS & Design student</h2>
+
+  <div class="header-block">
+    <div>
+      <div class="name">
+        Kanishk
+        <span>B.Tech · Computer Science & Design · 2024–2028</span>
+      </div>
+      <div style="margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+        <span class="tag-pill">UI/UX</span>
+        <span class="tag-pill">Front-end</span>
+        <span class="tag-pill">Open to internships</span>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <span>your@email.com</span>
+      <span>+91 00000 00000</span>
+      <a href="#">github.com/yourhandle</a>
+      <a href="#">linkedin.com/in/yourname</a>
+      <a href="#">yourportfolio.com</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">About</span>
+      <div class="section-line"></div>
+    </div>
+    <p class="summary-text">
+      First-year CS & Design student with a curiosity for where code meets visual thinking. Comfortable with the fundamentals of programming and drawn to building things people can actually use — whether that's a clean interface, a quick script, or a side project that solves a real problem. Actively looking for internship and collaborative opportunities for summer 2025.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Education</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2024 — Present</span>
+        <span class="entry-place">Your City, India</span>
+      </div>
+      <div>
+        <div class="entry-title">B.Tech in Computer Science & Design</div>
+        <div class="entry-sub">Your University Name</div>
+        <ul class="entry-desc">
+          <li>Relevant coursework: Intro to Programming, Design Thinking, Data Structures, Visual Communication</li>
+          <li>CGPA: X.XX / 10 (Semester 1)</li>
+          <li>Member of the Design & Tech Club</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2022 — 2024</span>
+        <span class="entry-place">Your City, India</span>
+      </div>
+      <div>
+        <div class="entry-title">Class XII — Science with Computer Science</div>
+        <div class="entry-sub">Your School Name</div>
+        <ul class="entry-desc">
+          <li>Percentage / Grade: XX% · CBSE / ICSE / State Board</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Projects</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Jan 2025</span>
+        <span class="entry-place">Personal</span>
+      </div>
+      <div>
+        <div class="entry-title">Project Name</div>
+        <div class="entry-sub">HTML · CSS · JavaScript · Figma</div>
+        <ul class="entry-desc">
+          <li>Brief description of what the project does and why you built it</li>
+          <li>One key challenge you solved or skill you applied</li>
+          <li>Link: github.com/yourhandle/project</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Nov 2024</span>
+        <span class="entry-place">College Hackathon</span>
+      </div>
+      <div>
+        <div class="entry-title">Another Project</div>
+        <div class="entry-sub">Python · Figma</div>
+        <ul class="entry-desc">
+          <li>What the project does and who it's for</li>
+          <li>Your specific contribution or role on the team</li>
+          <li>Outcome: finalist / winner / shipped</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Skills</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+          <span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Design</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Adobe XD</span>
+          <span class="skill-tag">Canva</span>
+          <span class="skill-tag">Wireframing</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Linux basics</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Soft skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Team collaboration</span>
+          <span class="skill-tag">Presentation</span>
+          <span class="skill-tag">Problem solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Activities & Achievements</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Ongoing</span>
+      </div>
+      <div>
+        <div class="entry-title">Club / Society Name</div>
+        <div class="entry-sub">Role — Design Lead / Member / Coordinator</div>
+        <ul class="entry-desc">
+          <li>What you do here — e.g. design posters, build the website, organise events</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Dec 2024</span>
+      </div>
+      <div>
+        <div class="entry-title">Hackathon / Competition / Certificate</div>
+        <div class="entry-sub">Organiser / Platform</div>
+        <ul class="entry-desc">
+          <li>Brief outcome — what you built, award received, rank, or skill gained</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <span>Last updated — April 2025</span>
+    <span>References available on request</span>
+  </div>
+</div>

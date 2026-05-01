@@ -1,0 +1,337 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .cv { font-family: 'DM Mono', monospace; background: var(--color-background-primary); color: var(--color-text-primary); max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 3rem; font-size: 12.5px; line-height: 1.6; }
+  .header-block { border-top: 3px solid var(--color-text-primary); border-bottom: 0.5px solid var(--color-border-tertiary); padding: 1.5rem 0 1.2rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: end; }
+  .name { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; color: var(--color-text-primary); }
+  .name span { display: block; font-size: 11.5px; font-family: 'DM Mono', monospace; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-secondary); margin-top: 8px; }
+  .contact-grid { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 11px; color: var(--color-text-secondary); }
+  .contact-grid a { color: var(--color-text-secondary); text-decoration: none; }
+  .tag-pill { display: inline-block; font-size: 10px; font-family: 'DM Mono', monospace; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); background: var(--color-background-secondary); }
+  .section { margin-bottom: 1.8rem; }
+  .section-header { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .section-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--color-text-secondary); white-space: nowrap; }
+  .section-line { height: 0.5px; background: var(--color-border-tertiary); }
+  .entry { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .entry-meta { text-align: right; font-size: 11px; color: var(--color-text-tertiary); line-height: 1.5; padding-top: 2px; }
+  .entry-date { display: block; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 2px; }
+  .entry-place { font-style: italic; font-size: 10.5px; }
+  .entry-title { font-family: 'Syne', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+  .entry-org { font-size: 11.5px; color: var(--color-text-secondary); font-weight: 500; margin-bottom: 4px; }
+  .entry-sub { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 5px; font-style: italic; }
+  .entry-desc { font-size: 11.5px; color: var(--color-text-secondary); line-height: 1.65; }
+  .entry-desc li { list-style: none; padding-left: 12px; position: relative; margin-bottom: 3px; }
+  .entry-desc li::before { content: '—'; position: absolute; left: 0; color: var(--color-text-tertiary); }
+  .highlight-entry { border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; background: var(--color-background-secondary); margin-bottom: 10px; }
+  .highlight-entry:last-child { margin-bottom: 0; }
+  .hl-title { font-family: 'Syne', sans-serif; font-size: 12.5px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+  .hl-meta { font-size: 10.5px; color: var(--color-text-tertiary); margin-bottom: 5px; font-style: italic; }
+  .hl-desc { font-size: 11.5px; color: var(--color-text-secondary); line-height: 1.6; }
+  .star-badge { display: inline-block; font-size: 9px; font-family: 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); margin-left: 6px; vertical-align: middle; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .skill-group { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 12px; background: var(--color-background-secondary); }
+  .skill-group-title { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--color-text-primary); margin-bottom: 7px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .skill-tag { font-size: 10.5px; padding: 2px 7px; border-radius: 2px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); }
+  .summary-text { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.75; border-left: 2px solid var(--color-text-primary); padding-left: 16px; }
+  .footer-row { margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--color-border-tertiary); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--color-text-tertiary); display: flex; justify-content: space-between; }
+  @media (max-width: 560px) {
+    .name { font-size: 26px; }
+    .header-block { grid-template-columns: 1fr; }
+    .contact-grid { align-items: flex-start; }
+    .entry { grid-template-columns: 1fr; }
+    .entry-meta { text-align: left; }
+    .skills-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+
+<div class="cv">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">CV — Kanishk Vivek Verma</h2>
+
+  <div class="header-block">
+    <div>
+      <div class="name">
+        Kanishk Vivek Verma
+        <span>B.Tech · Computer Science & Design · IIIT Delhi · 2025–2029</span>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="tag-pill">Robotics</span>
+        <span class="tag-pill">AI / ML</span>
+        <span class="tag-pill">Full-stack Dev</span>
+        <span class="tag-pill">Event Management</span>
+        <span class="tag-pill">Open to internships</span>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <span>kanishk25250@iiitd.ac.in</span>
+      <span>+91 99204 66104</span>
+      <span>Delhi, India</span>
+      <a href="https://github.com/Loloopsmybad">github.com/Loloopsmybad</a>
+      <a href="https://www.linkedin.com/in/kanishk-vivek-verma-513065305/">linkedin.com/in/kanishk-vivek-verma</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">About</span>
+      <div class="section-line"></div>
+    </div>
+    <p class="summary-text">First year CSD student at IIIT Delhi with a track record of competing at national level in robotics, being recognised by the Department of Science & Technology, and showcasing an AI-integrated project to the Prime Minister of India. Equally comfortable writing code, designing circuits, leading a student council, and running large-scale college events. Actively looking for internship opportunities in tech, robotics, or product design.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Education</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Aug 2025 — Dec 2029</span>
+        <span class="entry-place">New Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">B.Tech — Computer Science & Design</div>
+        <div class="entry-org">Indraprastha Institute of Information Technology, Delhi (IIIT-D)</div>
+        <ul class="entry-desc">
+          <li>Courses: Data Structures & Algorithms · Computer Organization</li>
+          <li>Skills: Full-Stack Development · C++ · Python · Embedded Systems</li>
+          <li>Active in ECell IIITD, ROBOCON team, Odyssey IIITDelhi</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2021 — 2025</span>
+        <span class="entry-place">New Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">Senior Secondary (XII) — Science · 84%</div>
+        <div class="entry-org">Dr. Rajendra Prasad Kendriya Vidyalaya · CBSE</div>
+        <ul class="entry-desc">
+          <li>Secondary (X) — 89% · CBSE · 2023</li>
+          <li>Student Council President (Jan 2024 — Mar 2025)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Experience & Activities</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Sep 2025 — Present</span>
+        <span class="entry-place">IIIT Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">Events Team Member</div>
+        <div class="entry-org">ECell IIITD</div>
+        <ul class="entry-desc">
+          <li>Event POC for Strategy Showdown and BPlan events at Esummit 2026</li>
+          <li>Event POC for HacHatch Hackathon (Nov 2025)</li>
+          <li>Event Coordinator — TechBazaar; POC for Startup Marathon (Oct 2025)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Sep 2025 — Present</span>
+        <span class="entry-place">New Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">Events Team Member</div>
+        <div class="entry-org">BYLD</div>
+        <ul class="entry-desc">
+          <li>Part of the events and leadership development team at BYLD</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Sep 2025 — Present</span>
+        <span class="entry-place">Delhi · Hybrid</span>
+      </div>
+      <div>
+        <div class="entry-title">Volunteer — PR Team</div>
+        <div class="entry-org">Odyssey IIITDelhi</div>
+        <ul class="entry-desc">
+          <li>Public relations and outreach for IIIT Delhi's cultural and technical fest</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Jan 2024 — Mar 2025</span>
+        <span class="entry-place">New Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">President — Student Council</div>
+        <div class="entry-org">Dr. Rajendra Prasad Kendriya Vidyalaya</div>
+        <ul class="entry-desc">
+          <li>Led the student council for over a year, representing the student body to school administration</li>
+          <li>Organised school-level events, competitions, and community initiatives</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Projects</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Apr 2026 — Present</span>
+        <span class="entry-place">IIIT Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">Vector-Based Query Retrieval System</div>
+        <div class="entry-sub">Python · NLP · AI / ML · Vector Embeddings</div>
+        <ul class="entry-desc">
+          <li>Building a semantic search system using vector embeddings for efficient document retrieval</li>
+          <li>Exploring nearest-neighbour algorithms and query-document matching pipelines</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">2025 — Present</span>
+        <span class="entry-place">IIIT Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">ROBOCON 2025 — National Level Team, IIIT-D</div>
+        <div class="entry-sub">Robotics · Embedded Systems · C++ · AutoCAD</div>
+        <ul class="entry-desc">
+          <li>Selected as part of IIIT-D's ROBOCON team competing at the national level</li>
+          <li>Contributing to mechanical design, electronics, and control software</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Oct 2024</span>
+        <span class="entry-place">Pragati Maidan, Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">Autonomous Robot — AI for Good Youth Challenge <span class="star-badge">National Finalist</span></div>
+        <div class="entry-sub">Robotics · Embedded Systems · Python · IHFC, IIT Delhi</div>
+        <ul class="entry-desc">
+          <li>Built an autonomous robot and qualified for the national finals held at Pragati Maidan</li>
+          <li>National finalist round was a qualifying tournament for the Grand Finale at the AI for Good Global Summit 2025, Geneva</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">Feb 2024</span>
+        <span class="entry-place">New Delhi</span>
+      </div>
+      <div>
+        <div class="entry-title">AI-Integrated Science Project — Presented to PM Modi <span class="star-badge">PPC Showcase</span></div>
+        <div class="entry-sub">Python · AI · Embedded Systems</div>
+        <ul class="entry-desc">
+          <li>Showcased an AI-integrated science project to Prime Minister Narendra Modi at the PPC event</li>
+          <li>Selected as one of the exhibitors to present directly to the PM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Achievements</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="highlight-entry">
+      <div class="hl-title">INSPIRE Award — Dept. of Science & Technology + National Innovation Foundation</div>
+      <div class="hl-meta">Jan 2023 · Dr. Rajendra Prasad Kendriya Vidyalaya</div>
+      <div class="hl-desc">Received ₹10,000 prize from DST and the National Innovation Foundation for innovation and development of an original AI-powered project.</div>
+    </div>
+
+    <div class="highlight-entry">
+      <div class="hl-title">RBVP 2024 — Delhi Region Winner & National Representative</div>
+      <div class="hl-meta">Mar–Apr 2024 · Delhi → Bhubaneswar, Odisha</div>
+      <div class="hl-desc">Won the Delhi Regional round of RBVP in the Health Theme and represented the Delhi region at the national competition in Bhubaneswar.</div>
+    </div>
+
+    <div class="highlight-entry">
+      <div class="hl-title">AI for Good Robotics — India National Finalist</div>
+      <div class="hl-meta">Oct 2024 · IHFC, IIT Delhi · Pragati Maidan</div>
+      <div class="hl-desc">Reached the national finals of the IHFC Robotics for Good Youth Challenge. The qualifying tournament led to the Grand Finale at the AI for Good Global Summit 2025, Geneva.</div>
+    </div>
+
+    <div class="highlight-entry">
+      <div class="hl-title">ROBOCON 2025 — National Level Selection</div>
+      <div class="hl-meta">2025 · IIIT Delhi</div>
+      <div class="hl-desc">Currently competing at the national level of ROBOCON 2025 as part of the IIIT-D team.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Skills</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">Full-Stack Dev</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Design & Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">Illustrator</span>
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">Lightroom</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Hardware & Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Robotics</span>
+          <span class="skill-tag">Embedded Systems</span>
+          <span class="skill-tag">AI / ML</span>
+          <span class="skill-tag">iOS Jailbreaking</span>
+        </div>
+      </div>
+      <div class="skill-group" style="grid-column: span 3;">
+        <div class="skill-group-title">Leadership & Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Event Management</span>
+          <span class="skill-tag">Public Relations</span>
+          <span class="skill-tag">Student Leadership</span>
+          <span class="skill-tag">Communication</span>
+          <span class="skill-tag">Team Coordination</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <span>Last updated — April 2026</span>
+    <span>github.com/Loloopsmybad</span>
+  </div>
+</div>
